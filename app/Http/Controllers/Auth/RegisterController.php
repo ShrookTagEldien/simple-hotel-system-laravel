@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'country'=>$data['country'],
             'gender'=>$data['gender'],
             
+            
         ]);
         $this->storeAvatar($user);
         return $user;
