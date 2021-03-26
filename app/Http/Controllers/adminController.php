@@ -16,6 +16,10 @@ class adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function dash()
+    {
+        return view('admin.dashboard');
+    }
     public function recep()
     {
         return view('admin.mangeReceptionist');
