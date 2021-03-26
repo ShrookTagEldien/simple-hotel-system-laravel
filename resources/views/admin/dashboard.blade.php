@@ -11,13 +11,12 @@
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{asset('/storage/'. Auth::user()->avatar)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -37,32 +36,32 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
-            <a href="/admin"  class="nav-link active">
+            <a href="#" class="nav-link active">
               <!--<i class="nav-icon fas fa-tachometer-alt"></i>-->
               <p>
                 DashBoard
                 <!--<i class="right fas fa-angle-left"></i>-->
               </p>
             </a>
-            <a href="/admin/receptionist"class="nav-link " >
+            <a href="/admin/receptionist" class="nav-link ">
                 Mange Receptionist
             </a>
-            <a href="/admin/clients" class="nav-link ">
+            <a href="#" class="nav-link ">
               <p>
                 Mange Client
               </p>
             </a>
-            <a href="/admin/floors" class="nav-link ">
+            <a href="#" class="nav-link ">
               <p>
                 Mange Floor
               </p>
             </a>
-            <a href="/admin/rooms" class="nav-link ">
+            <a href="#" class="nav-link ">
               <p>
                 Mange Room
               </p>
             </a>
-          </li> 
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
