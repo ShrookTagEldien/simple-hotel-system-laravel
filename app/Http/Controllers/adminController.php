@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DataTables\AdminDatatable;
 
 class adminController extends Controller
 {
@@ -16,7 +17,12 @@ class adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function dash()
+    public function index(AdminDatatable $admin)
+    {
+        return $admin->render('admin.index');
+    }
+   
+     public function dash()
     {
         return view('admin.dashboard');
     }

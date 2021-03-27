@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\adminController;
 /*
 Route::get('/', function () {
 
@@ -10,12 +11,12 @@ Route::get('/', function () {
 });
 */
 Auth::routes();
-Route::get('/', [App\Http\Controllers\adminController::class, 'dash'])->name('dashboard');
-Route::get('/receptionist', [App\Http\Controllers\adminController::class, 'recep'])->name('rec');
-Route::get('/rooms', [App\Http\Controllers\adminController::class, 'rooms'])->name('rooms');
-Route::get('/floors', [App\Http\Controllers\adminController::class, 'floors'])->name('floors');
-Route::get('/clients', [App\Http\Controllers\adminController::class, 'clients'])->name('clients');
-
+Route::get('/', [adminController::class, 'dash'])->name('dashboard');
+Route::get('/receptionist', [adminController::class, 'recep'])->name('rec');
+Route::get('/rooms', [adminController::class, 'rooms'])->name('rooms');
+Route::get('/floors', [adminController::class, 'floors'])->name('floors');
+Route::get('/clients', [adminController::class, 'clients'])->name('clients');
+Route::get('admin',[adminController::class, 'index']);
 
 /*
 Route::get('/receptionist', function () {
