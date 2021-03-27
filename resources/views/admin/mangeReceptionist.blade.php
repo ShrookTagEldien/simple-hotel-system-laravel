@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('sideMenu')
+    @include('layouts.adminSideMenu')
+  @endsection
+
   <!-- Main Sidebar Container -->
   @section('content')
  

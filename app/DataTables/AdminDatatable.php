@@ -45,17 +45,28 @@ class AdminDatatable extends DataTable
     {
         return $this->builder()
                     ->setTableId('admindatatable-table')
-                    ->columns($this->getColumns())
+                    //->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    //->dom('Bfrtip')
                     ->orderBy(1)
-                    ->buttons(
+                    /*->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );
+                    );*/
+                    ->columns([
+                        'id',
+                        'name',
+                        'email',
+                        'created_at',
+                        'updated_at',
+                    ])
+                    ->parameters([
+                        'dom' => 'Bfrtip',
+                        'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
+                    ]);
     }
 
     /**

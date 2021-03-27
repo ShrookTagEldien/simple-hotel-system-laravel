@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('sideMenu')
+    @include('layouts.adminSideMenu')
+  @endsection
+
+
   @section('content')
 
 

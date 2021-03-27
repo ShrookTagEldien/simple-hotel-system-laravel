@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('sideMenu')
+    @include('layouts.adminSideMenu')
+  @endsection
+
   @section('content')
   
   <!-- Content Wrapper. Contains page content -->
