@@ -2,7 +2,7 @@
 
   <!-- Main Sidebar Container -->
   @section('content')
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:auto">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ url('/') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -44,25 +44,25 @@
                 <!--<i class="right fas fa-angle-left"></i>-->
               </p>
             </a>
-            <a href="/admin/Manger" class="nav-link">
+            <a href="/admin/Manger" class="nav-link active">
                Manage Managers
             </a>
             <a href="/admin/receptionist" class="nav-link ">
-                Mange Receptionist
+               Manage Receptionists
             </a>
             <a href="/admin/clients" class="nav-link ">
               <p>
-                Mange Client
+                Manage Clients
               </p>
             </a>
             <a href="/admin/floors" class="nav-link ">
               <p>
-                Mange Floor
+                Manage Floors
               </p>
             </a>
-            <a href="/admin/rooms" class="nav-link active">
+            <a href="/admin/rooms" class="nav-link ">
               <p>
-                Mange Room
+              Manage Rooms
               </p>
             </a>
           </li>
@@ -80,7 +80,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Rooms</h1>
+            <h1 class="m-0">Managers</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -100,12 +100,13 @@
     <table id="table_id" class="display table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Number</th>
-            <th>Capacity</th>
-            <th>Price</th>
-            <th>Floor Number</th>
-            <th>Manager Name</th>
-            <th>Actions</th>
+            <th>Avater</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>National ID</th>
+            <th>Action</th>
+
         </tr>
     </thead>
     <tbody>
@@ -114,22 +115,28 @@
             <td>Row 1 Data 2</td>
             <td>Row 1 Data 1</td>
             <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
+            <td>Row 1 Data 1</td>
+
             <td>
-                <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="rooms/1/edit"></a>
+            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="managers/1/edit"></a>
                 <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
+
             </td>
 
         </tr>
         <tr>
-            <td>Row 2 Data 1</td>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
             <td>Row 2 Data 2</td>
             <td>Row 1 Data 1</td>
             <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
               <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="rooms/1/edit"></a>
+              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="managers/1/edit"></a>
                 <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
             </td>
 
         </tr>
@@ -139,6 +146,4 @@
  </div>
  </div>
   <!-- /.content-wrapper -->
-
-
 @endsection

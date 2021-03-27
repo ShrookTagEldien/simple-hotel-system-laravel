@@ -2,7 +2,7 @@
 
   <!-- Main Sidebar Container -->
   @section('content')
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:auto">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ url('/') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -44,6 +44,9 @@
                 <!--<i class="right fas fa-angle-left"></i>-->
               </p>
             </a>
+            <a href="/admin/Manger" class="nav-link">
+               Manage Managers
+            </a>
             <a href="/admin/receptionist" class="nav-link active">
                 Mange Receptionist
             </a>
@@ -77,7 +80,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Starter Page</h1>
+            <h1 class="m-0">Receptionists</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -91,8 +94,50 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
+  <div class="content">
+  <div class="container-fluid">
+  <div class="card-body p-2">
+    <table id="table_id" class="display table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Manger Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+            <td>
+            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
+                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
+            </td>
 
+        </tr>
+        <tr>
+            <td>Row 2 Data 1</td>
+            <td>Row 2 Data 2</td>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+              <td>
+              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
+                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
+                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
+            </td>
+
+        </tr>
+    </tbody>
+  </table>
+  </div>
+ </div>
+ </div>
   <!-- /.content-wrapper -->
-
-
 @endsection

@@ -44,6 +44,9 @@
                 <!--<i class="right fas fa-angle-left"></i>-->
               </p>
             </a>
+            <a href="/admin/Manger" class="nav-link">
+               Manage Managers
+            </a>
             <a href="/admin/receptionist"class="nav-link " >
                 Mange Receptionist
             </a>
@@ -62,7 +65,7 @@
                 Mange Room
               </p>
             </a>
-          </li> 
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

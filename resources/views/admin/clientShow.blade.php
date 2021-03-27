@@ -17,7 +17,7 @@
           <img src="{{asset('/storage/'. Auth::user()->avatar)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
                 Mange Floor
               </p>
             </a>
-            <a href="/admin/rooms" class="nav-link active">
+            <a href="/admin/rooms" class="nav-link ">
               <p>
                 Mange Room
               </p>
@@ -80,7 +80,10 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Rooms</h1>
+          <h3 class="p-2">
+        <i class="bi bi-person-fill"> Client Name</i><br>
+        <i class="bi bi-envelope-fill"> Email</i>
+        </h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -94,43 +97,32 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-  <div class="content">
+    <div class="content">
+
   <div class="container-fluid">
   <div class="card-body p-2">
     <table id="table_id" class="display table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Number</th>
-            <th>Capacity</th>
-            <th>Price</th>
-            <th>Floor Number</th>
-            <th>Manager Name</th>
-            <th>Actions</th>
+            <th>room number</th>
+            <th>accompany number</th>
+            <th>paid price</th>
         </tr>
     </thead>
     <tbody>
         <tr>
+
             <td>Row 1 Data 1</td>
             <td>Row 1 Data 2</td>
-            <td>Row 1 Data 1</td>
             <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>
-                <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="rooms/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
+
 
         </tr>
         <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
+
+            <td>Row 1 Data 2</td>
+            <td>Row 1 Data 2</td>
             <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-              <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="rooms/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
 
         </tr>
     </tbody>
