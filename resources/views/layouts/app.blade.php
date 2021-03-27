@@ -14,6 +14,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -189,6 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </ul>
     </ul>
   </nav>
+
 @yield('content')
 
 
@@ -201,14 +205,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </aside>
 <!-- Main Footer -->
-<footer class="main-footer">
+<footer class="main-footer mx-0">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -217,6 +221,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- jQuery -->
 
 <script src="{{asset('js/app.js')}}"></script>
-
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
 </body>
 </html>
