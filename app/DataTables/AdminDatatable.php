@@ -49,13 +49,13 @@ class AdminDatatable extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
-                    ->buttons(
+                   /* ->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );
+                    ); */
                     ->columns([
                         'id',
                         'name',
@@ -63,10 +63,7 @@ class AdminDatatable extends DataTable
                         'created_at',
                         'updated_at',
                     ]);
-                    ->parameters([
-                        'dom' => 'Bfrtip',
-                        'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
-                    ]);
+                   
     }
 
     /**
