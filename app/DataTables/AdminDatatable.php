@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-//use App\Models\AdminDatatable;
+use App\Models\AdminDatatable;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -49,20 +49,20 @@ class AdminDatatable extends DataTable
                     ->minifiedAjax()
                     //->dom('Bfrtip')
                     ->orderBy(1)
-                    /*->buttons(
+                    ->buttons(
                         Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );*/
+                    );
                     ->columns([
                         'id',
                         'name',
                         'email',
                         'created_at',
                         'updated_at',
-                    ])
+                    ]);
                     ->parameters([
                         'dom' => 'Bfrtip',
                         'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
