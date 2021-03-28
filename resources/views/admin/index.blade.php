@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
-  @section('sideMenu')
+@section('sideMenu')
     @include('layouts.adminSideMenu')
-  @endsection
+@endsection
 
-  @section('content')
- 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+
+@section('content')
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -24,11 +23,16 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card-body p-2">
 
-  <!-- /.content-wrapper -->
+                {!! $dataTable->table()!!}
 
+            </div>
+        </div>
+      </div>            
 
 @endsection
+

@@ -180,6 +180,11 @@ return [
        // Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
 
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\HtmlServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        Yajra\DataTables\EditorServiceProvider::class,
+    
     ],
 
     /*
@@ -232,9 +237,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        
-        //'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        //'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],

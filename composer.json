@@ -14,8 +14,10 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "rinvex/countries": "^7.3",
-        "yajra/laravel-datatables": "^1.5",
-        "yajra/laravel-datatables-oracle": "^9.17"
+
+        "yajra/laravel-datatables": "^1.",
+        "yajra/laravel-datatables-oracle": "~9.0"
+
     },
     "require-dev": {
         "facade/ignition": "^2.5",

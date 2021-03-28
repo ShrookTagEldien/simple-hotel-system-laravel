@@ -2,7 +2,15 @@
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
-/*Route::get('/', function () {
+
+
+use App\Http\Controllers\adminController;
+
+
+
+/*
+Route::get('/', function () {
+
 
     return view('admin.dashboard');
 
@@ -10,18 +18,23 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\adminController::class, 'dash'])->name('dashboard');
-Route::get('/receptionist', [App\Http\Controllers\adminController::class, 'recep'])->name('rec');
-Route::get('/receps/{recep}/edit', [App\Http\Controllers\adminController::class, 'receps_edit'])->name('receps.edit');
-Route::get('/Manger', [App\Http\Controllers\adminController::class, 'managers'])->name('Managers');
-Route::get('/managers/{manager}/edit', [App\Http\Controllers\adminController::class, 'managers_edit'])->name('managers.edit');
-Route::get('/rooms', [App\Http\Controllers\adminController::class, 'rooms'])->name('rooms');
-Route::get('/rooms/{room}/edit', [App\Http\Controllers\adminController::class, 'rooms_edit'])->name('rooms.edit');
-Route::get('/floors', [App\Http\Controllers\adminController::class, 'floors'])->name('floors');
-Route::get('/floors/{floor}/edit', [App\Http\Controllers\adminController::class, 'floors_edit'])->name('floors.edit');
-Route::get('/clients', [App\Http\Controllers\adminController::class, 'clients'])->name('clients');
-Route::get('/clients/{client}', [App\Http\Controllers\adminController::class, 'show'])->name('client.show');
-Route::get('/clients/{client}/edit', [App\Http\Controllers\adminController::class, 'client_edit'])->name('client.edit');
+//test datatable admin route
+Route::get('/admin', [adminController::class, 'index'])->name('index');
+
+//we're using admin prefix for all those routes defined in routeServiceProvider.php for admin accout as following >> localhost:8000/admin/following_route_name
+Route::get('/', [adminController::class, 'dash'])->name('dash');
+Route::get('/receptionist', [adminController::class, 'recep'])->name('rec');
+Route::get('/receps/{recep}/edit', [adminController::class, 'receps_edit'])->name('receps.edit');
+Route::get('/Manger', [adminController::class, 'managers'])->name('Managers');
+Route::get('/managers/{manager}/edit', [adminController::class, 'managers_edit'])->name('managers.edit');
+Route::get('/rooms', [adminController::class, 'rooms'])->name('rooms');
+Route::get('/rooms/{room}/edit', [adminController::class, 'rooms_edit'])->name('rooms.edit');
+Route::get('/floors', [adminController::class, 'floors'])->name('floors');
+Route::get('/floors/{floor}/edit', [adminController::class, 'floors_edit'])->name('floors.edit');
+Route::get('/clients', [adminController::class, 'clients'])->name('clients');
+Route::get('/clients/{client}', [adminController::class, 'show'])->name('client.show');
+Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->name('client.edit');
+
 
 
 
