@@ -30,15 +30,15 @@
   <div class="content">
   <div class="container-fluid">
   <div class="card-body p-2">
-    <table id="table_id" class="display table table-bordered table-striped">
+    <table id="table_id yajra-datatable" class="display table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Avater</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>National ID</th>
-            <th>Action</th>
+            <th class='text-centerr'>Avater</th>
+            <th class='text-centerr'>Name</th>
+            <th class='text-centerr'>Email</th>
+            <th class='text-centerr'>Created At</th>
+            <th class='text-centerr'>National ID</th>
+            <th class='text-centerr'>Action</th>
 
         </tr>
     </thead>
@@ -78,5 +78,29 @@
   </div>
  </div>
  </div>
-  <!-- /.content-wrapper -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+
+ <script type="text/javascript">
+  $(function () {
+    
+    var table = $('.yajra-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('managers.list') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-centerr'},
+            {data: 'Email', name: 'email',className:'text-centerr'},
+            {data: 'username', name: 'username', className: 'text-centerr'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+    
+  });
+</script>
 @endsection

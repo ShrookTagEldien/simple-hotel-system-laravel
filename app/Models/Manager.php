@@ -9,4 +9,13 @@ class Manager extends Model
 {
     use HasFactory;
     protected $table="managers";
+
+    protected $fillable = [
+        'email',
+        'username',
+        'NationalID',
+        'avatar',
+
+    ];  
+
 }

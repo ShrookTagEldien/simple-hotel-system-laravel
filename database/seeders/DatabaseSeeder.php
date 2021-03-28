@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+
 //use Illuminate\Database\Seeder;
+
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
@@ -21,13 +23,14 @@ class DatabaseSeeder extends Seeder
         $gender = $faker->randomElement(['male', 'female']);
 
     	foreach (range(1,200) as $index) {
-            DB::table('students')->insert([
-                'name' => $faker->name($gender),
+
+            DB::table('managers')->insert([
+                
                 'email' => $faker->email,
                 'username' => $faker->username,
-                'phone' => $faker->phoneNumber,
-                'dob' => $faker->date($format = 'Y-m-d', $max = 'now')
+                'avatar' => 'img.png',
+                'NationalID' => $faker->phoneNumber
             ]);
-        }
-    }
+        }    }
+
 }
