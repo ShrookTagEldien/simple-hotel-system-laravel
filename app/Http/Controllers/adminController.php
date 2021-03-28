@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\AdminDatatable;
+use App\Models\Manager;
+use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\DataTables;
+
+use App\Models\Receptionist;
+
+
 
 class adminController extends Controller
 {
@@ -89,5 +96,22 @@ class adminController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function getReceptionists(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = Receptionist::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+       // dd("inside rece controller");
     }
 }

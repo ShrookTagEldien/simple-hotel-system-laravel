@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\adminController;
 
+use App\Http\Controllers\ReceptionistsController;
 
 
 /*
@@ -37,6 +38,12 @@ Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->n
 
 
 Route::get('managers/list', [adminController::class, 'getManagers'])->name('managers.list');
+
+/*******Receptionist******/
+//Route::get('receptionist', [StudentController::class, 'index']);
+//Route::get('/receptionists', [ReceptionistsController::class, 'getReceptionists'])->name('receptionist.list');
+
+Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
 
 
 
