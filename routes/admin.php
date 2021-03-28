@@ -33,6 +33,7 @@ Route::get('/clients/{client}', [adminController::class, 'show'])->name('client.
 Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->name('client.edit');
 
 
+Route::get('managers/list', [adminController::class, 'getManagers'])->name('managers.list');
 
 
 /*
