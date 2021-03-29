@@ -1,19 +1,23 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
 
+
 use App\Http\Controllers\adminController;
 
+use App\Http\Controllers\ReceptionistsController;
 
 
 /*
 Route::get('/', function () {
 
+
     return view('admin.dashboard');
 
     // return view('admin.mangeReceptionist');
-});
-*/
+});*/
+
 Auth::routes();
 //test datatable admin route
 Route::get('/admin', [adminController::class, 'index'])->name('index');
@@ -33,7 +37,13 @@ Route::get('/clients/{client}', [adminController::class, 'show'])->name('client.
 Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->name('client.edit');
 
 Route::resource('managers', adminController::class);
-Route::get('get-managers', [adminController::class, 'getManagers'])->name('get-managers');
+Route::get('get-managers', [adminController::class, 'getManagers'])->name('managers.list');
+
+/*******Receptionist******/
+//Route::get('receptionist', [StudentController::class, 'index']);
+//Route::get('/receptionists', [ReceptionistsController::class, 'getReceptionists'])->name('receptionist.list');
+Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+
 
 
 /*
