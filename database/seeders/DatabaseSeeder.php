@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
+use Illuminate\Support\Facades\Hash;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -27,5 +30,14 @@ class DatabaseSeeder extends Seeder
                 'avatar' => 'img.png',
                 'NationalID' => $faker->phoneNumber
             ]);
-        }    }
+        }   
+    
+    //generate admin user
+    DB::table('users')->insert([
+                
+        'email' => 'admin@admin.com',
+        'password' => Hash::make('123456')
+    ]);    
+    
+    }
 }

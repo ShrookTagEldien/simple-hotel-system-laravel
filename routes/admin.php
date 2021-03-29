@@ -32,8 +32,8 @@ Route::get('/clients', [adminController::class, 'clients'])->name('clients');
 Route::get('/clients/{client}', [adminController::class, 'show'])->name('client.show');
 Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->name('client.edit');
 
-
-Route::get('managers/list', [adminController::class, 'getManagers'])->name('managers.list');
+Route::resource('managers', adminController::class);
+Route::get('get-managers', [adminController::class, 'getManagers'])->name('get-managers');
 
 
 /*

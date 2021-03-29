@@ -2,7 +2,7 @@
 
 @section('sideMenu')
     @include('layouts.adminSideMenu')
-  @endsection
+@endsection
 
 
 @section('content');
@@ -30,7 +30,7 @@
   <div class="content">
   <div class="container-fluid">
   <div class="card-body p-2">
-    <table id="table_id yajra-datatable" class="display table table-bordered table-striped">
+    <table id="table_id " class="yajra-datatable display table table-bordered table-striped">
     <thead>
         <tr>
             <th class='text-centerr'>Avater</th>
@@ -76,22 +76,29 @@
     </tbody>
   </table>
   </div>
- </div>
- </div>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+</div>
+</div>
+@endsection
+@section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
- <script type="text/javascript">
+<script type="text/javascript">
   $(function () {
-    
+    console.log('scriiiipt');
     var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('managers.list') }}",
+        ajax: '{{ route('get-managers') }}',
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-centerr'},
-            {data: 'Email', name: 'email',className:'text-centerr'},
-            {data: 'username', name: 'username', className: 'text-centerr'},
+                {data: 'avatar', name: 'avatar'},
+                {data: 'username', name: 'username'},
+                {data: 'email', name: 'email'},
+                {data: 'createdAt', name: 'createdAt'},
+                {data: 'NationalID', name: 'NationalID'},
+            
+
             {
                 data: 'action', 
                 name: 'action', 

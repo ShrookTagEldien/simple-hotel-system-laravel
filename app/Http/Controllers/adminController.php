@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\DataTables\AdminDatatable;
+use App\Models\Manager;
+use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Services\DataTable;
 
 class adminController extends Controller
 {
@@ -79,9 +82,10 @@ class adminController extends Controller
     public function getManagers(Request $request)
     {
         if ($request->ajax()) {
+            
             $data = Manager::latest()->get();
+            //dd($data);
             return Datatables::of($data)
-                ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
@@ -90,4 +94,17 @@ class adminController extends Controller
                 ->make(true);
         }
     }
+/*
+    public function getManagers(Request $request, Manager $manager)
+    {
+        $data = $manager->getData();
+        return \DataTables::of($data)
+            ->addColumn('Actions', function($data) {
+                return '<button type="button" class="btn btn-success btn-sm" id="getEditArticleData" data-id="'.$data->id.'">Edit</button>
+                    <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+            })
+            ->rawColumns(['Actions'])
+            ->make(true);
+    }
+    */
 }
