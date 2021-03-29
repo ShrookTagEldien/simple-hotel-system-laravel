@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create',[RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
@@ -31,3 +34,8 @@ Route::get('reservations/all',[ReservationsController::class, 'index'])->name('r
 Route::get('reservations',[ReservationsController::class,'index']);          //show available rooms
 Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservations.create');
 Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
+
+
+Route::get('students', [StudentController::class, 'index']);
+Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+

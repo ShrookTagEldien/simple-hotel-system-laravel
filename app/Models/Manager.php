@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Manager extends Model
 {
     use HasFactory;
+    protected $table="managers";
+
     protected $fillable = [
         'email',
         'username',
@@ -15,4 +17,5 @@ class Manager extends Model
         'avatar',
 
     ];  
+
 }
