@@ -25,7 +25,7 @@ Route::get('/admin', [adminController::class, 'index'])->name('index');
 //we're using admin prefix for all those routes defined in routeServiceProvider.php for admin accout as following >> localhost:8000/admin/following_route_name
 Route::get('/', [adminController::class, 'dash'])->name('dash');
 Route::get('/receptionist', [adminController::class, 'recep'])->name('rec');
-Route::get('/receps/{recep}/edit', [adminController::class, 'receps_edit'])->name('receps.edit');
+
 Route::get('/Manger', [adminController::class, 'managers'])->name('Managers');
 Route::get('/managers/{manager}/edit', [adminController::class, 'managers_edit'])->name('managers.edit');
 Route::get('/rooms', [adminController::class, 'rooms'])->name('rooms');
@@ -40,11 +40,8 @@ Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->n
 Route::get('managers/list', [adminController::class, 'getManagers'])->name('managers.list');
 
 /*******Receptionist******/
-//Route::get('receptionist', [StudentController::class, 'index']);
-//Route::get('/receptionists', [ReceptionistsController::class, 'getReceptionists'])->name('receptionist.list');
-
 Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
-
+Route::get('/receptionists/{receptionists}/edit', [adminController::class, 'receptionists_edit'])->name('receptionists.edit');
 
 
 /*

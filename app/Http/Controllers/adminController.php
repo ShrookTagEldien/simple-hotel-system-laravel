@@ -9,6 +9,7 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\DataTables;
 
 use App\Models\Receptionist;
+use Validator;
 
 
 
@@ -106,12 +107,39 @@ class adminController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                  //  $actionBtn = '<a href="javascript:void(0)" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href=" {{route('.'"receptionists.edit"'.')}}" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
+                   
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-       // dd("inside rece controller");
     }
+    /************ Update Receptionists **************/
+    public function updateReceptionists(Request $request, Receptionist $receptionist )
+    {
+        $form_data = array(
+            'username'    =>  $request->username,
+            'email'     =>  $request->email,
+        );
+
+        Receptionist::whereId($request->hidden_id)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+
+    }
+    /************ Edit Receptionists  **************/
+    public function editReceptionists($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Receptionist::findOrFail($id);
+           // return response()->json(['result' => $data]);
+            $receptionistData =  response()->json(['result' => $data]);
+            return view('receptionistEdit');
+        }
+    }
+
+
 }

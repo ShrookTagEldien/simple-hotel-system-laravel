@@ -32,45 +32,6 @@
   <div class="content">
   <div class="container-fluid">
   <div class="card-body p-2">
-   {{-- <table id="table_id" class="display table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>Manger Name</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>
-            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-              <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-
-        </tr>
-    </tbody>
-  </table> --}}
   <table class="table table-bordered yajra-datatable" id="user">
     <thead>
         <tr>
@@ -125,5 +86,24 @@
         ]
     });  
   });
+
+  $(document).on('click', '.edit', function(){
+  var id = $(this).attr('id');
+  $('#form_result').html('');
+  $.ajax({
+   url :"/sample/"+id+"/edit",
+   dataType:"json",
+   success:function(data)
+   {
+    $('#first_name').val(data.result.first_name);
+    $('#last_name').val(data.result.last_name);
+    $('#hidden_id').val(id);
+    $('.modal-title').text('Edit Record');
+    $('#action_button').val('Edit');
+    $('#action').val('Edit');
+    $('#formModal').modal('show');
+   }
+  })
+ });
 </script>
 @endsection
