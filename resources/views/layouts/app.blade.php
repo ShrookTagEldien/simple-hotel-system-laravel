@@ -272,6 +272,7 @@ $(document).ready( function () {
 </script>
 @stack('js')
 @stack('css')
+
 @yield('script')
 </body>
 </html>
