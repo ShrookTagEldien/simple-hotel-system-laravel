@@ -108,7 +108,7 @@
 
 <!-- Create Article Modal -->
 <div class="modal" id="CreateArticleModal">
-<div class="modal-dialog">
+<div class="modal-dialog-scrollable modal-dialog">
     <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
@@ -201,9 +201,10 @@
                 orderable: false, 
                 searchable: true,
             },
-
-     
         ]
+
+
+        
     });  
 
 
