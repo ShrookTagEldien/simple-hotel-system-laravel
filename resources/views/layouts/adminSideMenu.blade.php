@@ -1,5 +1,5 @@
      <!-- Sidebar Menu -->
-     <nav class="mt-2">
+     <nav class="mt-2" style="min-height: 100%;">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
             <a href="/admin" class="nav-link @if (Route::current()->getName()== 'dash') active @endif">
@@ -10,7 +10,7 @@
               </p>
             </a>
             <a href="/admin/Manger" class="nav-link @if (Route::current()->getName()== 'Managers') active @endif">
-               Manage Managers 
+               Manage Managers
             </a>
             <a href="/admin/receptionist" class="nav-link @if (Route::current()->getName()== 'rec') active @endif">
                Manage Receptionists

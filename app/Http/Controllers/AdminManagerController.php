@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-
-
-
-
-
 class AdminManagerController extends Controller
 {
     /**
@@ -49,9 +44,9 @@ class AdminManagerController extends Controller
             'avatar' => 'required',
         ]);
 
-    
-        
-        
+
+
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
@@ -67,9 +62,26 @@ class AdminManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function show(Manager $manager)
+    public function show(Manager $manager, $id)
     {
-        //
+        $manager = new Manager;
+        $data = $manager->findData($id);
+        $html = '
+                <div class="form-group">
+                    <h5>User Name:</h5>
+                    <h6>'.$data->username.'</h6>
+                </div>
+                <div class="form-group">
+                    <h5>Email:</h5>
+                    <h6>'.$data->email.'</h6>
+                </div>
+                <div class="form-group">
+                    <h5>National ID:</h5>
+                    <h6>'.$data->NationalID.'</h6>
+                </div>';
+
+
+        return response()->json(['html'=>$html]);
     }
 
     /**
@@ -78,7 +90,7 @@ class AdminManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function edit(Manager $manager,$id)
+    public function edit(Manager $manager, $id)
     {
         $manager = new Manager;
         $data = $manager->findData($id);
@@ -114,7 +126,7 @@ class AdminManagerController extends Controller
             'email' => 'required',
 
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
@@ -123,7 +135,6 @@ class AdminManagerController extends Controller
         $manager->updateData($id, $request->all());
 
         return response()->json(['success'=>'Manager updated successfully']);
-   
     }
 
     /**
@@ -132,7 +143,8 @@ class AdminManagerController extends Controller
      * @param  \App\Models\Manager  $manager
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         $manager = new Manager;
         $manager->deleteData($id);
 
