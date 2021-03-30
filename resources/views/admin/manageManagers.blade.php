@@ -1,109 +1,4 @@
-{{--@extends('layouts.app')
 
-@section('sideMenu')
-    @include('layouts.adminSideMenu')
-  @endsection
-
-
-@section('content');
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">         
-            <h1 class="m-0">Managers</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Managers</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-  <div class="content">
-  <div class="container-fluid">
-  <div class="card-body p-2">
-    <table id="table_id yajra-datatable" class="display table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th class='text-centerr'>Avater</th>
-            <th class='text-centerr'>Name</th>
-            <th class='text-centerr'>Email</th>
-            <th class='text-centerr'>Created At</th>
-            <th class='text-centerr'>National ID</th>
-            <th class='text-centerr'>Action</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 1</td>
-
-            <td>
-            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="managers/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-
-            </td>
-
-        </tr>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-              <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="managers/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-
-        </tr>
-    </tbody>
-  </table>
-  </div>
- </div>
- </div>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-
- <script type="text/javascript">
-  $(function () {
-    
-    var table = $('.yajra-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('managers.list') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'text-centerr'},
-            {data: 'Email', name: 'email',className:'text-centerr'},
-            {data: 'username', name: 'username', className: 'text-centerr'},
-            {
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
-                searchable: true
-            },
-        ]
-    });
-    
-  });
-</script>
-@endsection--}}
 @extends('layouts.app')
 
 @section('sideMenu')
@@ -115,68 +10,23 @@
  
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+  <div class="content-wrapper p-3 " >
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Receptionists</h1>
+            <h1 class="m-0">Managers</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Receptionist</li>
-            </ol>
+            <button style="float: right; font-weight: 900;" class="btn btn-info btn-sm" type="button"  data-toggle="modal" data-target="#CreateArticleModal">
+              Create Manager
+          </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
-  <div class="content">
-  <div class="container-fluid">
-  <div class="card-body p-2">
-   {{-- <table id="table_id" class="display table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Created At</th>
-            <th>Manger Name</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>
-            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-
-        </tr>
-        <tr>
-            <td>Row 2 Data 1</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-              <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="receps/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-x pl-2" style="font-size: 1.25rem; color:gray;"></i>
-                <i class="bi bi-person-check pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-
-        </tr>
-    </tbody>
-  </table> --}}
   <table class="table table-bordered yajra-datatable" id="user">
     <thead>
         <tr>
@@ -195,6 +45,119 @@
  </div>
  </div>
   <!-- /.content-wrapper -->
+
+
+  <div class="modal" id="EditArticleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Article Edit</h4>
+                <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                    <strong>Success!</strong>Article was added successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="EditArticleModalBody">
+                    
+                </div>
+            </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
+          <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+      </div>
+  </div>
+</div>
+</div>
+
+<!-- Delete Article Modal -->
+<div class="modal" id="DeleteArticleModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Article Delete</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+              <h4>Are you sure want to delete this Article?</h4>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Create Article Modal -->
+<div class="modal" id="CreateArticleModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Article Create</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                  <strong>Success!</strong>Manager was added successfully.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="form-group">
+                <label for="username">User Name:</label>
+                <input type="text" class="form-control" name="username" id="createUserName">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" class="form-control" name="email" id="createEmail">
+          </div>
+          <div class="form-group">
+            <label for="pass">Password:</label>
+            <input type="text" class="form-control" name="pass" id="createPassword">
+        </div>
+          <div class="form-group">
+            <label for="nationalid">National ID:</label>
+            <input type="text" class="form-control" name="nationalid" id="createNationalID">
+        </div>
+        <div class="form-group">
+          <label for="avatar">Avatar:</label>
+          <input type="text" class="form-control" name="avatar" id="createAvatar">
+      </div>
+ 
+            
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="SubmitCreateArticleForm">Create</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
 @endsection
 
 @section('script')
@@ -204,16 +167,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-<script>
+<script type="text/javascript">
 //  $(function () {
-       var table= $(document).ready(function(){
+       var table =$(document).ready(function(){
    // var table = $('.yajra-datatable').DataTable({
-    $('#user').DataTable({
+     var user =$('#user').DataTable({
 
         processing: true,
         serverSide: true,
-        //ajax: "{{ route('receptionist.list') }}",
-       // ajax: 'admin/receptionists' ,
         ajax: {
          url: "{{ route('managers.list') }}",
         },
@@ -225,11 +186,156 @@
             {
                 data: 'action', 
                 name: 'action', 
-                orderable: true, 
+                orderable: false, 
                 searchable: true,
             },
         ]
     });  
-  });
+ 
+
+//////////////////////////////////CRUD Operations//////////////////////////////////////
+
+
+        // Get single article in EditModel
+        $('.modelClose').on('click', function(){
+            $('#EditArticleModal').hide();
+        });
+        var id;
+        $('body').on('click', '#editManagers', function(e) {
+            // e.preventDefault();
+            $('.alert-danger').html('');
+            $('.alert-danger').hide();
+            id = $(this).data('id');
+            $.ajax({
+                url: "adminManagers/"+id+"/edit",
+                method: 'GET',
+                // data: {
+                //     id: id,
+                // },
+                success: function(result) {
+                    console.log(result);
+                    $('#EditArticleModalBody').html(result.html);
+                    $('#EditArticleModal').show();
+                }
+            });
+        });
+
+
+                // Update article Ajax request.
+                $('#SubmitEditArticleForm').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "adminManagers/"+id,
+                method: 'PUT',
+                data: {
+                    username: $('#editUserName').val(),
+                    email: $('#editEmail').val(),
+                    NationalID: $('#editNationalID').val(),
+                },
+                success: function(result) {
+                    if(result.errors) {
+                        $('.alert-danger').html('');
+                        $.each(result.errors, function(key, value) {
+                            $('.alert-danger').show();
+                            $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                        });
+                    } else {
+                        $('.alert-danger').hide();
+                        $('.alert-success').show();
+                        $('#user').DataTable().ajax.reload();
+                        setTimeout(function(){ 
+                            $('.alert-success').hide();
+                            $('#EditArticleModal').hide();
+                        }, 2000);
+
+                    }
+                }
+            });
+            
+        
+            
+        });
+
+        // Delete article Ajax request.
+        var deleteID;
+        $('body').on('click', '#getDeleteId', function(){
+            deleteID = $(this).data('id');
+        })
+        $('#SubmitDeleteArticleForm').click(function(e) {
+            e.preventDefault();
+            var id = deleteID;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "adminManagers/"+id,
+                method: 'DELETE',
+                success: function(result) {
+                  setTimeout(function(){ 
+                        $('#user').DataTable().ajax.reload();
+                        $('#DeleteArticleModal').hide();
+                        $('.modal-backdrop.show').hide();
+                    }, 1000);
+          
+                }
+            });
+        });
+
+
+      // Create article Ajax request.
+      $('#SubmitCreateArticleForm').click(function(e) {
+                  e.preventDefault();
+                  $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                  });
+                  $.ajax({
+                      url: "adminManagers",
+                      method: 'post',
+                      data: {
+                        username: $('#createUserName').val(),
+                        email: $('#createEmail').val(),
+                        NationalID: $('#createNationalID').val(),
+                        password: $('#createPassword').val(),
+                        avatar: $('#createAvatar').val(),
+                
+                      },
+                      success: function(result) {
+                          if(result.errors) {
+                              $('.alert-danger').html('');
+                              $.each(result.errors, function(key, value) {
+                                  $('.alert-danger').show();
+                                  $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                              });
+                          } else {
+                            $('.alert-danger').hide();
+                            $('.alert-success').show();
+                            $('#user').DataTable().ajax.reload();
+                            setInterval(function(){ 
+                                $('.alert-success').hide();
+                                $('#CreateArticleModal').modal('hide');
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+
+
+
+
+
+    });
 </script>
+
+
+
 @endsection

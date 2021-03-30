@@ -29,7 +29,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+  <div class="content">
   <div class="container-fluid">
   <div class="card-body p-2">
     <table id="table_id" class="display table table-bordered table-striped">
