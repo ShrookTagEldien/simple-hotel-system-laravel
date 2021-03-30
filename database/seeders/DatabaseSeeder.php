@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             ]);
 
             /********************Receptionists****************************/
-          /*
+          
             DB::table('receptionists')->insert([
                 
                     'email' => $faker->email,
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                     'password' =>Hash::make('12345678'),
                 ]);
                
-            */
+            
             }
     
     }

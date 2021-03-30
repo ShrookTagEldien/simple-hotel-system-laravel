@@ -57,7 +57,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
@@ -87,5 +86,24 @@
         ]
     });  
   });
+
+  $(document).on('click', '.edit', function(){
+  var id = $(this).attr('id');
+  $('#form_result').html('');
+  $.ajax({
+   url :"/sample/"+id+"/edit",
+   dataType:"json",
+   success:function(data)
+   {
+    $('#first_name').val(data.result.first_name);
+    $('#last_name').val(data.result.last_name);
+    $('#hidden_id').val(id);
+    $('.modal-title').text('Edit Record');
+    $('#action_button').val('Edit');
+    $('#action').val('Edit');
+    $('#formModal').modal('show');
+   }
+  })
+ });
 </script>
 @endsection

@@ -241,9 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @yield('sideMenu')
 
 
-<!-- @yield('content') -->
-
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -267,7 +264,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-@yield('content')
 
 <script src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>

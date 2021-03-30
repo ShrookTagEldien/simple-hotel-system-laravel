@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'avatar'=>['required','image','file','max:5000'],
             'country'=>['required'],
             'gender'=>['required'],
+            'phone'=>['required'],
         ]);
     }
 
@@ -74,6 +75,7 @@ class RegisterController extends Controller
             'avatar'=>$data['avatar'],
             'country'=>$data['country'],
             'gender'=>$data['gender'],
+            'phone'=>$data['phone'],
             
             
         ]);

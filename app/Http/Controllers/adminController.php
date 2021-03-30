@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\DataTables\AdminDatatable;
+use Validator;
+use App\Models\Room;
 use App\Models\Manager;
 
-use Yajra\DataTables\DataTables;
-use Yajra\DataTables\Services\DataTable;
-
 use App\Models\Receptionist;
+use Illuminate\Http\Request;
+
+use Yajra\DataTables\DataTables;
+use App\DataTables\AdminDatatable;
+use Yajra\DataTables\Services\DataTable;
 
 class adminController extends Controller
 {
@@ -103,6 +105,25 @@ class adminController extends Controller
                 ->make(true);
         }
     }
+    public function getRooms(Request $request)
+    {
+        if ($request->ajax()) {
+            
+            $data = Room::latest()->get();
+            //dd($data);
+            return Datatables::of($data)
+                ->addColumn('action', function($row){
+                   // $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm" id="editManagers">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                   $actionBtn = '<button type="button" class="btn btn-success btn-sm" id="editManagers" data-id="'.$row->id.'">Edit</button> 
+                   <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+
+                   return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
     /*
     
     public function getManagers(Request $request)
@@ -139,12 +160,39 @@ class adminController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                  //  $actionBtn = '<a href="javascript:void(0)" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href=" {{route('.'"receptionists.edit"'.')}}" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
+                   
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-       // dd("inside rece controller");
     }
+    /************ Update Receptionists **************/
+    public function updateReceptionists(Request $request, Receptionist $receptionist )
+    {
+        $form_data = array(
+            'username'    =>  $request->username,
+            'email'     =>  $request->email,
+        );
+
+        Receptionist::whereId($request->hidden_id)->update($form_data);
+
+        return response()->json(['success' => 'Data is successfully updated']);
+
+    }
+    /************ Edit Receptionists  **************/
+    public function editReceptionists($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Receptionist::findOrFail($id);
+           // return response()->json(['result' => $data]);
+            $receptionistData =  response()->json(['result' => $data]);
+            return view('receptionistEdit');
+        }
+    }
+
+
 }
