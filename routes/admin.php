@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\adminController;
 
+use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\ReceptionistsController;
 
 
@@ -39,27 +40,11 @@ Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->n
 Route::resource('managers', adminController::class);
 Route::get('get-managers', [adminController::class, 'getManagers'])->name('managers.list');
 
-/*******Receptionist******/
-//Route::get('receptionist', [StudentController::class, 'index']);
-//Route::get('/receptionists', [ReceptionistsController::class, 'getReceptionists'])->name('receptionist.list');
 Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
 
 
+Route::resource('adminManagers', AdminManagerController::class);
+//Route::get('adminManagers/{id}/edit', [AdminManagerController::class, 'edit']);
 
-/*
-Route::get('/receptionist', function () {
 
-    return view('admin.mangeReceptionist');
-});
 
-Route::get('/rooms', function () {
-    return view('admin.manageRooms');
-});
-
-Route::get('/floors', function () {
-    return view('admin.manageFloors');
-});
-Route::get('/clients', function () {
-    return view('admin.manageClients');
-});
-*/
