@@ -18,13 +18,18 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('avatar');
+            $table->string('avatar')->default('img.jpg');
+            $table->string('phone');
             $table->string('password');
             $table->string('country');
             $table->string('gender');
             $table->rememberToken();
             $table->timestamps();
             $table->string('status')->default('pending');
+            $table->unsignedBigInteger('receptionist_id')->nullable();
+            $table->foreign('receptionist_id')
+            ->references('id')->on('receptionists')
+            ->onDelete('cascade')->default(null);
         });
     }
 

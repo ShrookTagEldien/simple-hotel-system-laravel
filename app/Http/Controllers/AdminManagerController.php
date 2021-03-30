@@ -4,6 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Manager;
 use Illuminate\Http\Request;
+//use Illuminate\Validation\Validator;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+
+
+
+
 
 class AdminManagerController extends Controller
 {
@@ -32,13 +41,16 @@ class AdminManagerController extends Controller
      */
     public function store(Request $request, Manager $manager)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'username' => 'required',
             'NationalID' => ['required', 'unique:managers'],
             'email' =>  ['required', 'unique:managers'],
             'password' => ['required','min:6'],
             'avatar' => 'required',
         ]);
+
+    
+        
         
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
@@ -96,7 +108,7 @@ class AdminManagerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'username' => 'required',
             'NationalID' => 'required',
             'email' => 'required',
