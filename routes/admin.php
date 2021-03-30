@@ -7,17 +7,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 
 use App\Http\Controllers\AdminManagerController;
-use App\Http\Controllers\ReceptionistsController;
+use App\Http\Controllers\AdminReceptionsController;
+  
 
 
-/*
-Route::get('/', function () {
 
-
-    return view('admin.dashboard');
-
-    // return view('admin.mangeReceptionist');
-});*/
 
 Auth::routes();
 //test datatable admin route
@@ -40,11 +34,12 @@ Route::get('/clients/{client}/edit', [adminController::class, 'client_edit'])->n
 Route::resource('managers', adminController::class);
 Route::get('get-managers', [adminController::class, 'getManagers'])->name('managers.list');
 
-Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
 
 /*******Receptionist******/
 Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
-Route::get('/receptionists/{receptionists}/edit', [adminController::class, 'receptionists_edit'])->name('receptionists.edit');
+Route::resource('adminReceptions', AdminReceptionsController::class);
+
+
 Route::resource('adminManagers', AdminManagerController::class);
 //Route::get('adminManagers/{id}/edit', [AdminManagerController::class, 'edit']);
 

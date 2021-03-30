@@ -205,7 +205,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!------------------------------------ side bar--------------------------------------------->
 <!------------------------------------------------------------------------------------------>
   <!-- Main Sidebar Container -->
-  @section('content')
   <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:auto">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -240,7 +239,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @yield('sideMenu')
 
 
-<!-- @yield('content') -->
 
 
   <!-- Control Sidebar -->
@@ -266,7 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-@yield('content')
+
 
 <script src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>

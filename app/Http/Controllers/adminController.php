@@ -24,10 +24,10 @@ class adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(AdminDatatable $admin)
+   /* public function index(AdminDatatable $admin)
     {
         return $admin->render('admin.index');
-    }
+    }*/
    
      public function dash()
     {
@@ -84,8 +84,6 @@ class adminController extends Controller
         return view('admin.clientShow');
     }
 
-
-
     public function getManagers(Request $request)
     {
         if ($request->ajax()) {
@@ -111,39 +109,14 @@ class adminController extends Controller
 
             $data = Receptionist::latest()->get();
             return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                  //  $actionBtn = '<a href="javascript:void(0)" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    $actionBtn = '<a href=" {{route('.'"receptionists.edit"'.')}}" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                   
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-    }
-    /************ Update Receptionists **************/
-    public function updateReceptionists(Request $request, Receptionist $receptionist )
-    {
-        $form_data = array(
-            'username'    =>  $request->username,
-            'email'     =>  $request->email,
-        );
+            ->addColumn('action', function($row){
+               $actionBtn = '<button type="button" class="btn btn-success btn-sm" id="editReceptionists" data-id="'.$row->id.'">Edit</button> 
+               <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
 
-        Receptionist::whereId($request->hidden_id)->update($form_data);
-
-        return response()->json(['success' => 'Data is successfully updated']);
-
-    }
-    /************ Edit Receptionists  **************/
-    public function editReceptionists($id)
-    {
-        if(request()->ajax())
-        {
-            $data = Receptionist::findOrFail($id);
-           // return response()->json(['result' => $data]);
-            $receptionistData =  response()->json(['result' => $data]);
-            return view('receptionistEdit');
+               return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
         }
     }
 
