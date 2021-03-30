@@ -19,6 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
 
   
 </head>
@@ -196,6 +197,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </ul>
     </ul>
   </nav>
+  <section>
+    @yield('content')
+  </section>
 
 
 <!------------------------------------ side bar--------------------------------------------->
@@ -236,7 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @yield('sideMenu')
 
 
-@yield('content')
+<!-- @yield('content') -->
 
 
   <!-- Control Sidebar -->
@@ -262,9 +266,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
+@yield('content')
 
 <script src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 <script>
 $(document).ready( function () {
     $('#table_id').DataTable();

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\RoomDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(RoomDataTable $dataTable)
     {
-        return view('home');
+        
+        return $dataTable->render('home');
     }
 }
