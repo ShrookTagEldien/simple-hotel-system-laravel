@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('avatar')->default('img.jpg');
-            $table->string('phone');
+            $table->string('phone')->default('01234566676');
             $table->string('password');
             $table->string('country');
             $table->string('gender');
@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->foreign('receptionist_id')
             ->references('id')->on('receptionists')
             ->onDelete('cascade')->default(null);
+            
         });
     }
 

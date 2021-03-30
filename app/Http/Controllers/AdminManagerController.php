@@ -45,7 +45,7 @@ class AdminManagerController extends Controller
         }
 
         $manager->storeData($request->all());
-        $this->storeAvatar($manager);
+        //$this->storeAvatar($manager);
         /*
         $create_user=new User;
         $create_user->name=$request->username;
