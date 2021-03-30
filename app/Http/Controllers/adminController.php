@@ -24,12 +24,18 @@ class adminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(AdminDatatable $admin)
+   /* public function index(AdminDatatable $admin)
     {
         return $admin->render('admin.index');
+<<<<<<< HEAD
     }
 
     public function dash()
+=======
+    }*/
+
+     public function dash()
+>>>>>>> 12a4858064f8b466fd5166fe69ef9f8a13ec58c5
     {
         return view('admin.dashboard');
     }
@@ -84,8 +90,6 @@ class adminController extends Controller
         return view('admin.clientShow');
     }
 
-
-
     public function getManagers(Request $request)
     {
         if ($request->ajax()) {
@@ -110,6 +114,7 @@ class adminController extends Controller
         if ($request->ajax()) {
             $data = Receptionist::latest()->get();
             return Datatables::of($data)
+
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     //  $actionBtn = '<a href="javascript:void(0)" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
@@ -120,26 +125,6 @@ class adminController extends Controller
                 ->make(true);
         }
     }
-    /************ Update Receptionists **************/
-    public function updateReceptionists(Request $request, Receptionist $receptionist)
-    {
-        $form_data = array(
-            'username'    =>  $request->username,
-            'email'     =>  $request->email,
-        );
 
-        Receptionist::whereId($request->hidden_id)->update($form_data);
 
-        return response()->json(['success' => 'Data is successfully updated']);
-    }
-    /************ Edit Receptionists  **************/
-    public function editReceptionists($id)
-    {
-        if (request()->ajax()) {
-            $data = Receptionist::findOrFail($id);
-            // return response()->json(['result' => $data]);
-            $receptionistData =  response()->json(['result' => $data]);
-            return view('receptionistEdit');
-        }
-    }
 }
