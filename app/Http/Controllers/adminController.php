@@ -27,15 +27,11 @@ class adminController extends Controller
    /* public function index(AdminDatatable $admin)
     {
         return $admin->render('admin.index');
-<<<<<<< HEAD
     }
 
-    public function dash()
-=======
-    }*/
-
+*/
      public function dash()
->>>>>>> 12a4858064f8b466fd5166fe69ef9f8a13ec58c5
+
     {
         return view('admin.dashboard');
     }
@@ -117,8 +113,8 @@ class adminController extends Controller
 
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    //  $actionBtn = '<a href="javascript:void(0)" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    $actionBtn = '<a href=" {{route('.'"receptionists.edit"'.')}}" name="edit" id="'.$row->id.'" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<button type="button" class="btn btn-success btn-sm" id="editReceptionists" data-id="'.$row->id.'">Edit</button>
+                   <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

@@ -44,6 +44,16 @@ class DatabaseSeeder extends Seeder
                     'NationalID' => $faker->phoneNumber,
                     'password' =>Hash::make('12345678'),
                 ]);
+
+
+                DB::table('floors')->insert([
+                    'id' =>$faker->unique()->numberBetween(1000, 9999),
+                    //'name' => $faker->name,
+                    'name' =>  $faker->sentence(3),
+                ]);
+
+
+
             }    
      
     
