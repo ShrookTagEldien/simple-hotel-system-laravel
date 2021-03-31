@@ -78,34 +78,49 @@ class AdminRoomController extends Controller
     {
         $room = new Room;
         $data = $room->findData($id);
+        if($data->status=='available'){
+            $available='checked="checked"';
+            $rented='';
+        }
+        else{
+            $rented='checked="checked"';
+            $available='';
+        }
         $html = '
-        <div class="form-group">
-            <label for="number">Room Number:</label>
-            <input type="text" class="form-control" name="number" id="createNumber" value="'.$data->room_number.'">
+        <div class="row">
+        <div class="col-6 m-0">
+            <div class="form-group">
+                <label for="number"class="text-dark">Room Number:</label>
+                <input type="text" class="form-control" name="number" id="createNumber" value="'.$data->room_number.'">
+            </div>
+                <div class="form-group">
+                <label for="capacity"class="text-dark">Room Capacity:</label>
+                <input type="text" class="form-control" name="capacity" id="createCapacity" value="'.$data->capacity.'">
+            </div>
+            <div class="form-group">
+                <label for="price"class="text-dark">Room Price:</label>
+                <input type="text" class="form-control" name="price" id="createPrice" value="'.$data->price.'">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="capacity">Room Capacity:</label>
-            <input type="text" class="form-control" name="capacity" id="createCapacity" value="'.$data->capacity.'">
-        </div>
-        <div class="form-group">
-            <label for="price">Room Price:</label>
-            <input type="text" class="form-control" name="price" id="createPrice" value="'.$data->price.'">
-        </div>
-        <div class="form-group">
-            <label for="floor">Floor Number:</label>
-            <input type="text" class="form-control" name="floor" id="createFloor" value="'.$data->floor_number.'">
-        </div>
-        <div class="form-group">
-            <label for="manager">Manager Name:</label>
-            <input type="text" class="form-control" name="manager" id="createManager" value="'.$data->manager_name.'">
-        </div>
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <input type="text" class="form-control" name="status" id="createStatus" value="'.$data->status.'">
-        </div>
+        <div class="col-6 m-0">
+            <div class="form-group">
+                <label for="floor"class="text-dark">Floor Number:</label>
+                <input type="text" class="form-control" name="floor" id="createFloor" value="'.$data->floor_number.'">
+            </div>
+            <div class="form-group">
+              <label for="manager"class="text-dark">Manager Name:</label>
+              <input type="text" class="form-control" name="manager" id="createManager" value="'.$data->manager_name.'">
+            </div>
+            <div class="form-group">
+              <label for="status"class="text-dark">Status:</label>   <br/>
+                  <input type="radio" name="status"  value="available"'.$available.'checked="checked"'.'> Available &nbsp;
+                  <input type="radio"  name="status"  value="rented"'.$rented.'> Rented
+            </div>
+            
+        </div> </div>
         ';
 
-
+        
         return response()->json(['html'=>$html]);
     }
 
