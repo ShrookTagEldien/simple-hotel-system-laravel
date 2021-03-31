@@ -26,7 +26,7 @@ class RoomFactory extends Factory
             'capacity' =>$this->faker->numberBetween(1,5),
             'status' =>$this->faker->randomElement(array('rented','available')),
             'price' =>$this->faker->numberBetween(1000,7000),
-            'floor_number' =>$faker->unique()->numberBetween(1000, 9999),
+            'floor_number' =>$this->faker->unique()->numberBetween(1000, 9999),
             'manager_name' =>$this->faker->name,
 
 
