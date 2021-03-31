@@ -52,10 +52,21 @@ class AdminManagerController extends Controller
         }
 
         $manager->storeData($request->all());
-
+        //$this->storeAvatar($manager);
+        /*
+        $create_user=new User;
+        $create_user->name=$request->username;
+        $create_user->password=$request->pass;
+        $create_user->email=$request->email;
+        $create_user->save();
+        */
         return response()->json(['success'=>'Manager added successfully']);
     }
-
+    public function StoreAvatar($user){
+        $user->update([
+            'avatar'=> $user->avatar->store('uploads','public')
+        ]);
+    }
     /**
      * Display the specified resource.
      *

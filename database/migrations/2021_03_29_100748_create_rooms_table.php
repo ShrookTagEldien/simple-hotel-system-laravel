@@ -19,6 +19,8 @@ class CreateRoomsTable extends Migration
             $table->integer('capacity');
             $table->string('status')->default('available');
             $table->decimal('price');
+            $table->integer('floor_number');
+            $table->string('manager_name');
             $table->timestamps();
         });
     }

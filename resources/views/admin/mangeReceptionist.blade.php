@@ -305,10 +305,12 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
-                            setInterval(function(){ 
+                            setTimeout(function(){ 
+                                console.log('hiding');
                                 $('.alert-success').hide();
-                                $('#CreateArticleModal').modal('hide');
-                                location.reload();
+                                $('#CreateArticleModal').hide();
+                                $('.modal-backdrop').hide();
+                                //location.reload();
                             }, 2000);
                         }
                     }
