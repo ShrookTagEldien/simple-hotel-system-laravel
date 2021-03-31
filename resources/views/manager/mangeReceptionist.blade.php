@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-    @include('layouts.adminSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
   <!-- Main Sidebar Container -->

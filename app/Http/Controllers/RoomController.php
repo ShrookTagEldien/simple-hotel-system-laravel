@@ -16,7 +16,7 @@ class RoomController extends Controller
     }
     public function getRooms(Request $request, Room $room)
     {
-        $data = $room->getData();
+        $data = $room->getAvailableRooms();
         return DataTables::of($data)
             ->addColumn('Actions', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="rent" data-id="'.$data->id.'">Rent</button>';

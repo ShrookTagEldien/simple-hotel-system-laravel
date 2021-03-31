@@ -13,15 +13,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
   <!-- Google Font: Source Sans Pro -->
+  
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
 
-  
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -205,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!------------------------------------ side bar--------------------------------------------->
 <!------------------------------------------------------------------------------------------>
   <!-- Main Sidebar Container -->
-  @section('content')
+
   <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:auto">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -240,9 +241,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @yield('sideMenu')
 
 
-<!-- @yield('content') -->
-
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -251,22 +249,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <p>Sidebar content</p>
     </div>
   </aside>
-<!-- Main Footer -->
-<footer class="main-footer mx-0">
+  <!-- Main Footer -->
+  <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-</footer>
+  </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-@yield('content')
 
 <script src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>

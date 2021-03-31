@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->foreign('receptionist_id')
             ->references('id')->on('receptionists')
             ->onDelete('cascade')->default(null);
+            
         });
     }
 
