@@ -154,8 +154,8 @@
                 </div>
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
-                      <input type="radio" name="status"  value="available" > Available &nbsp;
-                      <input type="radio"  name="status"  value="rented"> Rented
+                      <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
+                      <input type="radio"  name="status" id="createStatus" value="rented"> Rented
                 </div>
                 
             </div>
@@ -220,7 +220,7 @@
 
 
 //////////////////////////////////CRUD Operations//////////////////////////////////////
-
+        var edstat; 
 
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
@@ -242,11 +242,15 @@
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
                     $('#EditArticleModal').show();
+                 
+            $('input[type="radio"]').click(function(){  
+                edstat = $(this).val();  
+                console.log($(this).val());
+                });
                 }
             });
         });
-
-
+                
                 // Update article Ajax request.
                 $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
@@ -264,7 +268,7 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-                        status: $('#createStatus').val(),
+                        status: edstat,
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -318,8 +322,14 @@
         });
 
 
+        var stat;
+            $('input[type="radio"]').click(function(){  
+                stat = $(this).val();  
+                console.log($(this).val());
+                });
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
+           // console.log($('#createStatus').val());
                   e.preventDefault();
                   $.ajaxSetup({
                       headers: {
@@ -335,7 +345,7 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-                        status: $('#createStatus').val(),
+                        status: stat,
                 
                       },
                       success: function(result) {
@@ -360,7 +370,6 @@
                     }
                 });
             });
-
 
 
 });

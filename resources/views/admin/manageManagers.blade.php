@@ -176,7 +176,7 @@
           </div>
           <div class="form-group">
             <label for="pass">Password:</label>
-            <input type="text" class="form-control" name="pass" id="createPassword">
+            <input type="password" class="form-control" name="pass" id="createPassword">
         </div>
           <div class="form-group">
             <label for="nationalid">National ID:</label>
