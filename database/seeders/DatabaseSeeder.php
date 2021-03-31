@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $gender = $faker->randomElement(['male', 'female']);
 
-    	foreach (range(1,200) as $index) {
+    	foreach (range(1,25) as $index) {
 
             DB::table('managers')->insert([
                 
@@ -48,8 +48,9 @@ class DatabaseSeeder extends Seeder
 
                 DB::table('floors')->insert([
                     'id' =>$faker->unique()->numberBetween(1000, 9999),
-                    //'name' => $faker->name,
-                    'name' =>  $faker->sentence(3),
+                    'name' =>strtoupper($faker->lexify('???')),
+
+                    
                 ]);
 
 
