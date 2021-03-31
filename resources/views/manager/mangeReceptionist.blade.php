@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-    @include('layouts.adminSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
   <!-- Main Sidebar Container -->
   @section('content')
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper p-3 " >
     <!-- Content Header (Page header) -->
@@ -15,11 +13,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Managers</h1>
+            <h1 class="m-0">Receptionists</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <button style="float: right; font-weight: 900;" class="btn btn-info btn-sm" type="button"  data-toggle="modal" data-target="#CreateArticleModal">
-              Create Manager
+              Create Receptionist
           </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -49,7 +47,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Edit Manger</h4>
+                <h4 class="modal-title">Receptionist Edit</h4>
                 <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
@@ -60,7 +58,7 @@
                     </button>
                 </div>
                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                    <strong>Success!</strong>Manager was added successfully.
+                    <strong>Success!</strong>Receptionist was added successfully.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -77,35 +75,13 @@
   </div>
 </div>
 </div>
-
-<!-- Delete Article Modal -->
-<div class="modal" id="DeleteArticleModal">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-              <h4 class="modal-title">Delete Manager</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-              <h4>Are you sure want to delete this Manager?</h4>
-          </div>
-          <!-- Modal footer -->
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-          </div>
-      </div>
-  </div>
-</div>
 <!--Show information of manager-->
 <div class="modal" id="ShowArticleModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Show Manger</h4>
+                <h4 class="modal-title">Show Receptionist</h4>
                 <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
@@ -121,19 +97,18 @@
   </div>
 </div>
 </div>
-
 <!-- Delete Article Modal -->
 <div class="modal" id="DeleteArticleModal">
   <div class="modal-dialog">
       <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-              <h4 class="modal-title">Delete Manager</h4>
+              <h4 class="modal-title">Receptionist Delete</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <!-- Modal body -->
           <div class="modal-body">
-              <h4>Are you sure want to delete this Manager?</h4>
+              <h4>Are you sure want to delete this Receptionist?</h4>
           </div>
           <!-- Modal footer -->
           <div class="modal-footer">
@@ -150,7 +125,7 @@
       <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-              <h4 class="modal-title">Create Manager</h4>
+              <h4 class="modal-title">Receptionist Create</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <!-- Modal body -->
@@ -161,7 +136,7 @@
                   </button>
               </div>
               <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                  <strong>Success!</strong>Manager was added successfully.
+                  <strong>Success!</strong>Receptionist was added successfully.
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -182,11 +157,7 @@
             <label for="nationalid">National ID:</label>
             <input type="text" class="form-control" name="nationalid" id="createNationalID">
         </div>
-       <!-- <div class="form-group">
-          <label for="avatar">Avatar:</label>
-          <input type="text" class="form-control" name="avatar" id="createAvatar">
-      </div>-->
-      <div class="form-group">
+        <div class="form-group">
             <label for="avatar">Choose Avatar:</label>
 
                 <input id="createAvatar" type="file" class=" @error('avatar') is-invalid @enderror" name="avatar" required>
@@ -219,15 +190,14 @@
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
-//  $(function () {
-       var table =$(document).ready(function(){
-   // var table = $('.yajra-datatable').DataTable({
+
+    var table =$(document).ready(function(){
      var user =$('#user').DataTable({
 
         processing: true,
         serverSide: true,
         ajax: {
-         url: "{{ route('managers.list') }}",
+          url: "{{ route('receptionist.list') }}",
         },
         columns: [
             {data: 'email', name: 'email'},
@@ -243,10 +213,9 @@
         ]
     });
 
-
 //////////////////////////////////CRUD Operations//////////////////////////////////////
-      // Get single article in ShowModel
-      $('.modelClose').on('click', function(){
+     // Get single article in ShowModel
+     $('.modelClose').on('click', function(){
             $('#ShowArticleModal').hide();
         });
         var id;
@@ -256,7 +225,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "adminManagers/"+id,
+                url: "adminReceptions/"+id,
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -268,24 +237,18 @@
                 }
             });
         });
-
-
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
             $('#EditArticleModal').hide();
         });
         var id;
-        $('body').on('click', '#editManagers', function(e) {
-            // e.preventDefault();
+        $('body').on('click', '#editReceptionists', function(e) {
             $('.alert-danger').html('');
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "adminManagers/"+id+"/edit",
+                url: "adminReceptions/"+id+"/edit",
                 method: 'GET',
-                // data: {
-                //     id: id,
-                // },
                 success: function(result) {
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
@@ -295,8 +258,8 @@
         });
 
 
-                // Update article Ajax request.
-                $('#SubmitEditArticleForm').click(function(e) {
+            // Update article Ajax request.
+            $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -304,7 +267,7 @@
                 }
             });
             $.ajax({
-                url: "adminManagers/"+id,
+                url: "adminReceptions/"+id,
                 method: 'PUT',
                 data: {
                     username: $('#editUserName').val(),
@@ -331,12 +294,11 @@
                 }
             });
 
-
-
         });
 
-        // Delete article Ajax request.
-        var deleteID;
+
+       // Delete article Ajax request.
+       var deleteID;
         $('body').on('click', '#getDeleteId', function(){
             deleteID = $(this).data('id');
         })
@@ -349,7 +311,8 @@
                 }
             });
             $.ajax({
-                url: "adminManagers/"+id,
+                //url: "receptionist.delete"+id,
+                 url: "adminReceptions/"+id,
                 method: 'DELETE',
                 success: function(result) {
                   setTimeout(function(){
@@ -362,7 +325,6 @@
             });
         });
 
-
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
                   e.preventDefault();
@@ -372,7 +334,7 @@
                       }
                   });
                   $.ajax({
-                      url: "adminManagers",
+                      url: "adminReceptions",
                       method: 'post',
                       data: {
                         username: $('#createUserName').val(),
@@ -393,23 +355,17 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
-                            setInterval(function(){
+                            setTimeout(function(){
+                                console.log('hiding');
                                 $('.alert-success').hide();
-                                $('#CreateArticleModal').modal('hide');
-                                location.reload();
+                                $('#CreateArticleModal').hide();
+                                $('.modal-backdrop').hide();
+                                //location.reload();
                             }, 2000);
                         }
                     }
                 });
             });
-
-
-
-
-
     });
 </script>
-
-
-
 @endsection

@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 //use Validator;
+
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
 use App\DataTables\AdminDatatable;
 use Yajra\DataTables\Services\DataTable;
+
 use Illuminate\Support\Facades\Validator;
+
 
 class AdminRoomController extends Controller
 {

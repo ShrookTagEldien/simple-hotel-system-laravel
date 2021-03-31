@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-    @include('layouts.adminSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
   @section('content')
-  
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
@@ -72,7 +72,7 @@
                   </button>
               </div>
               <div id="EditArticleModalBody">
-                  
+
               </div>
           </div>
       <!-- Modal footer -->
@@ -154,21 +154,16 @@
                 </div>
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
-<<<<<<< HEAD
-                      <input type="radio" name="status"  value="available" > Available &nbsp;
-                      <input type="radio"  name="status"  value="rented"> Rented
-=======
                       <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
                       <input type="radio"  name="status" id="createStatus" value="rented"> Rented
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                 </div>
-                
+
             </div>
           </div>
 
 
 
-          
+
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -186,7 +181,7 @@
 
 
 @section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -209,27 +204,23 @@
             {data: 'floor_number', name:'floor_number', searchable: true,},
             {data: 'manager_name', name:'manager_name', searchable: true,},
             {data: 'status', name: 'status', searchable: true,},
-        
+
             {
-                data: 'action', 
-                name: 'action', 
-                orderable: false, 
+                data: 'action',
+                name: 'action',
+                orderable: false,
                 searchable: true,
             },
         ]
 
 
-        
-    });  
+
+    });
 
 
 
 //////////////////////////////////CRUD Operations//////////////////////////////////////
-<<<<<<< HEAD
-
-=======
-        var edstat; 
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
+        var edstat;
 
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
@@ -251,23 +242,15 @@
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
                     $('#EditArticleModal').show();
-<<<<<<< HEAD
-                }
-            });
-        });
 
-
-=======
-                 
-            $('input[type="radio"]').click(function(){  
-                edstat = $(this).val();  
+            $('input[type="radio"]').click(function(){
+                edstat = $(this).val();
                 console.log($(this).val());
                 });
                 }
             });
         });
-                
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
+
                 // Update article Ajax request.
                 $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
@@ -285,11 +268,7 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-<<<<<<< HEAD
-                        status: $('#createStatus').val(),
-=======
                         status: edstat,
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -302,7 +281,7 @@
                         $('.alert-danger').hide();
                         $('.alert-success').show();
                         $('#user').DataTable().ajax.reload();
-                        setTimeout(function(){ 
+                        setTimeout(function(){
                             $('.alert-success').hide();
                             $('#EditArticleModal').hide();
                         }, 2000);
@@ -310,9 +289,9 @@
                     }
                 }
             });
-            
-        
-            
+
+
+
         });
 
         // Delete article Ajax request.
@@ -332,30 +311,25 @@
                 url: "adminRooms/"+id,
                 method: 'DELETE',
                 success: function(result) {
-                  setTimeout(function(){ 
+                  setTimeout(function(){
                         $('#user').DataTable().ajax.reload();
                         $('#DeleteArticleModal').hide();
                         $('.modal-backdrop.show').hide();
                     }, 1000);
-          
+
                 }
             });
         });
 
 
-<<<<<<< HEAD
-      // Create article Ajax request.
-      $('#SubmitCreateArticleForm').click(function(e) {
-=======
         var stat;
-            $('input[type="radio"]').click(function(){  
-                stat = $(this).val();  
+            $('input[type="radio"]').click(function(){
+                stat = $(this).val();
                 console.log($(this).val());
                 });
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
            // console.log($('#createStatus').val());
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                   e.preventDefault();
                   $.ajaxSetup({
                       headers: {
@@ -371,12 +345,8 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-<<<<<<< HEAD
-                        status: $('#createStatus').val(),
-=======
                         status: stat,
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
-                
+
                       },
                       success: function(result) {
                           if(result.errors) {
@@ -389,7 +359,7 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
-                            setTimeout(function(){ 
+                            setTimeout(function(){
                                 console.log('hiding');
                                 $('.alert-success').hide();
                                 $('#CreateArticleModal').hide();
@@ -402,10 +372,6 @@
             });
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
 });
 </script>
-@endsection       
+@endsection

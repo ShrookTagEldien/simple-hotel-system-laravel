@@ -29,7 +29,7 @@
         <tr>
             <th>Email</th>
             <th>Username</th>
-            <th>Avatar</th>
+            <th>National ID</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div id="EditArticleModalBody">
-                    
+
                 </div>
             </div>
         <!-- Modal footer -->
@@ -75,7 +75,28 @@
   </div>
 </div>
 </div>
+<!--Show information of manager-->
+<div class="modal" id="ShowArticleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Show Receptionist</h4>
+                <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="ShowArticleModalBody">
 
+                </div>
+            </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+      </div>
+  </div>
+</div>
+</div>
 <!-- Delete Article Modal -->
 <div class="modal" id="DeleteArticleModal">
   <div class="modal-dialog">
@@ -130,18 +151,25 @@
           </div>
           <div class="form-group">
             <label for="pass">Password:</label>
-            <input type="text" class="form-control" name="pass" id="createPassword">
+            <input type="password" class="form-control" name="pass" id="createPassword">
         </div>
           <div class="form-group">
             <label for="nationalid">National ID:</label>
             <input type="text" class="form-control" name="nationalid" id="createNationalID">
         </div>
         <div class="form-group">
-          <label for="avatar">Avatar:</label>
-          <input type="text" class="form-control" name="avatar" id="createAvatar">
-      </div>
- 
-            
+            <label for="avatar">Choose Avatar:</label>
+
+                <input id="createAvatar" type="file" class=" @error('avatar') is-invalid @enderror" name="avatar" required>
+                @error('avatar')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+        </div>
+
+
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -156,7 +184,7 @@
 @endsection
 
 @section('script')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
@@ -174,19 +202,41 @@
         columns: [
             {data: 'email', name: 'email'},
             {data: 'username', name: 'username'},
-            {data: 'avatar', name:'Avatar'},
-            
+            {data: 'NationalID', name:'National ID'},
+
             {
-                data: 'action', 
-                name: 'action', 
-                orderable: false, 
+                data: 'action',
+                name: 'action',
+                orderable: false,
                 searchable: true,
             },
         ]
-    });  
- 
-//////////////////////////////////CRUD Operations//////////////////////////////////////
+    });
 
+//////////////////////////////////CRUD Operations//////////////////////////////////////
+     // Get single article in ShowModel
+     $('.modelClose').on('click', function(){
+            $('#ShowArticleModal').hide();
+        });
+        var id;
+        $('body').on('click', '#showManagers', function(e) {
+            // e.preventDefault();
+            $('.alert-danger').html('');
+            $('.alert-danger').hide();
+            id = $(this).data('id');
+            $.ajax({
+                url: "adminReceptions/"+id,
+                method: 'GET',
+                // data: {
+                //     id: id,
+                // },
+                success: function(result) {
+                    console.log(result);
+                    $('#ShowArticleModalBody').html(result.html);
+                    $('#ShowArticleModal').show();
+                }
+            });
+        });
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
             $('#EditArticleModal').hide();
@@ -235,7 +285,7 @@
                         $('.alert-danger').hide();
                         $('.alert-success').show();
                         $('#user').DataTable().ajax.reload();
-                        setTimeout(function(){ 
+                        setTimeout(function(){
                             $('.alert-success').hide();
                             $('#EditArticleModal').hide();
                         }, 2000);
@@ -243,7 +293,7 @@
                     }
                 }
             });
-   
+
         });
 
 
@@ -265,12 +315,12 @@
                  url: "adminReceptions/"+id,
                 method: 'DELETE',
                 success: function(result) {
-                  setTimeout(function(){ 
+                  setTimeout(function(){
                         $('#user').DataTable().ajax.reload();
                         $('#DeleteArticleModal').hide();
                         $('.modal-backdrop.show').hide();
                     }, 1000);
-          
+
                 }
             });
         });
@@ -292,7 +342,7 @@
                         NationalID: $('#createNationalID').val(),
                         password: $('#createPassword').val(),
                         avatar: $('#createAvatar').val(),
-                
+
                       },
                       success: function(result) {
                           if(result.errors) {
@@ -305,7 +355,11 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
+<<<<<<< HEAD
                             setTimeout(function(){ 
+=======
+                            setTimeout(function(){
+>>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                                 console.log('hiding');
                                 $('.alert-success').hide();
                                 $('#CreateArticleModal').hide();
