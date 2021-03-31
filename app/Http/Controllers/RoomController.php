@@ -5,13 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
-use App\DataTables\RoomDataTable;
+// use App\DataTables\RoomDataTable;
+use Yajra\DataTables\DataTables;
 
 class RoomController extends Controller
 {
-    public function index(RoomDataTable $dataTable){
-        return $dataTable->render('rooms.index');
+    public function index(){
+            return view('rooms.index');
+        
     }
+    public function getRooms(Request $request, Room $room)
+    {
+        $data = $room->getData();
+        return DataTables::of($data)
+            ->addColumn('Actions', function($data) {
+                return '<button type="button" class="btn btn-success btn-sm" id="rent" data-id="'.$data->id.'">Rent</button>';
+            })
+            ->rawColumns(['Actions'])
+            ->make(true);
+    }
+    
     public function create(Request $request)
     {
         $room = new Room;
@@ -26,14 +39,15 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
+        
         $room = new Room;
         $room->room_number = $request->room_number;
         $room->capacity=$request->capacity;
         $room->price=$request->price;
-        $room->status=0;
+        $room->status='rented';
         $room->save();
 
-        return redirect('rooms');
+        return redirect('home');
     }
 
     public function edit($id)

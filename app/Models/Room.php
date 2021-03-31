@@ -15,4 +15,9 @@ class Room extends Model
         'status',
         'price',
     ];
+
+    public function getData()
+    {
+        return static::where('status','available')->orderBy('created_at','desc')->get();
+    }
 }

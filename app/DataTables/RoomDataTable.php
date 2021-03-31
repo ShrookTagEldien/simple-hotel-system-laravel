@@ -32,7 +32,8 @@ class RoomDataTable extends DataTable
      */
     public function query(Room $model)
     {
-        return $model->newQuery();
+        $available_rooms=Room::where('status','available');
+        return $this->applyScopes($available_rooms);
     }
 
     /**
@@ -65,10 +66,8 @@ class RoomDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
             'room_number',
             'capacity',
-            'status',
             'price',
         ];
     }
