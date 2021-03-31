@@ -1,5 +1,5 @@
      <!-- Sidebar Menu -->
-     <nav class="mt-2">
+     <nav class="mt-2" style="height: auto">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
             <a href="/admin" class="nav-link @if (Route::current()->getName()== 'dash') active @endif">

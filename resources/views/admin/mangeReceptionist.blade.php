@@ -6,10 +6,8 @@
 
   <!-- Main Sidebar Container -->
   @section('content')
- 
-
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+  <div class="content-wrapper p-3 " >
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -18,26 +16,17 @@
             <h1 class="m-0">Receptionists</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Receptionist</li>
-            </ol>
+            <button style="float: right; font-weight: 900;" class="btn btn-info btn-sm" type="button"  data-toggle="modal" data-target="#CreateArticleModal">
+              Create Receptionist
+          </button>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-  <div class="content">
-  <div class="container-fluid">
-  <div class="card-body p-2">
 
   <table class="table table-bordered yajra-datatable" id="user">
     <thead>
         <tr>
-           {{-- <th>No</th> --}}
-           {{-- <th>Name</th> --}}
             <th>Email</th>
             <th>Username</th>
             <th>Avatar</th>
@@ -51,6 +40,119 @@
  </div>
  </div>
   <!-- /.content-wrapper -->
+
+
+  <div class="modal" id="EditArticleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Receptionist Edit</h4>
+                <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                    <strong>Success!</strong>Receptionist was added successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="EditArticleModalBody">
+                    
+                </div>
+            </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
+          <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+      </div>
+  </div>
+</div>
+</div>
+
+<!-- Delete Article Modal -->
+<div class="modal" id="DeleteArticleModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Receptionist Delete</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+              <h4>Are you sure want to delete this Receptionist?</h4>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Create Article Modal -->
+<div class="modal" id="CreateArticleModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Receptionist Create</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                  <strong>Success!</strong>Receptionist was added successfully.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="form-group">
+                <label for="username">User Name:</label>
+                <input type="text" class="form-control" name="username" id="createUserName">
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" class="form-control" name="email" id="createEmail">
+          </div>
+          <div class="form-group">
+            <label for="pass">Password:</label>
+            <input type="text" class="form-control" name="pass" id="createPassword">
+        </div>
+          <div class="form-group">
+            <label for="nationalid">National ID:</label>
+            <input type="text" class="form-control" name="nationalid" id="createNationalID">
+        </div>
+        <div class="form-group">
+          <label for="avatar">Avatar:</label>
+          <input type="text" class="form-control" name="avatar" id="createAvatar">
+      </div>
+ 
+            
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="SubmitCreateArticleForm">Create</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
 @endsection
 
 @section('script')
@@ -59,18 +161,15 @@
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-<script>
-//  $(function () {
-       var table= $(document).ready(function(){
-   // var table = $('.yajra-datatable').DataTable({
-    $('#user').DataTable({
+<script type="text/javascript">
+
+    var table =$(document).ready(function(){
+     var user =$('#user').DataTable({
 
         processing: true,
         serverSide: true,
-        //ajax: "{{ route('receptionist.list') }}",
-       // ajax: 'admin/receptionists' ,
         ajax: {
-         url: "{{ route('receptionist.list') }}",
+          url: "{{ route('receptionist.list') }}",
         },
         columns: [
             {data: 'email', name: 'email'},
@@ -80,30 +179,143 @@
             {
                 data: 'action', 
                 name: 'action', 
-                orderable: true, 
+                orderable: false, 
                 searchable: true,
             },
         ]
     });  
-  });
+ 
+//////////////////////////////////CRUD Operations//////////////////////////////////////
 
-  $(document).on('click', '.edit', function(){
-  var id = $(this).attr('id');
-  $('#form_result').html('');
-  $.ajax({
-   url :"/sample/"+id+"/edit",
-   dataType:"json",
-   success:function(data)
-   {
-    $('#first_name').val(data.result.first_name);
-    $('#last_name').val(data.result.last_name);
-    $('#hidden_id').val(id);
-    $('.modal-title').text('Edit Record');
-    $('#action_button').val('Edit');
-    $('#action').val('Edit');
-    $('#formModal').modal('show');
-   }
-  })
- });
+        // Get single article in EditModel
+        $('.modelClose').on('click', function(){
+            $('#EditArticleModal').hide();
+        });
+        var id;
+        $('body').on('click', '#editReceptionists', function(e) {
+            $('.alert-danger').html('');
+            $('.alert-danger').hide();
+            id = $(this).data('id');
+            $.ajax({
+                url: "adminReceptions/"+id+"/edit",
+                method: 'GET',
+                success: function(result) {
+                    console.log(result);
+                    $('#EditArticleModalBody').html(result.html);
+                    $('#EditArticleModal').show();
+                }
+            });
+        });
+
+
+            // Update article Ajax request.
+            $('#SubmitEditArticleForm').click(function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "adminReceptions/"+id,
+                method: 'PUT',
+                data: {
+                    username: $('#editUserName').val(),
+                    email: $('#editEmail').val(),
+                    NationalID: $('#editNationalID').val(),
+                },
+                success: function(result) {
+                    if(result.errors) {
+                        $('.alert-danger').html('');
+                        $.each(result.errors, function(key, value) {
+                            $('.alert-danger').show();
+                            $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                        });
+                    } else {
+                        $('.alert-danger').hide();
+                        $('.alert-success').show();
+                        $('#user').DataTable().ajax.reload();
+                        setTimeout(function(){ 
+                            $('.alert-success').hide();
+                            $('#EditArticleModal').hide();
+                        }, 2000);
+
+                    }
+                }
+            });
+   
+        });
+
+
+       // Delete article Ajax request.
+       var deleteID;
+        $('body').on('click', '#getDeleteId', function(){
+            deleteID = $(this).data('id');
+        })
+        $('#SubmitDeleteArticleForm').click(function(e) {
+            e.preventDefault();
+            var id = deleteID;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                //url: "receptionist.delete"+id,
+                 url: "adminReceptions/"+id,
+                method: 'DELETE',
+                success: function(result) {
+                  setTimeout(function(){ 
+                        $('#user').DataTable().ajax.reload();
+                        $('#DeleteArticleModal').hide();
+                        $('.modal-backdrop.show').hide();
+                    }, 1000);
+          
+                }
+            });
+        });
+
+      // Create article Ajax request.
+      $('#SubmitCreateArticleForm').click(function(e) {
+                  e.preventDefault();
+                  $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      }
+                  });
+                  $.ajax({
+                      url: "adminReceptions",
+                      method: 'post',
+                      data: {
+                        username: $('#createUserName').val(),
+                        email: $('#createEmail').val(),
+                        NationalID: $('#createNationalID').val(),
+                        password: $('#createPassword').val(),
+                        avatar: $('#createAvatar').val(),
+                
+                      },
+                      success: function(result) {
+                          if(result.errors) {
+                              $('.alert-danger').html('');
+                              $.each(result.errors, function(key, value) {
+                                  $('.alert-danger').show();
+                                  $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                              });
+                          } else {
+                            $('.alert-danger').hide();
+                            $('.alert-success').show();
+                            $('#user').DataTable().ajax.reload();
+                            setTimeout(function(){ 
+                                console.log('hiding');
+                                $('.alert-success').hide();
+                                $('#CreateArticleModal').hide();
+                                $('.modal-backdrop').hide();
+                                //location.reload();
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+    });
 </script>
 @endsection

@@ -2,24 +2,14 @@
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
-
-
 use App\Http\Controllers\adminController;
-
 use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminRoomController;
-
-use App\Http\Controllers\ReceptionistsController;
-
-
-/*
-Route::get('/', function () {
+use App\Http\Controllers\AdminReceptionsController;
 
 
-    return view('admin.dashboard');
 
-    // return view('admin.mangeReceptionist');
-});*/
+
 
 Auth::routes();
 
@@ -45,13 +35,16 @@ Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list'
 Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
 
 /*******CRUD operations routes ******/
+
+
+
+/*******Receptionist******/
+Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+
+Route::resource('adminReceptions', AdminReceptionsController::class);
+
 Route::resource('adminManagers', AdminManagerController::class);
 Route::resource('adminRooms', AdminRoomController::class);
-
-
-
-
-//Route::get('adminManagers/{id}/edit', [AdminManagerController::class, 'edit']);
 
 
 
