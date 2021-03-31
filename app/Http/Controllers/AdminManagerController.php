@@ -62,9 +62,10 @@ class AdminManagerController extends Controller
         */
         return response()->json(['success'=>'Manager added successfully']);
     }
-    public function StoreAvatar($user){
+    public function StoreAvatar($user)
+    {
         $user->update([
-            'avatar'=> $user->avatar->store('uploads','public')
+            'avatar'=> $user->avatar->store('uploads', 'public')
         ]);
     }
     /**

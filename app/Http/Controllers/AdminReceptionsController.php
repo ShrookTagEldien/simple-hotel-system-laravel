@@ -21,7 +21,7 @@ class AdminReceptionsController extends Controller
         //
     }
 
-      /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,28 +52,43 @@ class AdminReceptionsController extends Controller
         return response()->json(['success'=>'Receptionist added successfully']);
     }
 
-  /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Receptionist $receptionist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Receptionist $receptionist)
+    /**
+       * Display the specified resource.
+       *
+       * @param  \App\Models\Receptionist $receptionist
+       * @return \Illuminate\Http\Response
+       */
+    public function show(Receptionist $receptionist, $id)
     {
-        //
+        $data = $receptionist->findData($id);
+        $html = '
+                <div class="form-group">
+                    <h5>User Name:</h5>
+                    <h6>'.$data->username.'</h6>
+                </div>
+                <div class="form-group">
+                    <h5>Email:</h5>
+                    <h6>'.$data->email.'</h6>
+                </div>
+                <div class="form-group">
+                    <h5>National ID:</h5>
+                    <h6>'.$data->NationalID.'</h6>
+                </div>';
+
+
+        return response()->json(['html'=>$html]);
     }
 
 
 
-     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Receptionist $receptionist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Receptionist $receptionist,$id)
+    /**
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Models\Receptionist $receptionist
+    * @return \Illuminate\Http\Response
+    */
+    public function edit(Receptionist $receptionist, $id)
     {
-        
         $data = $receptionist->findData($id);
         $html = '<div class="form-group">
                     <label for="username">User Name:</label>
@@ -92,13 +107,13 @@ class AdminReceptionsController extends Controller
         return response()->json(['html'=>$html]);
     }
 
-     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Receptionist $receptionist
-     * @return \Illuminate\Http\Response
-     */
+    /**
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Models\Receptionist $receptionist
+    * @return \Illuminate\Http\Response
+    */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -107,7 +122,7 @@ class AdminReceptionsController extends Controller
             'email' => 'required',
 
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
@@ -116,24 +131,20 @@ class AdminReceptionsController extends Controller
         $receptionist->updateData($id, $request->all());
 
         return response()->json(['success'=>'Receptionist updated successfully']);
-   
     }
 
-     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Manager  $manager
-     * @param  \App\Models\Receptionist $receptionist
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id){
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Models\Manager  $manager
+    * @param  \App\Models\Receptionist $receptionist
+    * @return \Illuminate\Http\Response
+    */
+    public function destroy($id)
+    {
         $receptionist = new Receptionist;
         $receptionist->deleteData($id);
 
         return response()->json(['success'=>'Receptionist deleted successfully']);
     }
-
-
-
-
 }

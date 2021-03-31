@@ -23,9 +23,8 @@ class adminController extends Controller
     public function index(AdminDatatable $admin)
     {
         return $admin->render('admin.index');
-
     }
-     public function dash()
+    public function dash()
     {
         return view('admin.dashboard');
     }
@@ -50,7 +49,7 @@ class adminController extends Controller
     {
         return view('admin.manageClients');
     }
- 
+
     public function floors()
     {
         return view('admin.manageFloors');
@@ -81,28 +80,27 @@ class adminController extends Controller
     public function getRooms(Request $request)
     {
         if ($request->ajax()) {
-            
             $data = Room::latest()->get();
-           
+
             return Datatables::of($data)
-                ->addColumn('action', function($row){
-                   $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editManagers" data-id="'.$row->id.'">Edit</button> 
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editManagers" data-id="'.$row->id.'">Edit</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
 
-                   return $actionBtn;
+                    return $actionBtn;
                 })
-                ->editColumn('price', function(Room $room) {
+                ->editColumn('price', function (Room $room) {
                     return  $room->price*0.01 . ' $';
                 })
-                ->addColumn('status', function(Room $room) {
-                    if($room->status=="available")
+                ->addColumn('status', function (Room $room) {
+                    if ($room->status=="available") {
                         return ('<font color="green"> '. $room->status .'</font>');
-                    else 
+                    } else {
                         return ('<font color="red"> '. $room->status .'</font>');
-   
+                    }
                 })
-                
-           
+
+
                 ->rawColumns(['action','status'])
                 ->make(true);
         }
@@ -117,6 +115,7 @@ class adminController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<button type="button" class="btn btn-success btn-sm" id="editReceptionists" data-id="'.$row->id.'">Edit</button>
+                    <button type="button" class="btn btn-info btn-sm" id="showManagers" data-id="'.$row->id.'">Show</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
                     return $actionBtn;
                 })
@@ -124,6 +123,4 @@ class adminController extends Controller
                 ->make(true);
         }
     }
-
-
 }

@@ -31,7 +31,7 @@
         <tr>
             <th>Email</th>
             <th>Username</th>
-            <th>Avatar</th>
+            <th>National ID</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -186,17 +186,16 @@
           <label for="avatar">Avatar:</label>
           <input type="text" class="form-control" name="avatar" id="createAvatar">
       </div>-->
-      <div class="form-group row">
-            <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('Choose an avatar') }}</label>
+      <div class="form-group">
+            <label for="avatar">Choose Avatar:</label>
 
-            <div class="col-md-6">
                 <input id="createAvatar" type="file" class=" @error('avatar') is-invalid @enderror" name="avatar" required>
                 @error('avatar')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-            </div>
+
         </div>
 
 
@@ -233,7 +232,7 @@
         columns: [
             {data: 'email', name: 'email'},
             {data: 'username', name: 'username'},
-            {data: 'avatar', name:'Avatar'},
+            {data: 'NationalID', name:'National ID'},
 
             {
                 data: 'action',
