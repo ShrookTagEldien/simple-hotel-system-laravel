@@ -18,6 +18,12 @@ class Room extends Model
         'status',
         'price',
     ];
+
+    public function getAvailableRooms()
+    {
+        return static::where('status','available')->orderBy('created_at','desc')->get();
+    }
+
     protected $guarded = array();
 
     public function getData()
@@ -44,6 +50,5 @@ class Room extends Model
     {
         return static::find($id)->delete();
     }
-
 
 }

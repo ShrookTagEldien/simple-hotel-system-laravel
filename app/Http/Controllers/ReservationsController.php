@@ -8,6 +8,8 @@ use App\Models\Room;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class ReservationsController extends Controller
@@ -20,19 +22,33 @@ class ReservationsController extends Controller
         return view('reservations.create',['user'=>Auth::user(),'room'=>$room]);
 
     }
-    public function store( ReservationRequest $request)
+    public function store(Request $request)
     {
-
-        $room=Room::where('id',$request->id)->first();
-        Reservation::create([
-            'room_id' => $request->id,
-            'room_num' =>$request->room_num,
-            'accompany_number' => $request->accompany_number,
+       
+        $data=$request->all();
+        $room=Room::where('id',$data['id'])->first();
+        $capacity=$room->capacity;
+        $validator = Validator::make($data, [
+            'accompanies' => "max:3",
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+        else{
+            $room->update(['status' => 'rented']);
+            Reservation::create([
+            'room_num' =>$room->room_number,
+            'accompany_number' => $data['accompanies'],
             'paid_price' => $room->price,
+            'room_id' => $room->id,
             'user_id' => Auth::user()->id
         ]);
-        Room::where('id',$request->id)->update(['status' => 0]);
-        return redirect('/reservations/all');
+        
+       
+
+            return response()->json(['success'=>'Article added successfully']);
+        }
     }
     public function get_available_rooms()
     {
