@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
@@ -15,19 +16,19 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('admins')->insert(array (
+
+        DB::table('admins')->insert(array(
         0 =>
-        array (
+        array(
             'email' => 'admin@admin.com',
              'password' =>Hash::make('123456'),
              'name'=>'admin',
-             'job_title'=>'admin',
+            'job_title'=>'admin',
+
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
         ),
-       
-
     ));
     }
 }
