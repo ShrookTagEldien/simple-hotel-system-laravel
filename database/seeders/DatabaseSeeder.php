@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Carbon\Carbon;
 
 use Illuminate\Database\Seeder;
 
@@ -44,14 +45,8 @@ class DatabaseSeeder extends Seeder
                     'NationalID' => $faker->phoneNumber,
                     'password' =>Hash::make('12345678'),
                 ]);
-                DB::table('floors')->insert([
-                    'id' =>$faker->unique()->numberBetween(1000, 9999),
-                    'name' =>strtoupper($faker->lexify('???')),
 
-                    
-                ]);
-
-
+             
 
             }    
 

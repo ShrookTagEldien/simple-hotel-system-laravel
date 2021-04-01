@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,16 @@ Route::get('reservations/{room}',[ReservationsController::class,'create'])->name
 Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
 
 
-Route::get('students', [StudentController::class, 'index']);
-Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+//Route::get('students', [StudentController::class, 'index']);
+//Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+
+
+//================  Multi Authentication ====================//
+/*Route::prefix('admin')->group(function(){
+
+    Route::get('/login',[adminLoginController::class,'showLoginForm'])->name('admin.login'); 
+    Route::post('/login',[adminLoginController::class,'login'])->name('admin.login.submit'); 
+    Route::get('/',[adminController::class,'dash']);
+});
+ */
 

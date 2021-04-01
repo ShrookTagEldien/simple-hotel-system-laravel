@@ -14,8 +14,11 @@ class CreateFloorsTable extends Migration
     public function up()
     {
         Schema::create('floors', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
+            //$table->string('floorId');
+            $table->integer('floorId');
             $table->string('name');
+            $table->string('Manager');
             $table->timestamps();
         });
     }

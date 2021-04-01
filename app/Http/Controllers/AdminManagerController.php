@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Manager;
 use Illuminate\Http\Request;
+use App\Models\User;
 //use Illuminate\Validation\Validator;
 
 use Illuminate\Support\Facades\Validator;
@@ -53,13 +54,18 @@ class AdminManagerController extends Controller
 
         $manager->storeData($request->all());
         //$this->storeAvatar($manager);
-        /*
-        $create_user=new User;
+        
+       /* $create_user=new User;
         $create_user->name=$request->username;
         $create_user->password=$request->pass;
         $create_user->email=$request->email;
+        $create_user->phone='010125486';
+        $create_user->avatar='img.png';
+        $create_user->country='Egypt';
+        $create_user->gender='Female';
         $create_user->save();
-        */
+       $create_user->storeData($create_user);*/
+        
         return response()->json(['success'=>'Manager added successfully']);
     }
 

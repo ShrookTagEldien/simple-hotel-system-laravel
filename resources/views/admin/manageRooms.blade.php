@@ -154,13 +154,8 @@
                 </div>
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
-<<<<<<< HEAD
-                      <input type="radio" name="status"  value="available" > Available &nbsp;
-                      <input type="radio"  name="status"  value="rented"> Rented
-=======
                       <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
                       <input type="radio"  name="status" id="createStatus" value="rented"> Rented
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                 </div>
                 
             </div>
@@ -225,12 +220,8 @@
 
 
 //////////////////////////////////CRUD Operations//////////////////////////////////////
-<<<<<<< HEAD
 
-=======
         var edstat; 
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
-
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
             $('#EditArticleModal').hide();
@@ -251,13 +242,12 @@
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
                     $('#EditArticleModal').show();
-<<<<<<< HEAD
-                }
-            });
-        });
+          //      }
+         ///   });
+      //  });
 
 
-=======
+
                  
             $('input[type="radio"]').click(function(){  
                 edstat = $(this).val();  
@@ -266,8 +256,7 @@
                 }
             });
         });
-                
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
+
                 // Update article Ajax request.
                 $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
@@ -285,11 +274,8 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-<<<<<<< HEAD
-                        status: $('#createStatus').val(),
-=======
+            //            status: $('#createStatus').val(),
                         status: edstat,
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -342,11 +328,6 @@
             });
         });
 
-
-<<<<<<< HEAD
-      // Create article Ajax request.
-      $('#SubmitCreateArticleForm').click(function(e) {
-=======
         var stat;
             $('input[type="radio"]').click(function(){  
                 stat = $(this).val();  
@@ -355,7 +336,6 @@
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
            // console.log($('#createStatus').val());
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                   e.preventDefault();
                   $.ajaxSetup({
                       headers: {
@@ -371,11 +351,11 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
-<<<<<<< HEAD
-                        status: $('#createStatus').val(),
-=======
+
+                    //    status: $('#createStatus').val(),
+
                         status: stat,
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
+
                 
                       },
                       success: function(result) {
@@ -402,10 +382,6 @@
             });
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
 });
 </script>
 @endsection       

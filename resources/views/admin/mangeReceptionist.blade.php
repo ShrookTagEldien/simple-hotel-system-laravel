@@ -355,11 +355,8 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
-<<<<<<< HEAD
-                            setTimeout(function(){ 
-=======
+
                             setTimeout(function(){
->>>>>>> b465edf43db4fd4048c81f4552232a3a0d795076
                                 console.log('hiding');
                                 $('.alert-success').hide();
                                 $('#CreateArticleModal').hide();

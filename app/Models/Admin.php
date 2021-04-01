@@ -1,35 +1,27 @@
 <?php
 
 namespace App\Models;
-use Carbon\Carbon;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 
-
-//============================
-
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
-    
+    use HasFactory, Notifiable ;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-
+    protected $guard ='admin';
     protected $fillable = [
         'name',
         'email',
         'password',
-        'phone',
-        'avatar',
-        'country',
-        'gender',
+        'job_title',
     ];
 
     /**
