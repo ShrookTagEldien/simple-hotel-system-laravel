@@ -47,6 +47,7 @@ Route::resource('adminReceptions', AdminReceptionsController::class);
 
 Route::resource('adminManagers', AdminManagerController::class);
 Route::get('adminManager/{manager}/ban', [AdminManagerController::class,'banManager']);
+Route::get('adminReception/{manager}/ban', [AdminReceptionsController::class,'banReception']);
 
 Route::resource('adminRooms', AdminRoomController::class);
 
@@ -54,6 +55,7 @@ Route::resource('adminRooms', AdminRoomController::class);
 Route::get('/floors', [adminController::class, 'floors'])->name('floors');
 Route::get('/get-floors', [adminController::class, 'getFloors'])->name('floor.list');
 Route::resource('adminFloors', AdminFloorController::class);
+
 
 
 /*******  */
@@ -67,3 +69,4 @@ Route::post('/login',[AdminLoginController::class,'login'])->name('admin.login.s
     // Route::get('/',[adminController::class,'dash']);
 
 
+   

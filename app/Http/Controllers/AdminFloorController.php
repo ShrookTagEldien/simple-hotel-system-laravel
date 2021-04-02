@@ -29,17 +29,20 @@ class AdminFloorController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'floorId' => 'required',
+            'Manager' => 'required',
             
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
       //  dd('after valdiation');
-        $floor->storeData($request->all());
+      Floor::insert([
+        'floorId'=>$request['floorId'],
+        'name'=>$request['name'],
+        'Manager'=>$request['Manager'],
+        ]);
         return response()->json(['success'=>'Floor added successfully']);
     }
-     
-
     public function show(Floor $floor, $id)
     {
         $data = $floor->findData($id);

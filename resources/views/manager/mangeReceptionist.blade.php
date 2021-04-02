@@ -325,6 +325,25 @@
             });
         });
 
+        // Ban article Ajax request.
+        $('body').on('click', '#banReceptionist', function(){
+            var id = $(this).data('id');
+            $.ajax({
+                url: "adminReception/"+id+"/ban",
+                method: 'GET',
+                success: function(result) {
+                    $("#banManagers").prop('value', 'Unban');
+                    $('#banManagers').toggleClass('btn-info');
+                    $('#banManagers').toggleClass('btn-success');
+                    //$('#banManagers').css('background_color', 'red');
+                  setTimeout(function(){
+                        $('#user').DataTable().ajax.reload();                      
+                    }, 1000);
+
+                }
+            });
+        });
+
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
                   e.preventDefault();

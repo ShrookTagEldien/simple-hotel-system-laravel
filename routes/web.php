@@ -37,7 +37,7 @@ Route::get('/home', function(RoomDataTable $dataTable) {
 		return view('admin.dashboard');
 	}else if($role=='client'){
         return $dataTable->render('reservations.index');
-    }else {
+    }else if($role=='recep'){
         return view('receptionist.index');
     }
 })->name('home');
