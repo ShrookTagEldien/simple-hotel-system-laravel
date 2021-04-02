@@ -182,6 +182,7 @@ class AdminManagerController extends Controller
         $record= $manager->findData($id);
         if(User::where('email',$record->email)->first()){
             User::where('email',$record->email)->delete();
+            return response()->json(['success'=>'banned']);
         }
         else{
 
@@ -197,8 +198,24 @@ class AdminManagerController extends Controller
                 'status'=>'active',
                 'role'=> 'manager'    
             ]);
+            return response()->json(['success'=>'unbanned']);
         }
-        return response()->json(['success'=>'Manager banneded successfully']);
+        
+
+    }
+
+
+    public function checkIfBanned($id){
+        $manager = new Manager;
+        $record= $manager->findData($id);
+        if(User::where('email',$record->email)->first()){
+            return response()->json(['success'=>'banned']);
+
+        }
+        else{
+            return response()->json(['success'=>'unbanned']);
+        }
+
 
     }
     
