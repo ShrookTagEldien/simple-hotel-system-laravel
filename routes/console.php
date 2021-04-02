@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -28,5 +29,17 @@ Artisan::command('create:admin {--name=} {--password=}', function ($name, $passw
     //store password hashed inside database
     $admin->password=Hash::make($password);
     $admin->save();
+    User::create([
+        'name' => $name,
+        'email' =>$name,
+        'password' => Hash::make($password),
+        'avatar'=>'img.png',
+        'country'=>'-',
+        'gender'=>'-',
+        'phone'=>'-',
+        'remember_token' =>null,
+        'status'=>'active',
+        'role'=> 'admin'
+    ]);
     $this->info('New Admin : '.$name ." is created");
 })->purpose('Create new Admin command');
