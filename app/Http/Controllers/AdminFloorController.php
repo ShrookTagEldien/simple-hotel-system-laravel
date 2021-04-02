@@ -29,7 +29,6 @@ class AdminFloorController extends Controller
             'name' => 'required',
             'floorId' => 'required',
             'Manager' => 'required',
-
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
@@ -42,7 +41,6 @@ class AdminFloorController extends Controller
         ]);
         return response()->json(['success'=>'Floor added successfully']);
     }
-
 
     public function show(Floor $floor, $id)
     {

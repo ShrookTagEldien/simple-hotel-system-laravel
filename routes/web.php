@@ -31,31 +31,19 @@ Auth::routes();
 Route::get('/home', function(RoomDataTable $dataTable) {
   ///dd(Auth::user()->roles->first()->name);
 	$role = Auth::user()->roles->first()->name;
+
 	if($role == 'manager') {
 		return view('manager.dashboard');
 	}else if($role == 'admin'){
 		return view('admin.dashboard');
 	}else if($role=='client'){
         return $dataTable->render('reservations.index');
-    }else {
+    }else if($role=='recep'){
         return view('receptionist.index');
     }
 })->name('home');
 
-/************************************************************** */
-/*
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/superadmin_dashboard', function(){
-      return view('admin.dashboard');
-    })->name('super_admin_dashboard');
-  });
 
-  Route::group(['middleware' => ['role:user']], function () {
-    Route::get('/user_dashboard', function(){
-      return view('user_dashboard');
-    })->name('user_dashboard');
-  });  
-*/
 
 // Route::resource('articles', ArticleController::class);
 Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');

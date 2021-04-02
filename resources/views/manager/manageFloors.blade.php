@@ -246,7 +246,7 @@
         });
 
 
-                // Update article Ajax request.
+            // Update article Ajax request.
             $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
             $.ajaxSetup({
