@@ -34,7 +34,6 @@ Route::get('/home', function() {
 	}
 })->name('home');
 
-
 /************************************************************** */
 /*
 Route::group(['middleware' => ['role:admin']], function () {
@@ -50,10 +49,14 @@ Route::group(['middleware' => ['role:admin']], function () {
   });  
 */
 
+Route::resource('articles', ArticleController::class);
+Route::get('get-rooms', [RoomController::class, 'getRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create',[RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
 Route::post('/rooms',[RoomController::class, 'store'])->name('room.store');
+Route::get('/rooms/{room}/rent', [ReservationController::class, 'store'])->name('reservation.store');
+
 
 
 Route::get('reservations/all',[ReservationsController::class, 'index'])->name('reservations.index');
@@ -62,6 +65,6 @@ Route::get('reservations/{room}',[ReservationsController::class,'create'])->name
 Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
 
 
-Route::get('students', [StudentController::class, 'index']);
-Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+// Route::get('students', [StudentController::class, 'index']);
+// Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 
