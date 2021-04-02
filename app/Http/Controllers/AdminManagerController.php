@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Manager;
+
 use Illuminate\Http\Request;
 //use Illuminate\Validation\Validator;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminManagerController extends Controller
 {
@@ -50,18 +53,27 @@ class AdminManagerController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+        //$this->storeAvatar($manager);                
 
         $manager->storeData($request->all());
-        //$this->storeAvatar($manager);
-        /*
-        $create_user=new User;
-        $create_user->name=$request->username;
-        $create_user->password=$request->pass;
-        $create_user->email=$request->email;
-        $create_user->save();
-        */
+
+
+        User::create([
+            'name' => $request['username'],
+            'email' =>$request['email'],
+            'password' => Hash::make($request['password']),
+            'avatar'=>$request['avatar'],
+            'country'=>'-',
+            'gender'=>'-',
+            'phone'=>'-',
+            'remember_token' =>NULL,
+            'status'=>'active',
+            'role'=> 'manager'    
+        ]); 
+
         return response()->json(['success'=>'Manager added successfully']);
     }
+    
     public function StoreAvatar($user)
     {
         $user->update([

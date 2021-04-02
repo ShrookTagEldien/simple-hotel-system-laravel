@@ -395,7 +395,7 @@
                             $('#user').DataTable().ajax.reload();
                             setInterval(function(){
                                 $('.alert-success').hide();
-                                $('#CreateArticleModal').modal('hide');
+                                $('#CreateArticleModal').hide();
                                 location.reload();
                             }, 2000);
                         }

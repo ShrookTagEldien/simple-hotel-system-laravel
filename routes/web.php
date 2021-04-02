@@ -22,7 +22,33 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', function() {
+  ///dd(Auth::user()->roles->first()->name);
+	$role = Auth::user()->roles->first()->name;
+	if($role == 'manager') {
+		return view('manager.dashboard');
+	}else if($role == 'admin'){
+		return view('admin.dashboard');
+	}
+})->name('home');
+
+
+/************************************************************** */
+/*
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/superadmin_dashboard', function(){
+      return view('admin.dashboard');
+    })->name('super_admin_dashboard');
+  });
+
+  Route::group(['middleware' => ['role:user']], function () {
+    Route::get('/user_dashboard', function(){
+      return view('user_dashboard');
+    })->name('user_dashboard');
+  });  
+*/
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create',[RoomController::class, 'create'])->name('room.create');

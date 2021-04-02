@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('status')->default('pending');
             $table->unsignedBigInteger('receptionist_id')->nullable();
+            $table->string('role');
             $table->foreign('receptionist_id')
             ->references('id')->on('receptionists')
             ->onDelete('cascade')->default(null);
