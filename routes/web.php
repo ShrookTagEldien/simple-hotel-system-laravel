@@ -31,6 +31,7 @@ Auth::routes();
 
 Route::get('/home', function (RoomDataTable $dataTable, ) {
   ///dd(Auth::user()->roles->first()->name);
+
   $role = Auth::user()->roles->first()->name;
   if ($role == 'manager') {
     return view('manager.dashboard');
@@ -47,20 +48,7 @@ Route::get('/home', function (RoomDataTable $dataTable, ) {
   }
 })->name('home');
 
-/************************************************************** */
-/*
-Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/superadmin_dashboard', function(){
-      return view('admin.dashboard');
-    })->name('super_admin_dashboard');
-  });
 
-  Route::group(['middleware' => ['role:user']], function () {
-    Route::get('/user_dashboard', function(){
-      return view('user_dashboard');
-    })->name('user_dashboard');
-  });  
-*/
 
 // Route::resource('articles', ArticleController::class);
 Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
@@ -89,8 +77,11 @@ Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'appro
 });*/
 
 
+
 Route::get('receptionist/all', [ReceptionistsController::class, 'index'])->name('receptionist.index');
 Route::get('receptionist/showNonApprovedClients', [ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
+Route::get('receptionist/showMyClients',[ReceptionistsController::class, 'showMyClients'])->name('receptionist.showMyClients');
+
 
 
 

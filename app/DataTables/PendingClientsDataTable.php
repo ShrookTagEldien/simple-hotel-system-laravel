@@ -34,6 +34,7 @@ class PendingClientsDataTable extends DataTable
     {
         $pendingClients = User::where('status' ,'pending');
         return $this->applyScopes($pendingClients);
+
     }
 
     /**

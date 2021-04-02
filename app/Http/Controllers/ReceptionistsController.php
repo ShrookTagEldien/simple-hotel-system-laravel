@@ -8,6 +8,8 @@ use App\Models\Receptionist;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\DataTables\PendingClientsDataTable;
+use App\DataTables\MyClientsDataTable;
+
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,6 +39,7 @@ class ReceptionistsController extends Controller
        // dd("inside rece controller");
     }
 
+
     public function getPendingClients(Request $request, User $user)
     {
         $data = $user->getPendingClients();
@@ -64,6 +67,13 @@ class ReceptionistsController extends Controller
             'status' => 'denied'
         ]);
         return response()->json(['success'=>'Client Denied']);
+    }
+    public function showMyClients()
+    {
+        $user=User::where('status' ,'approved');
+        return DataTables::of($user);
+        
+
     }
 }
 
