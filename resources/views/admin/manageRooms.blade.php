@@ -220,8 +220,8 @@
 
 
 //////////////////////////////////CRUD Operations//////////////////////////////////////
-        var edstat; 
 
+        var edstat; 
         // Get single article in EditModel
         $('.modelClose').on('click', function(){
             $('#EditArticleModal').hide();
@@ -242,6 +242,12 @@
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
                     $('#EditArticleModal').show();
+          //      }
+         ///   });
+      //  });
+
+
+
                  
             $('input[type="radio"]').click(function(){  
                 edstat = $(this).val();  
@@ -250,7 +256,7 @@
                 }
             });
         });
-                
+
                 // Update article Ajax request.
                 $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
@@ -268,6 +274,7 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
+            //            status: $('#createStatus').val(),
                         status: edstat,
                 },
                 success: function(result) {
@@ -321,7 +328,6 @@
             });
         });
 
-
         var stat;
             $('input[type="radio"]').click(function(){  
                 stat = $(this).val();  
@@ -345,7 +351,11 @@
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
                         manager_name: $('#createManager').val(),
+
+                    //    status: $('#createStatus').val(),
+
                         status: stat,
+
                 
                       },
                       success: function(result) {

@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +33,7 @@ class RoleTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
 
         ),
+
         2 =>
          array (
             'id' => 3,
@@ -52,8 +52,6 @@ class RoleTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
 
         ),        
-                        
-        
 
     ));
 }

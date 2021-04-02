@@ -2,10 +2,13 @@
 
 use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReceptionistsController;
+
+use  App\Http\Controllers\Auth\AdminLoginController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +77,23 @@ Route::get('reservations/{room}',[ReservationsController::class,'create'])->name
 Route::post('reservations',[ReservationsController::class, 'store'])->name('reservation.store');
 
 
+
+//================  Multi Authentication ====================//
+/*Route::prefix('admin')->group(function(){
+
+    Route::get('/login',[AdminLoginController::class,'showLoginForm'])->name('admin.login'); 
+    Route::post('/login',[AdminLoginController::class,'login'])->name('admin.login.submit'); 
+    Route::get('/',[adminController::class,'dash']);
+});*/
+ 
+
+Route::get('receptionist/all',[ReceptionistsController::class, 'index'])->name('receptionist.index');
+Route::get('receptionist/showNonApprovedClients',[ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
+
+
+
+
 // Route::get('students', [StudentController::class, 'index']);
 // Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+
 

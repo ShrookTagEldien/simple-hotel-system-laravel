@@ -1,11 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\User;
 use App\Models\Manager;
-
 use Illuminate\Http\Request;
+use App\Models\User;
 //use Illuminate\Validation\Validator;
 
 use Illuminate\Validation\Rule;
@@ -56,7 +54,6 @@ class AdminManagerController extends Controller
         //$this->storeAvatar($manager);                
 
         $manager->storeData($request->all());
-
 
         User::create([
             'name' => $request['username'],

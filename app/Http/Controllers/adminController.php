@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Models\Room;
 use App\Models\Manager;
+use App\Models\Floor;
+
 
 use App\Models\Receptionist;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
-use App\DataTables\AdminDatatable;
-use Yajra\DataTables\Services\DataTable;
 
 class adminController extends Controller
 {
@@ -20,10 +20,11 @@ class adminController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(AdminDatatable $admin)
+    /*public function index(AdminDatatable $admin)
     {
         return $admin->render('admin.index');
-    }
+    }*/
+
     public function dash()
     {
         return view('admin.dashboard');
@@ -108,6 +109,8 @@ class adminController extends Controller
         }
     }
 
+
+
     public function getReceptionists(Request $request)
     {
         if ($request->ajax()) {
@@ -125,4 +128,27 @@ class adminController extends Controller
                 ->make(true);
         }
     }
+
+    public function getFloors(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Floor::latest()->get();
+            return Datatables::of($data)
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editFloor" data-id="'.$row->id.'">Edit</button>
+                   <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>
+                   <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+
+
+
+
+
 }
