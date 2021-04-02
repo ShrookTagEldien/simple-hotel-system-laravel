@@ -25,7 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('articles', ArticleController::class);
-Route::get('get-rooms', [RoomController::class, 'getRooms'])->name('get-rooms');
+Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create',[RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
@@ -34,10 +34,10 @@ Route::get('/rooms/{room}/rent', [ReservationController::class, 'store'])->name(
 
 
 
-Route::get('reservations/all',[ReservationsController::class, 'index'])->name('reservations.index');
+Route::get('reservations/all',[ReservationsController::class, 'index'])->name('reservation.list');
 Route::get('reservations',[ReservationsController::class,'index']);          //show available rooms
-Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservations.create');
-Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
+Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservation.create');
+Route::post('reservations',[ReservationsController::class, 'store'])->name('reservation.store');
 
 
 // Route::get('students', [StudentController::class, 'index']);

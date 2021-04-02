@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 
 
@@ -22,14 +23,24 @@ class ReservationsController extends Controller
         return view('reservations.create',['user'=>Auth::user(),'room'=>$room]);
 
     }
-    public function store(Request $request)
+    public function getAvailableRooms(Request $request, Room $room)
+    {
+        $data = $room->getAvailableRooms();
+        return DataTables::of($data)
+            ->addColumn('Actions', function($data) {
+                return '<button type="button" class="btn btn-success btn-sm" id="rent" data-id="'.$data->id.'">Rent</button>';
+            })
+            ->rawColumns(['Actions'])
+            ->make(true);
+    }
+    public function store(ReservationRequest $request)
     {
        
         $data=$request->all();
         $room=Room::where('id',$data['id'])->first();
         $capacity=$room->capacity;
         $validator = Validator::make($data, [
-            'accompanies' => "max:3",
+            'accompanies' => "max:$capacity",
         ]);
     
         if ($validator->fails()) {

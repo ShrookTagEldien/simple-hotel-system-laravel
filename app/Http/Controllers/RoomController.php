@@ -14,16 +14,7 @@ class RoomController extends Controller
             return view('rooms.index');
         
     }
-    public function getRooms(Request $request, Room $room)
-    {
-        $data = $room->getAvailableRooms();
-        return DataTables::of($data)
-            ->addColumn('Actions', function($data) {
-                return '<button type="button" class="btn btn-success btn-sm" id="rent" data-id="'.$data->id.'">Rent</button>';
-            })
-            ->rawColumns(['Actions'])
-            ->make(true);
-    }
+    
     
     public function create(Request $request)
     {
@@ -47,7 +38,7 @@ class RoomController extends Controller
         $room->status='rented';
         $room->save();
 
-        return redirect('home');
+        return redirect('reservations.index');
     }
 
     public function edit($id)
