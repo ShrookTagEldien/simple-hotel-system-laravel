@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-@include('layouts.managerSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
+  <!-- Main Sidebar Container -->
   @section('content')
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
