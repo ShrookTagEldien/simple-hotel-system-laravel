@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
 use App\Models\Receptionist;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\DataTables;
+use App\DataTables\PendingClientsDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ReceptionistsController extends Controller
 {
     //
-    public function index()
+    public function index(PendingClientsDataTable $dataTable)
     {
-        return view('welcome');
+        //echo "dfff";
+        // view('receptionist.index');
+        return $dataTable->render('receptionist.pendingClients');
     }
 
     public function getReceptionists(Request $request)
@@ -31,4 +36,17 @@ class ReceptionistsController extends Controller
         }
        // dd("inside rece controller");
     }
+
+    public function showNonApprovedClients()
+    {
+        $user=User::all();
+        //$AllNonApprovedClients = $user->getPendingClients();
+        return DataTables::of($user);
+        /*
+        return view('Receptionist.nonapprovedClients', [
+            'nonapprovedclients' => $AllNonApprovedClients,
+          ]);*/
+
+    }
 }
+

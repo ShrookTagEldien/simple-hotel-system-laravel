@@ -4,6 +4,8 @@ use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReceptionistsController;
+
 use  App\Http\Controllers\Auth\AdminLoginController;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +82,12 @@ Route::post('reservations',[ReservationsController::class, 'store'])->name('rese
     Route::get('/',[adminController::class,'dash']);
 });*/
  
+
+Route::get('receptionist/all',[ReceptionistsController::class, 'index'])->name('receptionist.index');
+Route::get('receptionist/showNonApprovedClients',[ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
+
+
+
 
 // Route::get('students', [StudentController::class, 'index']);
 // Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');

@@ -3,8 +3,9 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\managerController;
-use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminRoomController;
+use App\Http\Controllers\AdminFloorController;
+use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminReceptionsController;
 
 Auth::routes();
@@ -24,4 +25,10 @@ Route::get('/clients', [managerController::class, 'clients'])->name('clients');
 
 
 Route::resource('adminReceptions', AdminReceptionsController::class);
+//Route::resource('adminFloors', AdminReceptionsController::class);
+Route::resource('adminFloors', AdminFloorController::class);
 Route::resource('adminRooms', AdminRoomController::class);
+
+
+
+//Route::resource('adminFloors', managerFloorController::class);
