@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -21,12 +22,27 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('create:admin {--name=} {--password=}', function ($name, $password) {
-    // $this->info('create new admin command '.$name .$password);
-    $admin = new Admin();
-    $admin->job_title='admin';
-    $admin->email=$name;
-    //store password hashed inside database
-    $admin->password=Hash::make($password);
-    $admin->save();
-    $this->info('New Admin : '.$name ." is created");
+    if (!User::where('email', $name)->first()) { // $this->info('create new admin command '.$name .$password);
+        $admin = new Admin();
+        $admin->job_title='admin';
+        $admin->email=$name;
+        //store password hashed inside database
+        $admin->password=Hash::make($password);
+        $admin->save();
+        User::create([
+        'name' => $name,
+        'email' =>$name,
+        'password' => Hash::make($password),
+        'avatar'=>'img.png',
+        'country'=>'-',
+        'gender'=>'-',
+        'phone'=>'-',
+        'remember_token' =>null,
+        'status'=>'active',
+        'role'=> 'admin'
+    ]);
+        $this->info('New Admin : '.$name ." is created");
+    } else {
+        $this->info("Can not create this admin : ".$name." \nEmail already taken");
+    }
 })->purpose('Create new Admin command');

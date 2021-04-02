@@ -184,6 +184,8 @@ return [
         Yajra\DataTables\HtmlServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Yajra\DataTables\EditorServiceProvider::class,
+
+        Spatie\Permission\PermissionServiceProvider::class,
     
     ],
 

@@ -22,7 +22,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
+<style>
+  .banned{
+    background-color:grey;
+  }
 
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
