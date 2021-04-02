@@ -1,4 +1,6 @@
 <?php
+
+namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,7 @@ class RoleTableSeeder extends Seeder
         0 =>
         array (
             'id' => 1,
-            'name' => 'super_admin',
+            'name' => 'admin',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -25,12 +27,31 @@ class RoleTableSeeder extends Seeder
         1 =>
          array (
             'id' => 2,
-            'name' => 'user',
+            'name' => 'manager',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
         ),
+
+        2 =>
+         array (
+            'id' => 3,
+            'name' => 'recep',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+        ),
+        3 =>
+         array (
+            'id' => 4,
+            'name' => 'client',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+        ),        
 
     ));
 }
