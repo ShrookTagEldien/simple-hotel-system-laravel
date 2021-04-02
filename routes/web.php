@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
@@ -25,14 +26,18 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', function() {
+Route::get('/home', function(RoomDataTable $dataTable) {
   ///dd(Auth::user()->roles->first()->name);
 	$role = Auth::user()->roles->first()->name;
 	if($role == 'manager') {
 		return view('manager.dashboard');
 	}else if($role == 'admin'){
 		return view('admin.dashboard');
-	}
+	}else if($role=='client'){
+        return $dataTable->render('reservations.index');
+    }else {
+        return view('receptionist.index');
+    }
 })->name('home');
 
 /************************************************************** */
@@ -50,8 +55,8 @@ Route::group(['middleware' => ['role:admin']], function () {
   });  
 */
 
-Route::resource('articles', ArticleController::class);
-Route::get('get-rooms', [RoomController::class, 'getRooms'])->name('get-rooms');
+// Route::resource('articles', ArticleController::class);
+Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create',[RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
@@ -60,10 +65,10 @@ Route::get('/rooms/{room}/rent', [ReservationController::class, 'store'])->name(
 
 
 
-Route::get('reservations/all',[ReservationsController::class, 'index'])->name('reservations.index');
+Route::get('reservations/all',[ReservationsController::class, 'index'])->name('reservation.list');
 Route::get('reservations',[ReservationsController::class,'index']);          //show available rooms
-Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservations.create');
-Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
+Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservation.create');
+Route::post('reservations',[ReservationsController::class, 'store'])->name('reservation.store');
 
 
 

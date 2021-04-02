@@ -21,8 +21,11 @@ class UserObserver
         else if($user->role=='manager'){
                 $user->assignRole('manager'); 
         }
+        else if ($user->role=='recep'){
+            $user->assignRole('recep');
+        }
         else{
-            $user->assignRole('admin');
+            $user->assignRole('client');
         }
     }
 

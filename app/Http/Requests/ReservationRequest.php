@@ -27,7 +27,7 @@ class ReservationRequest extends FormRequest
         $room=Room::where('id',request()->id)->first();
         $capacity=$room->capacity;
         return [
-           'accompany_number' => "required|integer|max:$capacity",
+           'accompanies' => "required|integer|max:$capacity",
            'id' => "required|exists:rooms,id"
         ];
     }

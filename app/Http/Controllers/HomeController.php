@@ -26,6 +26,6 @@ class HomeController extends Controller
     public function index(RoomDataTable $dataTable)
     {
         
-        return $dataTable->render('home');
+        return $dataTable->render('reservations.index');
     }
 }
