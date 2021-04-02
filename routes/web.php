@@ -33,7 +33,11 @@ Route::get('/home', function(RoomDataTable $dataTable) {
 	}else if($role == 'admin'){
 		return view('admin.dashboard');
 	}else if($role=='client'){
-        return $dataTable->render('reservations.index');
+        if(Auth::user()->status=='approved')
+            return $dataTable->render('reservations.index');
+        else{
+            return view('client.pending');
+        }
     }else {
         return view('receptionist.index');
     }
