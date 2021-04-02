@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReceptionistsController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -38,6 +40,12 @@ Route::get('reservations/all',[ReservationsController::class, 'index'])->name('r
 Route::get('reservations',[ReservationsController::class,'index']);          //show available rooms
 Route::get('reservations/{room}',[ReservationsController::class,'create'])->name('reservations.create');
 Route::post('reservations',[ReservationsController::class, 'store'])->name('reservations.store');
+
+
+Route::get('receptionist/all',[ReceptionistsController::class, 'index'])->name('receptionist.index');
+Route::get('receptionist/showNonApprovedClients',[ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
+
+
 
 
 // Route::get('students', [StudentController::class, 'index']);

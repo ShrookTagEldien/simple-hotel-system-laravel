@@ -26,6 +26,10 @@ class User extends Authenticatable
         'gender',
     ];
 
+    public function getPendingClients()
+    {
+        return static::where('status' ,'pending')->get();
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
