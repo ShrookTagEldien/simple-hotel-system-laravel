@@ -85,6 +85,7 @@ Route::post('reservations',[ReservationsController::class, 'store'])->name('rese
 
 Route::get('receptionist/all',[ReceptionistsController::class, 'index'])->name('receptionist.index');
 Route::get('receptionist/showNonApprovedClients',[ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
+Route::get('receptionist/showMyClients',[ReceptionistsController::class, 'showMyClients'])->name('receptionist.showMyClients');
 
 
 

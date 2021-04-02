@@ -8,6 +8,8 @@ use App\Models\Receptionist;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\DataTables\PendingClientsDataTable;
+use App\DataTables\MyClientsDataTable;
+
 use Yajra\DataTables\Services\DataTable;
 
 class ReceptionistsController extends Controller
@@ -37,15 +39,23 @@ class ReceptionistsController extends Controller
        // dd("inside rece controller");
     }
 
-    public function showNonApprovedClients()
+    public function showNonApprovedClients(PendingClientsDataTable $dataTable)
     {
-        $user=User::all();
-        //$AllNonApprovedClients = $user->getPendingClients();
+        $user=User::where('status' ,'pending');
+       // $AllNonApprovedClients = $user->getPendingClients();
         return DataTables::of($user);
         /*
         return view('Receptionist.nonapprovedClients', [
             'nonapprovedclients' => $AllNonApprovedClients,
           ]);*/
+
+    }
+
+    public function showMyClients()
+    {
+        $user=User::where('status' ,'approved');
+        return DataTables::of($user);
+        
 
     }
 }
