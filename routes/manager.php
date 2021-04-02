@@ -3,6 +3,7 @@ namespace App;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\managerController;
 use App\Http\Controllers\AdminRoomController;
@@ -32,8 +33,10 @@ Route::group(['middleware' => ['role:manager']], function () {
       /*******CRUD operations routes ******/
 
 
-      Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
-      Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list');
+      Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.manager.list');
+      Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list.manager');
+      Route::resource('managerRooms', AdminRoomController::class);
+
 
       Route::resource('adminReceptions', AdminReceptionsController::class);
       //Route::resource('adminFloors', AdminReceptionsController::class);

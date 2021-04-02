@@ -194,7 +194,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-         url: "{{ route('rooms.list') }}",
+         url: "{{ route('rooms.list.manager') }}",
         },
         columns: [
             {data: 'room_number', name: 'number', searchable: true,},
@@ -231,7 +231,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "adminRooms/"+id+"/edit",
+                url: "managerRooms/"+id+"/edit",
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -258,7 +258,7 @@
                 }
             });
             $.ajax({
-                url: "adminRooms/"+id,
+                url: "managerRooms/"+id,
                 method: 'PUT',
                 data: {
                         room_number: $('#createNumber').val(),
@@ -306,7 +306,7 @@
                 }
             });
             $.ajax({
-                url: "adminRooms/"+id,
+                url: "managerRooms/"+id,
                 method: 'DELETE',
                 success: function(result) {
                   setTimeout(function(){
@@ -335,7 +335,7 @@
                       }
                   });
                   $.ajax({
-                      url: "adminRooms",
+                      url: "managerRooms",
                       method: 'post',
                       data: {
                         room_number: $('#createNumber').val(),

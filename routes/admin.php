@@ -39,7 +39,7 @@ Route::group(['middleware' => ['role:admin']], function () {
         /********** Tables listing data routes*************/
         Route::resource('managers', adminController::class);
         Route::get('get-managers', [adminController::class, 'getManagers'])->name('managers.list');
-        Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list');
+        Route::get('get-rooms-admin', [adminController::class, 'getRooms'])->name('rooms.list');
         Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
 
         /*******CRUD operations routes ******/
