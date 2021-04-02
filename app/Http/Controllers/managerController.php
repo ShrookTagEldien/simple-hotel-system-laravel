@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Receptionist;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Models\Floor;
+
 
 class managerController extends Controller
 {
@@ -11,10 +15,10 @@ class managerController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(AdminDatatable $admin)
+    /*public function index(AdminDatatable $admin)
     {
         return $admin->render('manager.index');
-    }
+    }*/
     public function dash()
     {
         return view('manager.dashboard');
@@ -96,4 +100,5 @@ class managerController extends Controller
                  ->make(true);
          }
      }*/
+ 
 }

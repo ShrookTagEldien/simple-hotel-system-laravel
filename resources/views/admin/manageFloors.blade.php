@@ -29,9 +29,9 @@
   <table class="table table-bordered yajra-datatable" id="user">
     <thead>
         <tr>
-            <th>Email</th>
-            <th>Username</th>
-            <th>National ID</th>
+            <th>Floor ID</th>
+            <th>Floor Name</th>
+            <th>Manager ID</th>
             <th>Action</th>
         </tr>
     </thead>
