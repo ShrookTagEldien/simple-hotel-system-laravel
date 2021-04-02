@@ -144,6 +144,28 @@
   </div>
 </div>
 
+{{-- <!-- Ban Article Modal -->
+<div class="modal" id="BanArticleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Ban Manager</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4>Are you sure want to ban this Manager?</h4>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="SubmitDeleteArticleForm">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+  </div> --}}
+
 <!-- Create Article Modal -->
 <div class="modal" id="CreateArticleModal">
   <div class="modal-dialog">
@@ -363,6 +385,32 @@
         });
 
 
+        // Ban article Ajax request.
+    
+        $('body').on('click', '#banManagers', function(){
+            var id = $(this).data('id');
+            $.ajax({
+                url: "adminManager/"+id+"/ban",
+                method: 'GET',
+                success: function(result) {
+                    $("#banManagers").prop('value', 'Unban');
+                    $('#banManagers').toggleClass('btn-info');
+                    $('#banManagers').toggleClass('btn-success');
+                    //$('#banManagers').css('background_color', 'red');
+
+                  setTimeout(function(){
+                        $('#user').DataTable().ajax.reload();
+                        //$(#banManagers).toggleClass();
+                    
+                        
+                    }, 1000);
+
+                }
+            });
+        });
+
+
+
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
                   e.preventDefault();
@@ -395,7 +443,7 @@
                             $('#user').DataTable().ajax.reload();
                             setInterval(function(){
                                 $('.alert-success').hide();
-                                $('#CreateArticleModal').modal('hide');
+                                $('#CreateArticleModal').hide();
                                 location.reload();
                             }, 2000);
                         }

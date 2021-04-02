@@ -355,6 +355,7 @@
                             $('.alert-danger').hide();
                             $('.alert-success').show();
                             $('#user').DataTable().ajax.reload();
+
                             setTimeout(function(){
                                 console.log('hiding');
                                 $('.alert-success').hide();

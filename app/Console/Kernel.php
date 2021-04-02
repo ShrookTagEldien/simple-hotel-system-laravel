@@ -13,9 +13,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
-    ];
 
+    ];
+    protected $routeMiddleware = [
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    ];
     /**
      * Define the application's command schedule.
      *

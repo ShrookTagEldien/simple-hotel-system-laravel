@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Carbon\Carbon;
 
 use Illuminate\Database\Seeder;
 
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $gender = $faker->randomElement(['male', 'female']);
 
+
         foreach (range(1, 25) as $index) {
             DB::table('managers')->insert([
 
@@ -43,6 +45,11 @@ class DatabaseSeeder extends Seeder
                     'NationalID' => $faker->phoneNumber,
                     'password' =>Hash::make('12345678'),
                 ]);
+
+             
+
+            }    
+
         }
+
     }
-}

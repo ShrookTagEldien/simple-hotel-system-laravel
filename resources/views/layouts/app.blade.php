@@ -23,7 +23,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
 
 
+<style>
+  .banned{
+    background-color:grey;
+  }
 
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

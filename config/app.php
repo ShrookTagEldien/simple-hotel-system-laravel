@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         //Yajra\DataTables\DataTablesServiceProvider::class,
         //yajra\Datatables\DatatablesServiceProvider
         /*
@@ -184,6 +185,8 @@ return [
         Yajra\DataTables\HtmlServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
         Yajra\DataTables\EditorServiceProvider::class,
+
+        Spatie\Permission\PermissionServiceProvider::class,
     
     ],
 
