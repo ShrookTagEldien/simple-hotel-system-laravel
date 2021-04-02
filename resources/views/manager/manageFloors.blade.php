@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-    @include('layouts.adminSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
   <!-- Main Sidebar Container -->
@@ -206,7 +206,7 @@
          url: "{{ route('floor.list') }}",
         },
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'floorId', name: 'id'},
             {data: 'name', name: 'name'},
             {data: 'Manager', name:'Manager'},
 

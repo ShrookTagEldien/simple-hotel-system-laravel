@@ -12,8 +12,6 @@ use App\Models\Receptionist;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
-use App\DataTables\AdminDatatables;
-use Yajra\DataTables\Services\DataTable;
 
 class adminController extends Controller
 {

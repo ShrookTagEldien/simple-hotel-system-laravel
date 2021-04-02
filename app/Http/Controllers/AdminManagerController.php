@@ -204,7 +204,7 @@ class AdminManagerController extends Controller
 
     }
 
-
+/*
     public function checkIfBanned($id){
         $manager = new Manager;
         $record= $manager->findData($id);
@@ -218,6 +218,6 @@ class AdminManagerController extends Controller
 
 
     }
-    
+ */   
     
 }
