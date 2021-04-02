@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\AdminReceptionsController;
 use App\Http\Controllers\AdminFloorController;
+use  App\Http\Controllers\Auth\AdminLoginController;
 
 
 Auth::routes();
@@ -49,6 +50,11 @@ Route::resource('adminRooms', AdminRoomController::class);
 Route::get('/floors', [adminController::class, 'floors'])->name('floors');
 Route::get('/get-floors', [adminController::class, 'getFloors'])->name('floor.list');
 Route::resource('adminFloors', AdminFloorController::class);
+
+
+/*******  */
+Route::get('/login',[AdminLoginController::class,'showLoginForm'])->name('admin.login'); 
+Route::post('/login',[AdminLoginController::class,'login'])->name('admin.login.submit'); 
 
 
 //================  Multi Authentication ====================//
