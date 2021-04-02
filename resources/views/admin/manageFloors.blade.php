@@ -149,10 +149,10 @@
                 <label for="name">Floor Name:</label>
                 <input type="text" class="form-control" name="name" id="createFloor">
             </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="id">Floor ID:</label>
             <input type="text" class="form-control" name="id" id="createFloorID">
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="manager">Floor Manager:</label>
           <input type="text" class="form-control" name="manager" id="createManagr">
@@ -327,7 +327,7 @@
                       method: 'post',
                       data: {
                         name: $('#createFloor').val(),
-                        floorId: $('#createFloorID').val(),
+                        // floorId: $('#createFloorID').val(),
                         Manager:$('#createManagr').val(),
 
                       },

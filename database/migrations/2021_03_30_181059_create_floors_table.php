@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Faker\Factory as Faker;
 
 class CreateFloorsTable extends Migration
 {
@@ -11,8 +12,10 @@ class CreateFloorsTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
+        $faker = Faker::create();
         Schema::create('floors', function (Blueprint $table) {
             $table->id()->autoIncrement();
             //$table->string('floorId');
