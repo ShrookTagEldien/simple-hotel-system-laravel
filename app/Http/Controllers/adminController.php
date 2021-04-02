@@ -62,16 +62,21 @@ class adminController extends Controller
 
     public function getManagers(Request $request)
     {
+        
         if ($request->ajax()) {
             $data = Manager::latest()->get();
             //dd($data);
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
-                    // $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm" id="editManagers">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $btnStyle= "";
+                    if($row->banning=='Ban'){
+                        $btnStyle='btn-success';
+                    }
+                    
                     $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editManagers" data-id="'.$row->id.'">Edit</button>
                    <button type="button" class="btn btn-info btn-sm" id="showManagers" data-id="'.$row->id.'">Show</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
-                   <button type="button" class="btn btn-success btn-sm border border-rounded" id="banManagers" data-id="'.$row->id.'">Ban</button>
+                   <button type="button" class="btn '.$btnStyle.' btn-sm border border-rounded" id="banManagers" data-id="'.$row->id.'">'.$row->banning.'</button>
                    ';
 
                     return $actionBtn;

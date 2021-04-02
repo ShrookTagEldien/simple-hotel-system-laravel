@@ -52,7 +52,6 @@ Route::group(['middleware' => ['role:admin']], function () {
 
         Route::resource('adminManagers', AdminManagerController::class);
         Route::get('adminManager/{manager}/ban', [AdminManagerController::class,'banManager']);
-        Route::get('adminManager/{manager}/banCheck', [AdminManagerController::class,'checkIfBanned'],);
 
         Route::resource('adminRooms', AdminRoomController::class);
 

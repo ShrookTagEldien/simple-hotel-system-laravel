@@ -36,7 +36,6 @@
             <th>Capacity</th>
             <th>Price</th>
             <th>Floor_Number</th>
-            <th>Manager_Name</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -202,7 +201,6 @@
             {data: 'capacity', name: 'capacity', searchable: true,},
             {data: 'price', name:'price', searchable: true,},
             {data: 'floor_number', name:'floor_number', searchable: true,},
-            {data: 'manager_name', name:'manager_name', searchable: true,},
             {data: 'status', name: 'status', searchable: true,},
 
             {

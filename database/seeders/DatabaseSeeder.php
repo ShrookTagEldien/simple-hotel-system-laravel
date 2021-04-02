@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
                 'username' => $faker->username,
                 'password' =>Hash::make('12345678'),
                 'avatar' => 'img.png',
-                'NationalID' => $faker->phoneNumber
+                'NationalID' => $faker->phoneNumber,
             ]);
 
             /********************Receptionists****************************/
