@@ -19,21 +19,7 @@
        
 
             
-            <!--
-            <a href="{{route(users.manage)}}" class="nav-link @if (Route::current()->getName()== 'users.manage') active @endif">
-              Manage Clients
-            </a>
-            <a href="{{route('reservation.list')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
-              <p>
-                My Clients
-              </p>
-            </a>
-            <a href="{{route('reservation.list')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
-              <p>
-                Clients Reservations
-              </p>
-            </a>
-            -->
+            
 
           </li>
         </ul>
