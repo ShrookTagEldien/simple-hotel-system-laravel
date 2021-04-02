@@ -153,6 +153,9 @@ class AdminManagerController extends Controller
         }
 
         $manager = new Manager;
+        $record= $manager-> findData($id);
+        User::where('email',$record->email)->update(array('name' => $request['username'],'email'=>$request['email']));
+
         $manager->updateData($id, $request->all());
 
         return response()->json(['success'=>'Manager updated successfully']);
@@ -167,8 +170,37 @@ class AdminManagerController extends Controller
     public function destroy($id)
     {
         $manager = new Manager;
-        $manager->deleteData($id);
-
+        $record= $manager->findData($id);
+        $manager->deleteData($id);      
+        User::where('email',$record->email)->delete();
         return response()->json(['success'=>'Manager deleted successfully']);
     }
+
+    public function banManager($id)
+    {
+        $manager = new Manager;
+        $record= $manager->findData($id);
+        if(User::where('email',$record->email)->first()){
+            User::where('email',$record->email)->delete();
+        }
+        else{
+
+            User::create([
+                'name' => $record['username'],
+                'email' =>$record['email'],
+                'password' => Hash::make($record['password']),
+                'avatar'=>$record['avatar'],
+                'country'=>'-',
+                'gender'=>'-',
+                'phone'=>'-',
+                'remember_token' =>NULL,
+                'status'=>'active',
+                'role'=> 'manager'    
+            ]);
+        }
+        return response()->json(['success'=>'Manager banneded successfully']);
+
+    }
+    
+    
 }
