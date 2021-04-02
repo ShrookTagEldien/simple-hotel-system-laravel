@@ -31,19 +31,16 @@ Auth::routes();
 Route::get('/home', function(RoomDataTable $dataTable) {
   ///dd(Auth::user()->roles->first()->name);
 	$role = Auth::user()->roles->first()->name;
-      if($role == 'manager') {
-        
-          return view('manager.dashboard');
 
-      }else if($role == 'admin'){
-
-        return redirect()->route('super_admin_dashboard');
-      }else if($role=='client'){
-
-            return $dataTable->render('reservations.index');
-        }else {
-          return redirect()->route('manag_dashboard');
-        }
+	if($role == 'manager') {
+		return view('manager.dashboard');
+	}else if($role == 'admin'){
+		return view('admin.dashboard');
+	}else if($role=='client'){
+        return $dataTable->render('reservations.index');
+    }else if($role=='recep'){
+        return view('receptionist.index');
+    }
 })->name('home');
 
 

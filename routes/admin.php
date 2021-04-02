@@ -46,9 +46,15 @@ Route::group(['middleware' => ['role:admin']], function () {
 
 
 
-        /******* Receptionist ******/
-        Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+
+
+
+Route::get('adminReception/{manager}/ban', [AdminReceptionsController::class,'banReception']);
+
+    
+        
         Route::resource('adminReceptions', AdminReceptionsController::class);
+
 
         Route::resource('adminManagers', AdminManagerController::class);
         Route::get('adminManager/{manager}/ban', [AdminManagerController::class,'banManager']);
@@ -62,10 +68,14 @@ Route::group(['middleware' => ['role:admin']], function () {
         Route::resource('adminFloors', AdminFloorController::class);
 
 
-        /*******  */
+
+
+
+
+        /*******  
         Route::get('/login',[AdminLoginController::class,'showLoginForm'])->name('admin.login'); 
         Route::post('/login',[AdminLoginController::class,'login'])->name('admin.login.submit'); 
-
+*/
 
         //================  Multi Authentication ====================//
             // Route::get('/login',[adminLoginController::class,'showLoginForm'])->name('admin.login'); 
@@ -73,3 +83,4 @@ Route::group(['middleware' => ['role:admin']], function () {
             // Route::get('/',[adminController::class,'dash']);
         });
 
+   

@@ -11,6 +11,16 @@ use App\Http\Controllers\AdminReceptionsController;
 Auth::routes();
 
 
+
+
+
+
+/********** Tables listing data routes*************/
+//Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
+//Route::get('/Receptionists', [managerController::class, 'getManagerReceptionists'])->name('managerReceptionist.list');
+
+/*******CRUD operations routes ******/
+
 Route::group(['middleware' => ['role:manager']], function () {
     Route::get('/manager_dashboard', function(){
       return view('manager.dashboard');
@@ -29,15 +39,13 @@ Route::group(['middleware' => ['role:manager']], function () {
 
     /*******CRUD operations routes ******/
 
-
-
-
 Route::resource('adminReceptions', AdminReceptionsController::class);
 //Route::resource('adminFloors', AdminReceptionsController::class);
 Route::resource('adminFloors', AdminFloorController::class);
 Route::resource('adminRooms', AdminRoomController::class);
 
 
-
 //Route::resource('adminFloors', managerFloorController::class);
+
 }); 
+

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\Receptionist;
 use App\Models\User;
+use App\Models\Receptionist;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 //use Illuminate\Validation\Validator;
 
@@ -47,6 +48,19 @@ class AdminReceptionsController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+
+        User::create([
+            'name' => $request['username'],
+            'email' =>$request['email'],
+            'password' => Hash::make($request['password']),
+            'avatar'=>$request['avatar'],
+            'country'=>'-',
+            'gender'=>'-',
+            'phone'=>'-',
+            'remember_token' =>NULL,
+            'status'=>'active',
+            'role'=> 'recep'    
+        ]); 
 
         $receptionist->storeData($request->all());
 
@@ -129,7 +143,11 @@ class AdminReceptionsController extends Controller
         }
 
         $receptionist = new Receptionist;
+        $record= $receptionist-> findData($id);
+        User::where('email',$record->email)->update(array('name' => $request['username'],'email'=>$request['email']));
         $receptionist->updateData($id, $request->all());
+
+       
 
         return response()->json(['success'=>'Receptionist updated successfully']);
     }
@@ -144,8 +162,42 @@ class AdminReceptionsController extends Controller
     public function destroy($id)
     {
         $receptionist = new Receptionist;
-        $receptionist->deleteData($id);
-
+        $record= $receptionist->findData($id);   
+        $receptionist->deleteData($id);   
+        User::where('email',$record->email)->delete();
         return response()->json(['success'=>'Receptionist deleted successfully']);
     }
+    
+    public function banReception($id)
+    {
+       
+        $receptionist = new Receptionist;
+        $record= $receptionist->findData($id);
+        if(User::where('email',$record->email)->first()){
+            User::where('email',$record->email)->delete();
+        }
+        else{
+
+            User::create([
+            'name' => $record['username'],
+            'email' =>$record['email'],
+            'password' => Hash::make($record['password']),
+            'avatar'=>$record['avatar'],
+            'country'=>'-',
+            'gender'=>'-',
+            'phone'=>'-',
+            'remember_token' =>NULL,
+            'status'=>'active',
+            'role'=> 'recep',      
+            ]);
+        }
+        return response()->json(['success'=>'Receptionist banneded successfully']);
+
+    }
+
+
+
+
+
+
 }
