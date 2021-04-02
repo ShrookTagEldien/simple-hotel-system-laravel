@@ -71,7 +71,7 @@ class adminController extends Controller
                     $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editManagers" data-id="'.$row->id.'">Edit</button>
                    <button type="button" class="btn btn-info btn-sm" id="showManagers" data-id="'.$row->id.'">Show</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
-                   <button type="button" class="btn btn-success btn-sm" id="banManagers" data-id="'.$row->id.'">Ban</button>
+                   <button type="button" class="btn btn-success btn-sm border border-rounded" id="banManagers" data-id="'.$row->id.'">Ban</button>
                    ';
 
                     return $actionBtn;

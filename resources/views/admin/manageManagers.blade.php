@@ -18,7 +18,7 @@
             <h1 class="m-0">Managers</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <button style="float: right; font-weight: 900;" class="btn btn-info btn-sm" type="button"  data-toggle="modal" data-target="#CreateArticleModal">
+            <button style="float: right; font-weight: 900;" id='create' class="btn btn-info btn-sm" type="button"  data-toggle="modal" data-target="#CreateArticleModal">
               Create Manager
           </button>
           </div><!-- /.col -->
@@ -242,8 +242,8 @@
 
 <script type="text/javascript">
 //  $(function () {
-       var table =$(document).ready(function(){
-   // var table = $('.yajra-datatable').DataTable({
+    var table =$(document).ready(function(){
+        
      var user =$('#user').DataTable({
 
         processing: true,
@@ -385,22 +385,34 @@
         });
 
 
-        // Ban article Ajax request.
-    
+
+        // Ban  Ajax request.
+
         $('body').on('click', '#banManagers', function(){
+
             var id = $(this).data('id');
             $.ajax({
                 url: "adminManager/"+id+"/ban",
                 method: 'GET',
                 success: function(result) {
-                    $("#banManagers").prop('value', 'Unban');
-                    $('#banManagers').toggleClass('btn-info');
-                    $('#banManagers').toggleClass('btn-success');
-                    //$('#banManagers').css('background_color', 'red');
-
+                     
                   setTimeout(function(){
-                        $('#user').DataTable().ajax.reload();
-                        //$(#banManagers).toggleClass();
+                       
+                        $('#user').DataTable().ajax.reload(function(){
+                            //console.log(result.success);
+                            if(result.success=='banned'){
+                                $("button[data-id="+id+"][id='banManagers']").removeClass('btn-success');
+                                $("button[data-id="+id+"][id='banManagers']").text('Unban');
+                            }
+                            else{
+                                $("button[data-id="+id+"][id='banManagers']").addClass('btn-success');
+                                $("button[data-id="+id+"][id='banManagers']").text('Ban');
+                            
+                            }   
+
+
+                        });
+                     
                     
                         
                     }, 1000);
@@ -450,12 +462,42 @@
                     }
                 });
             });
-
-
-
-
-
     });
+
+/*********************** check banned records ******************************/
+/*
+for(){}     
+    $.ajax({
+                url: "adminManager/"+id+"/banCheck",
+                method: 'GET',
+                success: function(result) {
+                     
+                  setTimeout(function(){
+                       
+                        $('#user').DataTable().ajax.reload(function(){
+                            //console.log(result.success);
+                            if(result.success=='banned'){
+                                $("button[data-id="+id+"][id='banManagers']").removeClass('btn-success');
+                                $("button[data-id="+id+"][id='banManagers']").text('Unban');
+                            }
+                            else{
+                                $("button[data-id="+id+"][id='banManagers']").addClass('btn-success');
+                                $("button[data-id="+id+"][id='banManagers']").text('Ban');
+                            
+                            }   
+
+
+                        });
+                     
+                    
+                        
+                    }, 1000);
+
+                }
+            });
+
+*/
+
 </script>
 
 
