@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\DataTables\PendingClientsDataTable;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\Auth;
+
 
 class ReceptionistsController extends Controller
 {
     //
-    public function index(PendingClientsDataTable $dataTable)
+    public function index()
     {
-        //echo "dfff";
-        // view('receptionist.index');
-        return $dataTable->render('receptionist.pendingClients');
+        view('receptionist.index');
     }
 
     public function getReceptionists(Request $request)
@@ -37,16 +37,33 @@ class ReceptionistsController extends Controller
        // dd("inside rece controller");
     }
 
-    public function showNonApprovedClients()
+    public function getPendingClients(Request $request, User $user)
     {
-        $user=User::all();
-        //$AllNonApprovedClients = $user->getPendingClients();
-        return DataTables::of($user);
-        /*
-        return view('Receptionist.nonapprovedClients', [
-            'nonapprovedclients' => $AllNonApprovedClients,
-          ]);*/
-
+        $data = $user->getPendingClients();
+        return DataTables::of($data)
+            ->addColumn('Actions', function($data) {
+                return '<button type="button" class="btn btn-success btn-sm" id="approveClient" data-id="'.$data->id.'">Approve</button>
+                    <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#denyClientModal" class="btn btn-danger btn-sm" id="denyClient">Deny</button>';
+            })
+            ->rawColumns(['Actions'])
+            ->make(true);
+    }
+    //function that updates database when client is approved
+    public function approve($id){
+        $user=User::find($id);
+        $user->update([
+            'status' => 'approved',
+            'receptionist_id'=> Auth::user()->id,
+        ]);
+        return response()->json(['success'=>'Client Approved']);
+    }
+    //function that updates database when client is denied
+    public function deny($id){
+        $user=User::find($id);
+        $user->update([
+            'status' => 'denied'
+        ]);
+        return response()->json(['success'=>'Client Denied']);
     }
 }
 
