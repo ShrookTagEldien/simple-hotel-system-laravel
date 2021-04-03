@@ -30,14 +30,10 @@ class PendingClientsDataTable extends DataTable
      * @param \App\Models\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(PendingClient $model)
+    public function query(User $model)
     {
-        
         $pendingClients = User::where('status' ,'pending');
-        return $this->applyScopes($AllNonApprovedClients);
-    
-       // return $model->newQuery();
-
+        return $this->applyScopes($pendingClients);
 
     }
 

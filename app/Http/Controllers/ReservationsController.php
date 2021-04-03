@@ -16,15 +16,24 @@ use Yajra\DataTables\DataTables;
 class ReservationsController extends Controller
 {
     public function index(){
-        return view('reservations.index',['user'=>Auth::user()]);
+        $userStatus=Auth::user()->status;
+        if($userStatus=='approved')
+             return view('reservations.index',['user'=>Auth::user()]);
+        return view('client.pending');
     }
 
     public function create(Room $room){
-        return view('reservations.create',['user'=>Auth::user(),'room'=>$room]);
+        $userStatus=Auth::user()->status;
+        if($userStatus=='approved')
+          return view('reservations.create',['user'=>Auth::user(),'room'=>$room]);
+        else view('client.pending');
 
     }
     public function getAvailableRooms(Request $request, Room $room)
     {
+        $userStatus=Auth::user()->status;
+        if($userStatus=='pending')
+             return view('client.pending');
         $data = $room->getAvailableRooms();
         return DataTables::of($data)
             ->addColumn('Actions', function($data) {
@@ -35,7 +44,9 @@ class ReservationsController extends Controller
     }
     public function store(ReservationRequest $request)
     {
-       
+        $userStatus=Auth::user()->status;
+        if($userStatus=='pending')
+             return view('client.pending');
         $data=$request->all();
         $room=Room::where('id',$data['id'])->first();
         $capacity=$room->capacity;
@@ -58,12 +69,7 @@ class ReservationsController extends Controller
         
        
 
-            return response()->json(['success'=>'Article added successfully']);
+            return response()->json(['success'=>'You Will Be redirected to the check out page shortly.']);
         }
-    }
-    public function get_available_rooms()
-    {
-        $AvailableRooms = Room::all()->where('status',1);
-        
     }
 }
