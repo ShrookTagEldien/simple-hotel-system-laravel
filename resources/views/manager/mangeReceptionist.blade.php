@@ -197,7 +197,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('receptionist.list') }}",
+          url: "{{ route('managerReceptionist.list') }}",
         },
         columns: [
             {data: 'email', name: 'email'},

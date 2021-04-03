@@ -81,9 +81,9 @@ class managerController extends Controller
                  ->rawColumns(['action','status'])
                  ->make(true);
          }
-     }
+     }*/
 
-     public function getManagerReceptionists(Request $request)
+     /*public function getManagerReceptionists(Request $request)
      {
          if ($request->ajax()) {
              $data = Receptionist::latest()->get();

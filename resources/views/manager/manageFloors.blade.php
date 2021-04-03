@@ -203,7 +203,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-         url: "{{ route('floor.list') }}",
+         url: "{{ route('managerFloors.list') }}",
         },
         columns: [
             {data: 'floorId', name: 'id'},
