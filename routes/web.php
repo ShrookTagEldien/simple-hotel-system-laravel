@@ -103,5 +103,5 @@ Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showRese
 
 //stripe routes
 
-Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
+Route::post('/stripe/form', [StripePaymentController::class, 'stripe'])->name('stripe');
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

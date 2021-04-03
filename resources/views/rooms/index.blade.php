@@ -141,11 +141,11 @@
         }
       });
       $.ajax({
-        url: "{{ route('stripe.post') }}",
+        url: "{{route('stripe')}}",
         method: 'post',
         data: {
           accompanies: $('#accompanies').val(),
-          room_id: id,
+          id: id,
         },
         success: function(result) {
           if (result.errors) {
@@ -160,7 +160,6 @@
             $('.datatable').DataTable().ajax.reload();
             setInterval(function() {
               $('.alert-success').hide();
-              location.replace("{{route('stripe')}}");
             }, 2000);
           }
         }

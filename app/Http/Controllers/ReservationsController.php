@@ -58,10 +58,10 @@ class ReservationsController extends Controller
         $validator = Validator::make($data, [
             'accompanies' => "max:$capacity",
         ]);
-    
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+        
         else{
             $room->update(['status' => 'rented']);
             Reservation::create([
