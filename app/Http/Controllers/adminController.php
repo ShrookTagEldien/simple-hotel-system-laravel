@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Models\Room;
+use App\Models\User;
+
 use App\Models\Manager;
 use App\Models\Floor;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +93,16 @@ class adminController extends Controller
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+    public function getClients(Request $request)
+    {
+        
+        if ($request->ajax()) {
+            $data = User::where('role','client')->get();
+            //dd($data);
+            return Datatables::of($data)
                 ->make(true);
         }
     }

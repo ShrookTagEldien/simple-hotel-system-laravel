@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('status')->default('pending');
             $table->string('role');
             $table->string('receptionist_id')->nullable();
-            $table->timestamp('last_login_at');
+            //$table->timestamp('last_login_at');
             
         });
     }

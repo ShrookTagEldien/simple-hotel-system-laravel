@@ -37,8 +37,10 @@ class ClientsReservationsDataTable extends DataTable
     public function query()
     {
         $myUsers=User::where('receptionist_id',Auth::user()->id);
-        $reservations=Reservation::whereIn('user_id',$myUsers)->get();
-        return $this->applyScopes($reservations);
+        //$myUserIds=User::select('id')->where('receptionist_id',Auth::user()->id)->get();
+        //$reservations=Reservation::whereIn('user_id',$myUser)->get();
+        return $this->applyScopes($myUsers);
+        //return  $this->applyScopes($myUsers);
     }
 
     /**

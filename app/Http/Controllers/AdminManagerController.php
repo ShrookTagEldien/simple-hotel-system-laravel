@@ -43,7 +43,7 @@ class AdminManagerController extends Controller
             'email' =>  ['required', 'unique:managers'],
             'password' => ['required','min:6'],
             //'avatar' => 'required',
-            'avatar' =>  'required|image|mimes:jpg,jpeg',
+            //'avatar' =>  'required|image|mimes:jpg,jpeg',
         ]);
 
 

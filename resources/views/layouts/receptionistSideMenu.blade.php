@@ -3,7 +3,7 @@
        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
          <li class="nav-item menu-open">
 
-           <a href="{{ route('receptionist.getPendingClients' )}}" class="nav-link @if (Route::current()->getName()== 'users.manage') active @endif">
+           <a href="/home" class="nav-link @if (Route::current()->getName()== 'users.manage') active @endif">
              Manage Clients
            </a>
            <a href="{{route('receptionist.approvedClients')}}" class="nav-link @if (Route::current()->getName()== 'receptionist.approvedClients') active @endif">
@@ -11,7 +11,7 @@
                My Clients
              </p>
            </a>
-           <a href="{{route('reservation.list')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
+           <a href="{{route('reservation.myClients')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
              <p>
                Clients Reservations
              </p>

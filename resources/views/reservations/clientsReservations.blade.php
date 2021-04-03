@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-@include('layouts.clientSideMenu')
+@include('layouts.receptionistSideMenu')
 @endsection
 
 @section('content')

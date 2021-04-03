@@ -43,7 +43,7 @@ class AdminReceptionsController extends Controller
             'NationalID' => ['required', 'unique:managers'],
             'email' =>  ['required', 'unique:managers'],
             'password' => ['required','min:6'],
-            'avatar' =>  'required|image|mimes:jpg,jpeg',
+            //'avatar' =>  ['required','image','mimes:jpg,jpeg'],
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);

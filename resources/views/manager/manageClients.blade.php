@@ -198,7 +198,7 @@ var user =$('#users').DataTable({
 processing: true,
 serverSide: true,
 ajax: {
- url: "{{ route('clients.list') }}",
+ url: "{{ route('clients1.list') }}",
 },
 columns: [
     {data: 'id', name: 'id'},

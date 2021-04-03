@@ -81,7 +81,7 @@ Route::get('/rooms/{room}/rent', [ReservationController::class, 'store'])->name(
 
 
 Route::get('reservations/all', [ReservationsController::class, 'index'])->name('reservation.list');
-Route::get('clients/reservations/all', [ReservationsController::class, 'getReservations'])->name('reservation.myClients');
+Route::get('clients/reservations/all', [UserController::class, 'getReservations'])->name('reservation.myClients');
 Route::get('reservations', [ReservationsController::class, 'index']);          //show available rooms
 Route::get('reservations/{room}', [ReservationsController::class, 'create'])->name('reservation.create');
 Route::post('reservations', [ReservationsController::class, 'store'])->name('reservation.store');
