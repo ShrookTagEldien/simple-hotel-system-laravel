@@ -31,7 +31,7 @@
         <tr>
             <th>Floor ID</th>
             <th>Floor Name</th>
-            <th>Manager ID</th>
+            <th>Manager</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -78,27 +78,6 @@
 </div>
 </div>
 
-<!-- Delete Article Modal -->
-<div class="modal" id="DeleteArticleModal">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-              <h4 class="modal-title">Delete Floor</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <!-- Modal body -->
-          <div class="modal-body">
-              <h4>Are you sure want to delete this Floor?</h4>
-          </div>
-          <!-- Modal footer -->
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-          </div>
-      </div>
-  </div>
-</div>
 <!--Show information of manager-->
 <div class="modal" id="ShowArticleModal">
     <div class="modal-dialog">
@@ -167,17 +146,17 @@
                 </button>
             </div>
             <div class="form-group">
-                <label for="username">Floor Name:</label>
-                <input type="text" class="form-control" name="name" id="createUserName">
+                <label for="name">Floor Name:</label>
+                <input type="text" class="form-control" name="name" id="createFloor">
             </div>
-          <div class="form-group">
-            <label for="nationalid">Floor ID:</label>
-            <input type="text" class="form-control" name="id" id="createEmail">
-        </div>
-        <div class="form-group">
-          <label for="nationalid">Floor Manager:</label>
-          <input type="text" class="form-control" name="id" id="createManagr">
-      </div>
+          <!-- <div class="form-group">
+            <label for="id">Floor ID:</label>
+            <input type="text" class="form-control" name="id" id="createFloorID">
+        </div> -->
+        <!-- <div class="form-group">
+          <label for="manager">Floor Manager:</label>
+          <input type="text" class="form-control" name="manager" id="createManagr">
+      </div> -->
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -206,7 +185,7 @@
          url: "{{ route('floor.list') }}",
         },
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'floorId', name: 'floorId'},
             {data: 'name', name: 'name'},
             {data: 'Manager', name:'Manager'},
 
@@ -279,7 +258,9 @@
                 url: "adminFloors/"+id,
                 method: 'PUT',
                 data: {
-                   name: $('#editFloorName').val(),    
+                   name: $('#editFloorName').val(),
+                   floorId: $('#editFloorId').val(),
+                   Manager: $('#editFloorManager').val(),
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -345,9 +326,9 @@
                       url: "adminFloors",
                       method: 'post',
                       data: {
-                        name: $('#createUserName').val(),
-                        floorId: $('#createEmail').val(),
-                        Manager:$('#createManagr').val(),                        
+                        name: $('#createFloor').val(),
+                        // floorId: $('#createFloorID').val(),
+                        // Manager:$('#createManagr').val(),
 
                       },
                       success: function(result) {

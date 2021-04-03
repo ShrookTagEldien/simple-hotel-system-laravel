@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-@include('layouts.managerSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
+  <!-- Main Sidebar Container -->
   @section('content')
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
@@ -36,7 +36,6 @@
             <th>Capacity</th>
             <th>Price</th>
             <th>Floor_Number</th>
-            <th>Manager_Name</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -195,14 +194,13 @@
         processing: true,
         serverSide: true,
         ajax: {
-         url: "{{ route('rooms.list') }}",
+         url: "{{ route('rooms.list.manager') }}",
         },
         columns: [
             {data: 'room_number', name: 'number', searchable: true,},
             {data: 'capacity', name: 'capacity', searchable: true,},
             {data: 'price', name:'price', searchable: true,},
             {data: 'floor_number', name:'floor_number', searchable: true,},
-            {data: 'manager_name', name:'manager_name', searchable: true,},
             {data: 'status', name: 'status', searchable: true,},
 
             {
@@ -233,7 +231,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "adminRooms/"+id+"/edit",
+                url: "managerRooms/"+id+"/edit",
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -260,7 +258,7 @@
                 }
             });
             $.ajax({
-                url: "adminRooms/"+id,
+                url: "managerRooms/"+id,
                 method: 'PUT',
                 data: {
                         room_number: $('#createNumber').val(),
@@ -308,7 +306,7 @@
                 }
             });
             $.ajax({
-                url: "adminRooms/"+id,
+                url: "managerRooms/"+id,
                 method: 'DELETE',
                 success: function(result) {
                   setTimeout(function(){
@@ -337,7 +335,7 @@
                       }
                   });
                   $.ajax({
-                      url: "adminRooms",
+                      url: "managerRooms",
                       method: 'post',
                       data: {
                         room_number: $('#createNumber').val(),

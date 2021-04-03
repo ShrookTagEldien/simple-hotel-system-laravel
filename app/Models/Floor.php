@@ -13,13 +13,14 @@ class Floor extends Model
     protected $fillable = [
         'name',
         'floorId',
+        'Manager',
     ];
-   
+
     protected $guarded = array();
 
     public function getData()
     {
-        return static::orderBy('created_at','desc')->get();
+        return static::orderBy('created_at', 'desc')->get();
     }
 
     public function storeData($input)
@@ -41,6 +42,4 @@ class Floor extends Model
     {
         return static::find($id)->delete();
     }
-
-
 }
