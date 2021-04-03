@@ -1,19 +1,29 @@
 <?php
+use App\Models\Room;
+use App\Models\Manager;
+use App\Models\Floor;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminRoomController;
-use App\Http\Controllers\AdminReceptionsController;
 use App\Http\Controllers\AdminFloorController;
+use App\Http\Controllers\AdminManagerController;
+use App\Http\Controllers\AdminReceptionsController;
 use  App\Http\Controllers\Auth\AdminLoginController;
 
 Auth::routes();
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/superadmin_dashboard', function () {
-        return view('admin.dashboard');
+    Route::get('/superadmin_dashboard', function(){
+      return view('admin.dashboard',[ 'managers'=> Manager::count(),
+                                        'rooms'=> Room::where('status','rented')->count(),
+                                        'available'=> intval(Room::avg('price')),
+                                        'reservations'=>'4037',
+                                        'floors'=>Floor::count(),
+                                        'clients'=>'9520'
+
+                                         ]);
+
     })->name('super_admin_dashboard');
 
     //we're using admin prefix for all those routes defined in routeServiceProvider.php for admin accout as following >> localhost:8000/admin/following_route_name
@@ -44,15 +54,20 @@ Route::group(['middleware' => ['role:admin']], function () {
     /*******CRUD operations routes ******/
 
 
+        /********** Tables listing data routes*************/
+        Route::resource('managers', adminController::class);
+        Route::get('get-managers', [adminController::class, 'getManagers'])->name('managers.list');
+        Route::get('get-rooms-admin', [adminController::class, 'getRooms'])->name('rooms.list');
+        Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+
+        Route::get('adminReception/{manager}/ban', [AdminReceptionsController::class,'banReception']);
 
 
 
-
-    Route::get('adminReception/{manager}/ban', [AdminReceptionsController::class,'banReception']);
-
-
-
-    Route::resource('adminReceptions', AdminReceptionsController::class);
+        Route::resource('adminManagers', AdminManagerController::class);
+        Route::get('adminManager/{manager}/ban', [AdminManagerController::class,'banManager']);
+    
+        Route::resource('adminReceptions', AdminReceptionsController::class);
 
 
     Route::resource('adminManagers', AdminManagerController::class);

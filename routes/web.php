@@ -34,9 +34,9 @@ Route::get('/home', function (RoomDataTable $dataTable, ) {
 
   $role = Auth::user()->roles->first()->name;
   if ($role == 'manager') {
-    return view('manager.dashboard');
+    return redirect()->route('manag_dashboard');
   } else if ($role == 'admin') {
-    return view('admin.dashboard');
+    return redirect()->route('super_admin_dashboard');
   } else if ($role == 'client') {
     if (Auth::user()->status == 'approved')
       return view('reservations.index');

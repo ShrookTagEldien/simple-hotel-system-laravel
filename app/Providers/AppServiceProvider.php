@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::enableForeignKeyConstraints();
         User::observe(UserObserver::class);
-        Manager::observe(ManagerObserver::class);
+        //Manager::observe(ManagerObserver::class);
 
 
     }
