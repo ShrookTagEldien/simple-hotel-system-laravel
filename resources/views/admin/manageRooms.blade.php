@@ -154,7 +154,12 @@
             <div class="col-6 m-0">
                 <div class="form-group">
                     <label for="floor"class="text-dark">Floor Number:</label>
-                    <input type="text" class="form-control" name="floor" id="createFloor">
+                 
+                    <select id="floor" name="floor" class="form-control">
+                        @foreach($floors as $floor)
+                            <option value="{{$floor['floorId']}}" id="createFloor">{{$floor['floorId']}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                   <label for="manager"class="text-dark">Manager Name:</label>
@@ -356,7 +361,7 @@
                 });
       // Create article Ajax request.
       $('#SubmitCreateArticleForm').click(function(e) {
-           // console.log($('#createStatus').val());
+           console.log($('#createFloor').val());
                   e.preventDefault();
                   $.ajaxSetup({
                       headers: {

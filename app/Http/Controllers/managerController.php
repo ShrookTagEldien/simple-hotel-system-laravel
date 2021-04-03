@@ -43,7 +43,7 @@ class managerController extends Controller
 
     public function rooms()
     {
-        return view('manager.manageRooms');
+        return view('manager.manageRooms',['floors'=>Floor::all()]);
     }
 
 

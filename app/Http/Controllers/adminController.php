@@ -50,7 +50,7 @@ class adminController extends Controller
 
     public function rooms()
     {
-        return view('admin.manageRooms');
+        return view('admin.manageRooms',['floors'=>Floor::all()]);
     }
 
 
