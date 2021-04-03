@@ -71,7 +71,7 @@ else{
 
 
 
-Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
+Route::get('get-rooms', [ReservationController::class, 'getAvailableRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create', [RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
@@ -88,7 +88,7 @@ Route::post('reservations', [ReservationsController::class, 'store'])->name('res
 Route::get('clients/approve', [ReceptionistsController::class, 'getPendingClients'])->name('get-pending');
 Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
 Route::get('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])->name('client.deny');
-
+Route::get("/client/{room}/rent",[StripePaymentController::class,'stripe']);
 
 
 //================  Multi Authentication ====================//
@@ -114,5 +114,4 @@ Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showRese
 
 //stripe routes
 
-Route::post('/stripe/form', [StripePaymentController::class, 'stripe'])->name('stripe');
-Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
+Route::post('room/rent/stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
