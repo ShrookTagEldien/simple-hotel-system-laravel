@@ -6,7 +6,8 @@ use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Faker\Factory as Faker;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Room;
 
 class AdminFloorController extends Controller
 {
@@ -117,9 +118,19 @@ class AdminFloorController extends Controller
     */
     public function destroy($id)
     {
-        $floor = new Floor();
-        $floor->deleteData($id);
-
+        
+        $reqfloor=Floor::find($id)->first();
+        $floorNo=$reqfloor['floorId'];
+        if( !(Room::where('floor_number',$floorNo)->first()) ){
+          //  dd('done delete');
+            $floor = new Floor();
+            $floor->deleteData($id);
         return response()->json(['success'=>'Floor deleted successfully']);
+
+        }else{
+            return response()->json(['success'=>"Floor can't be deleted "]);
+            dd('in else delete');
+        }
+        
     }
 }

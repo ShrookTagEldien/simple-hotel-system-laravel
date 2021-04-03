@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminReceptionsController;
 use App\Http\Controllers\AdminFloorController;
-use App\Http\Controllers\adminController;
+
  
 
 
@@ -42,14 +42,7 @@ Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/rooms', [managerController::class, 'rooms'])->name('rooms');
       Route::get('/floors', [managerController::class, 'floors'])->name('floors');
       Route::get('/clients', [managerController::class, 'clients'])->name('clients');
-
-      /********** Tables listing data routes*************/
-      //Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
-      //Route::get('/Receptionists', [managerController::class, 'getManagerReceptionists'])->name('managerReceptionist.list');
-
       /*******CRUD operations routes ******/
-
-
       Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('managerReceptionist.list');
       Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list.manager');
       Route::resource('managerRooms', AdminRoomController::class);
@@ -61,7 +54,8 @@ Route::group(['middleware' => ['role:manager']], function () {
 
 
     Route::resource('adminFloors', AdminFloorController::class);
-
+    
+   
 
     // Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
     //Route::resource('adminFloors', managerFloorController::class);

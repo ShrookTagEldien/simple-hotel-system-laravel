@@ -43,7 +43,7 @@ class AdminReceptionsController extends Controller
             'NationalID' => ['required', 'unique:managers'],
             'email' =>  ['required', 'unique:managers'],
             'password' => ['required','min:6'],
-            'avatar' => 'required',
+            'avatar' =>  'required|image|mimes:jpg,jpeg',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
@@ -135,6 +135,7 @@ class AdminReceptionsController extends Controller
             'username' => 'required',
             'NationalID' => 'required',
             'email' => 'required',
+           
 
         ]);
 
@@ -170,14 +171,14 @@ class AdminReceptionsController extends Controller
     
     public function banReception($id)
     {
-       
         $receptionist = new Receptionist;
         $record= $receptionist->findData($id);
         if(User::where('email',$record->email)->first()){
             User::where('email',$record->email)->delete();
+            Receptionist::where('id',$id)->update(array('banning' => 'Ban'));
+            return response()->json(['success'=>'banned']);
         }
         else{
-
             User::create([
             'name' => $record['username'],
             'email' =>$record['email'],
@@ -190,11 +191,13 @@ class AdminReceptionsController extends Controller
             'status'=>'active',
             'role'=> 'recep',      
             ]);
+            Receptionist::where('id',$id)->update(array('banning' => 'unban'));
+            return response()->json(['success'=>'unbanned']);
         }
-        return response()->json(['success'=>'Receptionist banneded successfully']);
+       
 
     }
-
+ 
 
 
 

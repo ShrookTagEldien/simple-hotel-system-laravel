@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.managerSideMenu')
@@ -197,13 +197,9 @@
         processing: true,
         serverSide: true,
         ajax: {
-<<<<<<< HEAD
-          url: "{{ route('managerReceptionist.list') }}",
-=======
 
           url: "{{ route('managerReceptionist.list') }}",
 
->>>>>>> 2fe6ae4749ca581295d925b9f627b8c18971a8eb
         },
         columns: [
             {data: 'email', name: 'email'},

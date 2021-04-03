@@ -29,7 +29,7 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', function (RoomDataTable $dataTable, ) {
+Route::get('/home', function (RoomDataTable $dataTable) {
   ///dd(Auth::user()->roles->first()->name);
 
   $role = Auth::user()->roles->first()->name;

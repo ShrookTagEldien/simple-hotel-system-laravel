@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.adminSideMenu')
