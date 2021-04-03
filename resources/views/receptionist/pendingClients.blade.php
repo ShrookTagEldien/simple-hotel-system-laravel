@@ -112,6 +112,7 @@
 
     // Create article Ajax request.
     $('body').on('click','#approveClient',function(e) {
+    
       e.preventDefault();
       id = $(this).data('id');
       $.ajaxSetup({
@@ -121,7 +122,10 @@
       });
       $.ajax({
         url: "clients/"+id+"/approve",
-        method: 'GET',
+        method: 'post',
+        data:{
+          receptionist_id: $('#recept_id').attr("value"),
+        },
         success: function(result) {
           if (result.errors) {
             $('.alert-danger').html('');

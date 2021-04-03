@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sideMenu')
-@include('layouts.clientSideMenu')
+@include('layouts.receptionistSideMenu')
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">My Approved Clientds</h1>
+            <h1 class="m-0">My Approved Clients</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

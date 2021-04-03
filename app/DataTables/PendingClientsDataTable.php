@@ -32,7 +32,7 @@ class PendingClientsDataTable extends DataTable
      */
     public function query(User $model)
     {
-        $pendingClients = User::where('status' ,'pending');
+        $pendingClients = User::where('status' ,'pending')->where('role','client');
         return $this->applyScopes($pendingClients);
 
     }

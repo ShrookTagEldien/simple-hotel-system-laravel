@@ -6,7 +6,7 @@
             <a href="{{route('home')}}"class="nav-link @if (Route::current()->getName()== 'reservation.create') active @endif">
               Make Reservation
             </a>
-            <a href="{{route('reservation.list')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
+            <a href="{{route('reservation.myClients')}}" class="nav-link @if (Route::current()->getName()== 'reservation.myClients') active @endif">
               <p>
                 My Reservations
               </p>

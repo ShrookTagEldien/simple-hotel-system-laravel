@@ -141,11 +141,11 @@
         }
       });
       $.ajax({
-        url: "{{ route('reservation.store') }}",
+        url: "{{ route('stripe.post') }}",
         method: 'post',
         data: {
           accompanies: $('#accompanies').val(),
-          id: id,
+          room_id: id,
         },
         success: function(result) {
           if (result.errors) {
@@ -160,8 +160,7 @@
             $('.datatable').DataTable().ajax.reload();
             setInterval(function() {
               $('.alert-success').hide();
-              
-              location.reload();
+              location.replace("{{route('stripe')}}");
             }, 2000);
           }
         }

@@ -111,7 +111,7 @@
     });
 
     // Create article Ajax request.
-    $('#approveClient').click(function(e) {
+    $('body').on('click','#approveClient', function(e) {
 
       e.preventDefault();
       $.ajaxSetup({
@@ -137,7 +137,7 @@
             $('.alert-success').show();
             $('.datatable').DataTable().ajax.reload();
             setInterval(function() {
-              location.refresh();
+              location.reload();
             }, 2000);
           }
         }

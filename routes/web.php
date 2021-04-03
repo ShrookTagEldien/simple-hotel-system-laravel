@@ -2,15 +2,20 @@
 
 use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Notification;
+use App\Models\User;
+use App\Notifications\GreetClient;
 
 use App\Http\Controllers\ReceptionistsController;
 
 use  App\Http\Controllers\Auth\AdminLoginController;
 use App\Models\Receptionist;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\StripePaymentController;
 
 
 /*
@@ -32,7 +37,7 @@ Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', function (RoomDataTable $dataTable, ) {
-  ///dd(Auth::user()->roles->first()->name);
+ 
 
   $role = Auth::user()->roles->first()->name;
   if ($role == 'manager') {
@@ -40,8 +45,10 @@ Route::get('/home', function (RoomDataTable $dataTable, ) {
   } else if ($role == 'admin') {
     return redirect()->route('super_admin_dashboard');
   } else if ($role == 'client') {
-    if (Auth::user()->status == 'approved')
+    if (Auth::user()->status == 'approved'){
+      $user= User::find(Auth::user()->id);
       return view('rooms.index');
+    }
     else {
       return view('client.pending');
     }
@@ -63,11 +70,12 @@ Route::get('/rooms/{room}/rent', [ReservationController::class, 'store'])->name(
 
 
 Route::get('reservations/all', [ReservationsController::class, 'index'])->name('reservation.list');
+Route::get('clients/reservations/all', [ReservationsController::class, 'getReservations'])->name('reservation.myClients');
 Route::get('reservations', [ReservationsController::class, 'index']);          //show available rooms
 Route::get('reservations/{room}', [ReservationsController::class, 'create'])->name('reservation.create');
 Route::post('reservations', [ReservationsController::class, 'store'])->name('reservation.store');
 Route::get('clients/approve', [ReceptionistsController::class, 'getPendingClients'])->name('get-pending');
-Route::get('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
+Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
 Route::get('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])->name('client.deny');
 
 
@@ -93,7 +101,7 @@ Route::get('receptionist/MyClientsReservations',[UserController::class, 'getRese
 Route::get('genderReservationsChart',[ReceptionistsController::class, 'showGenderReservationsChart'])->name('genderReservationsChart');
 Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showReservationsRevenueChart'])->name('reservationsRevenueChart');
 
+//stripe routes
 
-
-// Route::get('students', [StudentController::class, 'index']);
-// Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
+Route::get('stripe', [StripePaymentController::class, 'stripe'])->name('stripe');
+Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');

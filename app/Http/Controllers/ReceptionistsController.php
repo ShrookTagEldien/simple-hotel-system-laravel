@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\DataTables\PendingClientsDataTable;
 use App\DataTables\MyClientsDataTable;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\GreetClient;
 
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Auth;
@@ -48,19 +50,26 @@ class ReceptionistsController extends Controller
             ->addColumn('Actions', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="approveClient" data-id="'.$data->id.'">Approve</button>
                     <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#denyClientModal" class="btn btn-danger btn-sm" id="denyClient">Deny</button>
-                    <button type="button" class="btn btn-success btn-sm" id="approveClient" data-id="'.Auth::user()->id.'" hidden></button>';
+                    <button type="button" class="btn btn-success btn-sm" id="recept_id" data-id="'.$data->id.'" value="'.Auth::user()->id.'" hidden></button>';
             })
             ->rawColumns(['Actions'])
             ->make(true);
     }
     //function that updates database when client is approved
-    public function approve($id){
-        
-        $user=User::where('id',$id);
+    public function approve($id, Request $request){
+        $data=$request->all();
+        $user=User::find($id);
         $user->update([
-            'status' => 'approved'
+            'status' => 'approved',
+            'receptionist_id' => $data['receptionist_id']
+
         ]);
+        Notification::send($user, new GreetClient());
+        // $user->notify(new GreetClient);
         return response()->json(['success'=>'Client Approved']);
+        $delay = now()->addSeconds(5);
+        $client = User::find($user->id);
+        $client->notify((new GreetClient())->delay($delay));
     }
     //function that updates database when client is denied
     public function deny($id){
