@@ -28,6 +28,9 @@ class User extends Authenticatable
         'gender',
         'role'
     ];
+    public function getPendingClients(){
+        return static::where('status','pending')->orderBy('created_at','asc')->get();
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

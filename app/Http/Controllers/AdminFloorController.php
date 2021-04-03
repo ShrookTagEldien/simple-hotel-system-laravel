@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Faker\Factory as Faker;
+use Auth;
 
 class AdminFloorController extends Controller
 {
@@ -24,25 +25,26 @@ class AdminFloorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Floor $floor)
+    public function store(Request $request, Floor $floor)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'floorId' => 'required',
-            'Manager' => 'required',
-            
+
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-      //  dd('after valdiation');
-      Floor::insert([
-        'floorId'=>$request['floorId'],
-        'name'=>$request['name'],
-        'Manager'=>$request['Manager'],
+        $faker = Faker::create();
+        Floor::insert([
+            'floorId'=>$faker->unique()->numberBetween(1000, 9999),
+            'name'=>$request['name'],
+            'Manager'=>Auth::user()->name,
+            'email'=>Auth::user()->email,
+
         ]);
         return response()->json(['success'=>'Floor added successfully']);
     }
+
     public function show(Floor $floor, $id)
     {
         $data = $floor->findData($id);
@@ -56,7 +58,7 @@ class AdminFloorController extends Controller
                     <h6>'.$data->name.'</h6>
                 </div>
                 <div class="form-group">
-                    <h5>Name:</h5>
+                    <h5>Manager:</h5>
                     <h6>'.$data->Manager.'</h6>
                 </div>
                 ';
@@ -74,8 +76,8 @@ class AdminFloorController extends Controller
         $data = $floor->findData($id);
         $html = '
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="text" class="form-control" name="name" id="editFloorName" value="'.$data->name.'">
+                <label for="name">Floor Name:</label>
+                <input type="text" class="form-control" name="name" id="editFloorName" value="'.$data->name.'">
                 </div>
                 ';
 
@@ -83,7 +85,7 @@ class AdminFloorController extends Controller
         return response()->json(['html'=>$html]);
     }
 
-      /**
+    /**
     * Update the specified resource in storage.
     *
     * @param  \Illuminate\Http\Request  $request
@@ -106,7 +108,7 @@ class AdminFloorController extends Controller
         return response()->json(['success'=>'Floor updated successfully']);
     }
 
-      /**
+    /**
     * Remove the specified resource from storage.
     *
     * @param  \App\Models\Manager  $manager
@@ -120,9 +122,4 @@ class AdminFloorController extends Controller
 
         return response()->json(['success'=>'Floor deleted successfully']);
     }
-
-   
-
-
-   
 }

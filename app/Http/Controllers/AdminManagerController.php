@@ -182,6 +182,7 @@ class AdminManagerController extends Controller
         $record= $manager->findData($id);
         if(User::where('email',$record->email)->first()){
             User::where('email',$record->email)->delete();
+            Manager::where('id',$id)->update(array('banning' => 'Unban'));
             return response()->json(['success'=>'banned']);
         }
         else{
@@ -198,6 +199,8 @@ class AdminManagerController extends Controller
                 'status'=>'active',
                 'role'=> 'manager'    
             ]);
+            Manager::where('id',$id)->update(array('banning' => 'Ban'));
+
             return response()->json(['success'=>'unbanned']);
         }
         

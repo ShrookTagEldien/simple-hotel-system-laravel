@@ -197,7 +197,9 @@
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('receptionist.list') }}",
+
+          url: "{{ route('managerReceptionist.list') }}",
+
         },
         columns: [
             {data: 'email', name: 'email'},
@@ -337,7 +339,7 @@
                     $('#banManagers').toggleClass('btn-success');
                     //$('#banManagers').css('background_color', 'red');
                   setTimeout(function(){
-                        $('#user').DataTable().ajax.reload();                      
+                        $('#user').DataTable().ajax.reload();
                     }, 1000);
 
                 }

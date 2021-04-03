@@ -20,6 +20,7 @@ class CreateReceptionistsTable extends Migration
             $table->string('username');
             $table->string('NationalID');
             $table->string('password');
+            $table->string('banning')->default('Ban'); //Ban is used for view button txt directly so Ban means he's unbanned :D
             $table->timestamps();
 
 

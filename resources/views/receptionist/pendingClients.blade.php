@@ -1,127 +1,178 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Pending Clients>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-      <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-
-</head>
-<body>
-<section style="padding-top: 60px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            {!! $dataTable->table() !!}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {!! $dataTable->scripts() !!}
-
-</body>
-
-</html>
--->
-
-
 @extends('layouts.app')
 
-
 @section('sideMenu')
-    @include('layouts.receptionistSideMenu')
-  @endsection
- 
-  @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">pending Clients</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">pendingClients</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+@include('layouts.receptionistSideMenu')
+@endsection
 
-    <!-- Main content -->
-    <section style="padding-top: 60px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            {!! $dataTable->table() !!}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {!! $dataTable->scripts() !!}
-
-  <!--
-  <div class="content">
-  <div class="container-fluid">
-  <div class="card-body p-2">
-    <table id="table_id" class="display table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Country</th>
-            <th>Gender</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 3</td>
-            <td>Row 1 Data 4</td>
-            <td>Row 1 Data 5</td>
-    
-            <td>
-            <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="floors/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-        </tr>
-        <tr>
-
-            <td>Row 1 Data 1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 3</td>
-            <td>Row 1 Data 4</td>
-            <td>Row 1 Data 5</td>
-        
-              <td>
-              <a class="bi bi-pencil-square pl-2" style="font-size: 1.25rem; color:gray;" href="floors/1/edit"></a>
-                <i class="bi bi-trash pl-2" style="font-size: 1.25rem; color:gray;"></i>
-            </td>
-        </tr>
-    </tbody>
-  </table>
+@section('content')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper p-3 ">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0"></h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
   </div>
- </div>
- </div>
- -->
-  <!-- /.content-wrapper -->
+  <table class="table table-bordered datatable">
+    <thead>
+      <tr>
+        <th>Client ID</th>
+        <th>Client Name</th>
+        <th>Client Email</th>
+        <th width="150" class="text-center">Action</th>
+      </tr>
+    </thead>
+  </table>
 
+</div>
+</div>
+</div>
+
+
+<div class="modal" id="denyClientModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Deny Client</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h4>Are you sure want to delete this user?</h4>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="SubmitDenyUserForm">Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // init datatable.
+    var dataTable = $('.datatable').DataTable({
+      processing: true,
+      serverSide: true,
+      autoWidth: false,
+      pageLength: 5,
+      // scrollX: true,
+      "order": [
+        [0, "desc"]
+      ],
+      ajax: '{{route('get-pending')}}',
+      columns: [{
+          data: 'id',
+          name: 'client_id'
+        },
+        {
+          data: 'name',
+          name: 'client_name'
+        },
+        {
+          data: 'email',
+          name: 'client_email'
+        },
+        {
+          data: 'Actions',
+          name: 'Actions',
+          orderable: false,
+          serachable: false,
+          sClass: 'text-center'
+        },
+      ]
+    });
+    var id;
+    $('body').on('click', '#denyClient', function(e) {
+      $('.alert-danger').html('');
+      $('.alert-danger').hide();
+      id = $(this).data('id');
+      $.ajax({
+        method: 'GET',
+        success: function(result) {
+          console.log(result);
+          $('#denyClientModal').show();
+        }
+      });
+    });
+
+    // Create article Ajax request.
+    $('#approveClient').click(function(e) {
+
+      e.preventDefault();
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        url: "{{ route('client.approve') }}",
+        method: 'post',
+        data: {
+          id: id,
+        },
+        success: function(result) {
+          if (result.errors) {
+            $('.alert-danger').html('');
+            $.each(result.errors, function(key, value) {
+              $('.alert-danger').show();
+              $('.alert-danger').append('<strong><li>' + value + '</li></strong>');
+            });
+          } else {
+            $('.alert-danger').hide();
+            $('.alert-success').show();
+            $('.datatable').DataTable().ajax.reload();
+            setInterval(function() {
+              location.refresh();
+            }, 2000);
+          }
+        }
+      });
+    });
+
+    $.ajax({
+      url: "{{ route('client.deny') }}",
+      method: 'post',
+      data: {
+        id: id,
+      },
+      success: function(result) {
+        if (result.errors) {
+          $('.alert-danger').html('');
+          $.each(result.errors, function(key, value) {
+            $('.alert-danger').show();
+            $('.alert-danger').append('<strong><li>' + value + '</li></strong>');
+          });
+        } else {
+          $('.alert-danger').hide();
+          $('.alert-success').show();
+          $('.datatable').DataTable().ajax.reload();
+          setInterval(function() {
+            location.refresh();
+          }, 2000);
+        }
+      }
+    });
+
+    $('.modalClose').on('click', function() {
+      $('#denyClientModal').hide();
+    });
+
+  });
+</script>
 
 @endsection
