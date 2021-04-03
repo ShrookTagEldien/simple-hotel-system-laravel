@@ -31,7 +31,7 @@
         <tr>
             <th>Floor ID</th>
             <th>Floor Name</th>
-            <th>Manager</th>
+            <!-- <th>Manager</th> -->
             <th>Action</th>
         </tr>
     </thead>
@@ -153,10 +153,10 @@
             <label for="id">Floor ID:</label>
             <input type="text" class="form-control" name="id" id="createFloorID">
         </div> -->
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="manager">Floor Manager:</label>
           <input type="text" class="form-control" name="manager" id="createManagr">
-      </div>
+      </div> -->
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -182,12 +182,12 @@
         processing: true,
         serverSide: true,
         ajax: {
-         url: "{{ route('managerFloors.list') }}",
+         url: "{{ route('managersFloors.list') }}",
         },
         columns: [
             {data: 'floorId', name: 'floorId'},
             {data: 'name', name: 'name'},
-            {data: 'Manager', name:'Manager'},
+            // {data: 'Manager', name:'Manager'},
 
             {
                 data: 'action',
@@ -259,8 +259,8 @@
                 method: 'PUT',
                 data: {
                    name: $('#editFloorName').val(),
-                   floorId: $('#editFloorId').val(),
-                   Manager: $('#editFloorManager').val(),
+                //    floorId: $('#editFloorId').val(),
+                //    Manager: $('#editFloorManager').val(),
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -328,7 +328,7 @@
                       data: {
                         name: $('#createFloor').val(),
                         // floorId: $('#createFloorID').val(),
-                        Manager:$('#createManagr').val(),
+                        // Manager:$('#createManagr').val(),
 
                       },
                       success: function(result) {

@@ -29,7 +29,7 @@ Artisan::command('create:admin {--name=} {--password=}', function ($name, $passw
         //store password hashed inside database
         $admin->password=Hash::make($password);
         $admin->save();
-        User::create([
+        User::insert([
         'name' => $name,
         'email' =>$name,
         'password' => Hash::make($password),
@@ -43,6 +43,6 @@ Artisan::command('create:admin {--name=} {--password=}', function ($name, $passw
     ]);
         $this->info('New Admin : '.$name ." is created");
     } else {
-        $this->info("Can not create this admin : ".$name." \nEmail already taken");
+        $this->error("This Email already taken , Try again");
     }
 })->purpose('Create new Admin command');

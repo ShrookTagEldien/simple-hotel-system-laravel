@@ -34,9 +34,9 @@ Route::get('/home', function (RoomDataTable $dataTable, ) {
 
   $role = Auth::user()->roles->first()->name;
   if ($role == 'manager') {
-    return view('manager.dashboard');
+    return redirect()->route('manag_dashboard');
   } else if ($role == 'admin') {
-    return view('admin.dashboard');
+    return redirect()->route('super_admin_dashboard');
   } else if ($role == 'client') {
     if (Auth::user()->status == 'approved')
       return view('rooms.index');
@@ -84,7 +84,10 @@ Route::get('receptionist/all', [ReceptionistsController::class, 'index'])->name(
 Route::get('clients/pending', [ReceptionistsController::class, 'getPendingClients'])->name('receptionist.getPendingClients');
 Route::get('receptionist/MyClients',[UserController::class, 'index'])->name('receptionist.approvedClients');
 
+/*============================================================================*/
 
+Route::get('genderReservationsChart',[ReceptionistsController::class, 'showGenderReservationsChart'])->name('genderReservationsChart');
+Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showReservationsRevenueChart'])->name('reservationsRevenueChart');
 
 
 

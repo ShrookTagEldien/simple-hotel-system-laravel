@@ -6,6 +6,7 @@ use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Faker\Factory as Faker;
+use Auth;
 
 class AdminFloorController extends Controller
 {
@@ -28,7 +29,7 @@ class AdminFloorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'Manager' => 'required',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
@@ -37,7 +38,8 @@ class AdminFloorController extends Controller
         Floor::insert([
             'floorId'=>$faker->unique()->numberBetween(1000, 9999),
             'name'=>$request['name'],
-            'Manager'=>$request['Manager'],
+            'Manager'=>Auth::user()->name,
+            'email'=>Auth::user()->email,
 
         ]);
         return response()->json(['success'=>'Floor added successfully']);
@@ -77,10 +79,6 @@ class AdminFloorController extends Controller
                 <label for="name">Floor Name:</label>
                 <input type="text" class="form-control" name="name" id="editFloorName" value="'.$data->name.'">
                 </div>
-                <div class="form-group">
-                <label for="manager">Floor Manager:</label>
-                <input type="text" class="form-control" name="manager" id="editFloorManager" value="'.$data->Manager.'">
-                </div>
                 ';
 
 
@@ -98,7 +96,6 @@ class AdminFloorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'Manager' => 'required',
           ]);
 
         if ($validator->fails()) {
