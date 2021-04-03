@@ -71,7 +71,7 @@ else{
 
 
 
-Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
+Route::get('get-rooms', [ReservationController::class, 'getAvailableRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create', [RoomController::class, 'create'])->name('room.create');
 Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('room.show');
