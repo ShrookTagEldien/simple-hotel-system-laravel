@@ -9,12 +9,17 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\managerController;
 use App\Http\Controllers\AdminRoomController;
-use App\Http\Controllers\AdminFloorController;
 use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminReceptionsController;
+use App\Http\Controllers\AdminFloorController;
 
 Auth::routes();
 
+/**** Tables listing data routes*****/
+//Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
+//Route::get('/Receptionists', [managerController::class, 'getManagerReceptionists'])->name('managerReceptionist.list');
+
+/**CRUD operations routes ***/
 
 Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/manager_dashboard', function(){
@@ -42,17 +47,19 @@ Route::group(['middleware' => ['role:manager']], function () {
       /*******CRUD operations routes ******/
 
 
-      Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.manager.list');
+      Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('managerReceptionist.list');
       Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list.manager');
       Route::resource('managerRooms', AdminRoomController::class);
-
-
+      Route::get('/FloorsManager', [adminController::class, 'getFloors'])->name('managersFloors.list');
+      //Route
       Route::resource('adminReceptions', AdminReceptionsController::class);
-      //Route::resource('adminFloors', AdminReceptionsController::class);
       Route::resource('adminFloors', AdminFloorController::class);
       Route::resource('adminRooms', AdminRoomController::class);
 
 
+    Route::resource('adminFloors', AdminFloorController::class);
 
-//Route::resource('adminFloors', managerFloorController::class);
-}); 
+
+    // Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+    //Route::resource('adminFloors', managerFloorController::class);
+});

@@ -50,9 +50,9 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'admin' => [
+        'recep' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'receptionists',
         ],
         'manager' => [
             'driver' => 'session',
@@ -91,6 +91,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Manager::class,
         ],
+        'receptionists' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Receptionist::class,
+        ],
 
        
        
@@ -124,6 +128,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'receptionists' => [
+            'provider' => 'receptionists',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        
     ],
 
     /*

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Carbon\Carbon;
 
 use Illuminate\Database\Seeder;
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
                 'email' => $faker->email,
                 'username' => $faker->username,
-                'password' =>Hash::make('12345678'),
+                'password' => Hash::make('12345678'),
                 'avatar' => 'img.png',
                 'NationalID' => $faker->phoneNumber,
             ]);
@@ -39,17 +40,25 @@ class DatabaseSeeder extends Seeder
 
             DB::table('receptionists')->insert([
 
-                    'email' => $faker->email,
-                    'username' => $faker->username,
-                    'avatar' => 'img.png',
-                    'NationalID' => $faker->phoneNumber,
-                    'password' =>Hash::make('12345678'),
-                ]);
+                'email' => $faker->email,
+                'username' => $faker->username,
+                'avatar' => 'img.png',
+                'NationalID' => $faker->phoneNumber,
+                'password' => Hash::make('12345678'),
+            ]);
 
-             
+            /************users************/
+            DB::table('users')->insert([
 
-            }    
-
+                'email' => $faker->email,
+                'name' => $faker->username,
+                'avatar' => 'img.png',
+                'phone'=>$faker->phoneNumber,
+                'country'=>'EG',
+                'gender'=>'Male',
+                'role'=>$faker->randomElement(['recep','manager','client']),
+                'password' => Hash::make('12345678'),
+            ]);
         }
-
     }
+}

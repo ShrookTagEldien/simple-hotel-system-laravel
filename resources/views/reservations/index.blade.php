@@ -12,12 +12,9 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Receptionists</h1>
+          <h1 class="m-0">Make a Reservation</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <button style="float: right; font-weight: 900;" class="btn btn-info btn-sm" type="button" data-toggle="modal" data-target="#CreateArticleModal">
-            Create Receptionist
-          </button>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
