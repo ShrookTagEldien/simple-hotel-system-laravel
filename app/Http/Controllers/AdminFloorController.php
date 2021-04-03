@@ -119,18 +119,19 @@ class AdminFloorController extends Controller
     public function destroy($id)
     {
         
-        $reqfloor=Floor::find($id)->first();
+      /*  $reqfloor=Floor::find($id)->first();
         $floorNo=$reqfloor['floorId'];
         if( !(Room::where('floor_number',$floorNo)->first()) ){
           //  dd('done delete');
             $floor = new Floor();
             $floor->deleteData($id);
         return response()->json(['success'=>'Floor deleted successfully']);
-
         }else{
             return response()->json(['success'=>"Floor can't be deleted "]);
             dd('in else delete');
-        }
-        
+        }*/
+         $floor = new Floor();
+         $floor->deleteData($id);
+        return response()->json(['success'=>"Floor can't be deleted "]);
     }
 }

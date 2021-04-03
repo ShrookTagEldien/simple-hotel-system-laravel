@@ -4,6 +4,8 @@ use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\ReceptionistsController;
 
 use  App\Http\Controllers\Auth\AdminLoginController;
@@ -39,7 +41,7 @@ Route::get('/home', function (RoomDataTable $dataTable) {
     return redirect()->route('super_admin_dashboard');
   } else if ($role == 'client') {
     if (Auth::user()->status == 'approved')
-      return view('reservations.index');
+      return view('rooms.index');
     else {
       return view('client.pending');
     }
@@ -50,7 +52,7 @@ Route::get('/home', function (RoomDataTable $dataTable) {
 
 
 
-// Route::resource('articles', ArticleController::class);
+
 Route::get('get-rooms', [ReservationsController::class, 'getAvailableRooms'])->name('get-rooms');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
 Route::get('/rooms/create', [RoomController::class, 'create'])->name('room.create');
@@ -65,7 +67,9 @@ Route::get('reservations', [ReservationsController::class, 'index']);          /
 Route::get('reservations/{room}', [ReservationsController::class, 'create'])->name('reservation.create');
 Route::post('reservations', [ReservationsController::class, 'store'])->name('reservation.store');
 Route::get('clients/approve', [ReceptionistsController::class, 'getPendingClients'])->name('get-pending');
-Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
+Route::get('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
+Route::get('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])->name('client.deny');
+
 
 
 //================  Multi Authentication ====================//
@@ -79,10 +83,15 @@ Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'appro
 
 
 Route::get('receptionist/all', [ReceptionistsController::class, 'index'])->name('receptionist.index');
-Route::get('receptionist/showNonApprovedClients', [ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
-Route::get('receptionist/showMyClients',[ReceptionistsController::class, 'showMyClients'])->name('receptionist.showMyClients');
+Route::get('clients/pending', [ReceptionistsController::class, 'getPendingClients'])->name('receptionist.getPendingClients');
+Route::get('receptionist/MyClients',[UserController::class, 'index'])->name('receptionist.approvedClients');
+Route::get('receptionist/MyClientsReservations',[UserController::class, 'getReservations'])->name('receptionist.clientsReservations');
 
 
+/*============================================================================*/
+
+Route::get('genderReservationsChart',[ReceptionistsController::class, 'showGenderReservationsChart'])->name('genderReservationsChart');
+Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showReservationsRevenueChart'])->name('reservationsRevenueChart');
 
 
 

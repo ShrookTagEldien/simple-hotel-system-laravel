@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 // use App\DataTables\RoomDataTable;
 use Yajra\DataTables\DataTables;
 
 class RoomController extends Controller
 {
     public function index(){
-            return view('rooms.index');
-        
+        $userStatus=Auth::user()->status;
+        if($userStatus=='approved')
+             return view('reservations.index',['user'=>Auth::user()]);
+        return view('client.pending');
     }
     
     

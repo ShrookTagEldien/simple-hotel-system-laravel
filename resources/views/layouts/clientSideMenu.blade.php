@@ -3,7 +3,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
             
-            <a href="#" class="nav-link @if (Route::current()->getName()== 'reservation.create') active @endif">
+            <a href="{{route('home')}}"class="nav-link @if (Route::current()->getName()== 'reservation.create') active @endif">
               Make Reservation
             </a>
             <a href="{{route('reservation.list')}}" class="nav-link @if (Route::current()->getName()== 'reservation.list') active @endif">
@@ -11,7 +11,6 @@
                 My Reservations
               </p>
             </a>
-            
           </li>
         </ul>
       </nav>
