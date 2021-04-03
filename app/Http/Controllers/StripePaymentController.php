@@ -16,12 +16,12 @@ class StripePaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripe(Request $request)
+    public function stripe($id)
     {   
-        $room=Room::find($request->id);
-        return view('stripe',["room"=>$room,
-                            "accompanies"=>$request->accompanies,
-        ]);
+       
+        $room=Room::find($id);
+        return view('stripe',["room"=>$room]);
+        
     }
   
     /**
@@ -35,7 +35,7 @@ class StripePaymentController extends Controller
         $room=Room::where('id',$request->id)->first();
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create([
-                "amount" => 100*100,
+                "amount" => (int)$room->price,
                 "currency" => "usd",
                 "source" => $request->stripeToken,
                 "description" => "Test payment" 
@@ -44,7 +44,7 @@ class StripePaymentController extends Controller
         Session::flash('success', 'Payment successful!');
         Reservation::create([
                 'room_num' =>$room->room_number,
-                'accompany_number' => $data['accompanies'],
+                'accompany_number' => $request->accompanies,
                 'paid_price' => $room->price,
                 'room_id' => $room->id,
                 'user_id' => Auth::user()->id

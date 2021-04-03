@@ -67,6 +67,11 @@
                                     <label class='control-label'>Card Number</label> <input autocomplete='off' class='form-control card-number' size='20' type='text'>
                                 </div>
                             </div>
+                            <div class='form-row row'>
+                                <div class='col-xs-12 form-group card required'>
+                                    <label class='control-label'>Number Of Accompanies</label> <input autocomplete='off' class='form-control card-number' name="accompanies" ize='20' type='text'>
+                                </div>
+                            </div>
 
                             <div class='form-row row'>
                                 <div class='col-xs-12 col-md-4 form-group cvc required'>
@@ -91,7 +96,7 @@
                                 <div class="col-xs-12">
                                     <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now {{$room->price}}</button>
                                 </div>
-                                <input type="text" name="accompanies" value="{{$accompanies}}" hidden>
+                                <input class='form-control card-expiry-year' name="id" value="{{$room->id}}" placeholder='YYYY' size='4' type='text' style="display:none;">
                             </div>
 
                         </form>

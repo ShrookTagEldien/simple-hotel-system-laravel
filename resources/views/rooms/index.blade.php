@@ -124,9 +124,8 @@
       $.ajax({
         method: 'GET',
         success: function(result) {
-          console.log(result);
           $('#rentModalBody').html(result.html);
-          $('#rentModal').show();
+          location.replace("/client/"+id+"/rent");
         }
       });
     });
@@ -141,12 +140,7 @@
         }
       });
       $.ajax({
-        url: "{{route('stripe')}}",
-        method: 'post',
-        data: {
-          accompanies: $('#accompanies').val(),
-          id: id,
-        },
+        url: "/client/"+id+"/rent",
         success: function(result) {
           if (result.errors) {
             $('.alert-danger').html('');
@@ -160,6 +154,7 @@
             $('.datatable').DataTable().ajax.reload();
             setInterval(function() {
               $('.alert-success').hide();
+              location.replace("client/"+id+"/rent");
             }, 2000);
           }
         }
