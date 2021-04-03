@@ -6,13 +6,14 @@ use Validator;
 use App\Models\Room;
 use App\Models\Manager;
 use App\Models\Floor;
+use Illuminate\Support\Facades\Auth;
 
 
 use App\Models\Receptionist;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
-use Auth;
+
 
 class adminController extends Controller
 {
@@ -132,10 +133,14 @@ class adminController extends Controller
 
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
+                    $btnStyle= "";
+                    if($row->banning=='Ban'){
+                        $btnStyle='btn-success';
+                    }
                     $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editReceptionists" data-id="'.$row->id.'">Edit</button>
                     <button type="button" class="btn btn-info btn-sm" id="showManagers" data-id="'.$row->id.'">Show</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
-                   <button type="button" class="btn btn-success btn-sm" id="banReceptionist" data-id="'.$row->id.'">Ban</button>
+                   <button type="button" class="btn '.$btnStyle.' btn-sm border border-rounded" id="banManagers" data-id="'.$row->id.'">'.$row->banning.'</button>
                    ';
 
                     return $actionBtn;

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.adminSideMenu')
@@ -161,10 +161,10 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label for="manager"class="text-dark">Manager Name:</label>
                   <input type="text" class="form-control" name="manager" id="createManager">
-                </div>
+                </div> --}}
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
                       <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
@@ -286,7 +286,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                       // manager_name: $('#createManager').val(),
             //            status: $('#createStatus').val(),
                         status: edstat,
                 },
@@ -376,7 +376,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                       // manager_name: $('#createManager').val(),
 
                     //    status: $('#createStatus').val(),
 

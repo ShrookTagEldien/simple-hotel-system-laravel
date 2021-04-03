@@ -1,7 +1,7 @@
 <?php
+
 namespace App;
 use App\Models\Room;
-
 use App\Models\Floor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +12,9 @@ use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminReceptionsController;
 use App\Http\Controllers\AdminFloorController;
+
+ 
+
 
 Auth::routes();
 
@@ -35,10 +38,7 @@ Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/floors', [managerController::class, 'floors'])->name('floors');
       Route::get('/clients', [managerController::class, 'clients'])->name('clients');
 
-
       /*******CRUD operations routes ******/
-
-
       Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('managerReceptionist.list');
       Route::get('get-rooms', [adminController::class, 'getRooms'])->name('rooms.list.manager');
       Route::resource('managerRooms', AdminRoomController::class);
@@ -50,5 +50,11 @@ Route::group(['middleware' => ['role:manager']], function () {
 
 
     Route::resource('adminFloors', AdminFloorController::class);
+    
+   
 
-    });
+    // Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
+    //Route::resource('adminFloors', managerFloorController::class);
+});
+
+

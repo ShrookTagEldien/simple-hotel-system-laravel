@@ -111,7 +111,38 @@
     });
 
     // Create article Ajax request.
-    $('#approveClient').click(function(e) {
+    $('body').on('click','#approveClient',function(e) {
+      e.preventDefault();
+      id = $(this).data('id');
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        url: "clients/"+id+"/approve",
+        method: 'GET',
+        success: function(result) {
+          if (result.errors) {
+            $('.alert-danger').html('');
+            
+            $.each(result.errors, function(key, value) {
+              $('.alert-danger').show();
+              $('.alert-danger').append('<strong><li>' + value + '</li></strong>');
+              
+            });
+          } else {
+            $('.alert-danger').hide();
+            $('.alert-success').show();
+            $('.datatable').DataTable().ajax.reload();
+            setInterval(function() {
+              location.reload();
+            }, 2000);
+          }
+        }
+      });
+    });
+    $('#SubmitDenyUserForm').click(function(e) {
 
       e.preventDefault();
       $.ajaxSetup({
@@ -120,11 +151,8 @@
         }
       });
       $.ajax({
-        url: "{{ route('client.approve') }}",
-        method: 'post',
-        data: {
-          id: id,
-        },
+        url: 'clients/' + id + '/deny',
+        method: 'GET',
         success: function(result) {
           if (result.errors) {
             $('.alert-danger').html('');
@@ -137,37 +165,12 @@
             $('.alert-success').show();
             $('.datatable').DataTable().ajax.reload();
             setInterval(function() {
-              location.refresh();
+              location.reload();
             }, 2000);
           }
         }
       });
     });
-
-    $.ajax({
-      url: "{{ route('client.deny') }}",
-      method: 'post',
-      data: {
-        id: id,
-      },
-      success: function(result) {
-        if (result.errors) {
-          $('.alert-danger').html('');
-          $.each(result.errors, function(key, value) {
-            $('.alert-danger').show();
-            $('.alert-danger').append('<strong><li>' + value + '</li></strong>');
-          });
-        } else {
-          $('.alert-danger').hide();
-          $('.alert-success').show();
-          $('.datatable').DataTable().ajax.reload();
-          setInterval(function() {
-            location.refresh();
-          }, 2000);
-        }
-      }
-    });
-
     $('.modalClose').on('click', function() {
       $('#denyClientModal').hide();
     });

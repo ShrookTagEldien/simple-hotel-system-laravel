@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.managerSideMenu')
@@ -151,6 +151,7 @@
             <div class="col-6 m-0">
                 <div class="form-group">
                     <label for="floor"class="text-dark">Floor Number:</label>
+
                               
                     <select id="floor" name="floor" class="form-control">
                         @foreach($floors as $floor)
@@ -161,6 +162,7 @@
                   <label for="manager"class="text-dark">Manager Name:</label>
                   <input type="text" class="form-control" name="manager" id="createManager">
                 </div>
+
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
                       <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
@@ -275,7 +277,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                     //   manager_name: $('#createManager').val(),
                         status: edstat,
                 },
                 success: function(result) {
@@ -364,7 +366,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                      //  manager_name: $('#createManager').val(),
                         status: stat,
 
                       },

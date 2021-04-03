@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 use App\DataTables\AdminDatatable;
 
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -48,16 +49,24 @@ class AdminRoomController extends Controller
         $validator = Validator::make($request->all(), [
             'room_number' => ['required','unique:rooms'],
             'floor_number' => 'required',
-            'manager_name' =>  ['required'],
+           // 'manager_name' =>  ['required'],
             'capacity' => 'required',
             'price' => 'required',
         ]);    
-
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+       // $room->storeData($request->all());
+        Room::create([
+            'room_number'=>$request['room_number'],
+            'floor_number'=>$request['floor_number'],
+            'capacity'=>$request['capacity'],
+            'status'=>$request['status'],
+            'price'=>$request['price'],
+            'manager_name'=>Auth::user()->name,
+            
 
-        $room->storeData($request->all());
+        ]);
 
         return response()->json(['success'=>'Room added successfully']);
     }
@@ -113,10 +122,6 @@ class AdminRoomController extends Controller
                 <input type="text" class="form-control" name="floor" id="createFloor" value="'.$data->floor_number.'">
             </div>
             <div class="form-group">
-              <label for="manager"class="text-dark">Manager Name:</label>
-              <input type="text" class="form-control" name="manager" id="createManager" value="'.$data->manager_name.'">
-            </div>
-            <div class="form-group">
               <label for="status"class="text-dark">Status:</label>   <br/>
                   <input type="radio" name="status"  value="available"'.$available.'checked="checked"'.'> Available &nbsp;
                   <input type="radio"  name="status"  value="rented"'.$rented.'> Rented
@@ -139,7 +144,15 @@ class AdminRoomController extends Controller
     public function update(Request $request, $id)
     {
         $room = new Room;
-        $room->updateData($id, $request->all());
+       /* Room::where('id', $id)->update(['room_number'=>$request['room_number'],
+        'floor_number'=>$request['floor_number'],
+        'capacity'=>$request['capacity'],
+        'status'=>$request['status'],
+        'price'=>$request['price'],
+        //'manager_name'=>Auth::user()->name]
+         ] );*/
+         //$room->Auth::user()->name;
+         $room->updateData($id, $request->all());
 
         return response()->json(['success'=>'Room updated successfully']);
    
