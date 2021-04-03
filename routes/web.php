@@ -75,7 +75,10 @@ Route::get('receptionist/all',[ReceptionistsController::class, 'index'])->name('
 Route::get('receptionist/showNonApprovedClients',[ReceptionistsController::class, 'showNonApprovedClients'])->name('receptionist.showNonApprovedClients');
 Route::get('receptionist/showMyClients',[ReceptionistsController::class, 'showMyClients'])->name('receptionist.showMyClients');
 
+/*============================================================================*/
 
+Route::get('genderReservationsChart',[ReceptionistsController::class, 'showGenderReservationsChart'])->name('genderReservationsChart');
+Route::get('reservationsRevenueChart',[ReceptionistsController::class, 'showReservationsRevenueChart'])->name('reservationsRevenueChart');
 
 
 // Route::get('students', [StudentController::class, 'index']);
