@@ -153,10 +153,10 @@
             <label for="id">Floor ID:</label>
             <input type="text" class="form-control" name="id" id="createFloorID">
         </div> -->
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="manager">Floor Manager:</label>
           <input type="text" class="form-control" name="manager" id="createManagr">
-      </div>
+      </div> -->
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -328,7 +328,7 @@
                       data: {
                         name: $('#createFloor').val(),
                         // floorId: $('#createFloorID').val(),
-                        Manager:$('#createManagr').val(),
+                        // Manager:$('#createManagr').val(),
 
                       },
                       success: function(result) {

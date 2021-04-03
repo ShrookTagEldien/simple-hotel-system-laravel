@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Floor;
 
-
 class managerController extends Controller
 {
     public function __construct()
@@ -100,5 +99,25 @@ class managerController extends Controller
                  ->make(true);
          }
      }*/
- 
+    // public function getManagerFloors(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = Floor::latest()->get();
+    //         return Datatables::of($data)
+    //                  ->addColumn('action', function ($row) {
+    //                      if ($row->email === Auth::user()->email) {
+    //                          $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editFloor" data-id="'.$row->id.'">Edit</button>
+    //                          <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>
+    //                          <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+    //                      } else {
+    //                          $actionBtn = ' <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>';
+    //                      }
+
+
+    //                      return $actionBtn;
+    //                  })
+    //                  ->rawColumns(['action'])
+    //                  ->make(true);
+    //     }
+    // }
 }

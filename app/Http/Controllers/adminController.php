@@ -12,6 +12,7 @@ use App\Models\Receptionist;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
+use Auth;
 
 class adminController extends Controller
 {
@@ -124,8 +125,8 @@ class adminController extends Controller
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
                    <button type="button" class="btn btn-success btn-sm" id="banReceptionist" data-id="'.$row->id.'">Ban</button>
                    ';
-                   
-                   return $actionBtn;
+
+                    return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -137,21 +138,23 @@ class adminController extends Controller
         if ($request->ajax()) {
             $data = Floor::latest()->get();
             return Datatables::of($data)
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editFloor" data-id="'.$row->id.'">Edit</button>
-                   <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>
-                   <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                        ->addColumn('action', function ($row) {
+                            if ($row->email === Auth::user()->email ||Auth::user()->role ==='admin') {
+                                $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editFloor" data-id="'.$row->id.'">Edit</button>
+                                <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>
+                                <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
+                            } else {
+                                $actionBtn = '
+                                <button type="button" class="btn btn-secondary btn-sm" id="editFloor" disabled>Edit</button>
+                                 <button type="button" class="btn btn-info btn-sm" id="showFloor" data-id="'.$row->id.'">Show</button>
+                                 <button type="button" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId" disabled>Delete</button>';
+                            }
 
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+
+                            return $actionBtn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
         }
     }
-
-
-
-
-
-
 }

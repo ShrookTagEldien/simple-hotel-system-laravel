@@ -32,7 +32,7 @@ Route::group(['middleware' => ['role:manager']], function () {
     /**** Tables listing data routes*****/
     //Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
     Route::get('/ReceptionistsManager', [adminController::class, 'getReceptionists'])->name('managerReceptionist.list');
-    Route::get('/FloorsManager', [adminController::class, 'getFloors'])->name('managerFloors.list');
+    Route::get('/FloorsManager', [adminController::class, 'getFloors'])->name('managersFloors.list');
     //Route::get('/FloorsManager', [managerController::class, 'getManagerFloors'])->name('managerFloor.list');
     /**CRUD operations routes ***/
 

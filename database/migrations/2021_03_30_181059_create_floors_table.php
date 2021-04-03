@@ -22,6 +22,7 @@ class CreateFloorsTable extends Migration
             $table->integer('floorId');
             $table->string('name');
             $table->string('Manager');
+            $table->string('email');
             $table->timestamps();
         });
     }
