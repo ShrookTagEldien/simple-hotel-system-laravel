@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 //use Validator;
 
 use App\Models\Room;
-use Illuminate\Http\Request;
+use App\Models\Reservation;
 
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\DataTables\AdminDatatable;
-use Yajra\DataTables\Services\DataTable;
 
+use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -136,18 +137,7 @@ class AdminRoomController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {/*
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'NationalID' => 'required',
-            'email' => 'required',
-
-        ]);
-        
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
-        }
-*/
+    {
         $room = new Room;
         $room->updateData($id, $request->all());
 
@@ -163,8 +153,17 @@ class AdminRoomController extends Controller
      */
     public function destroy($id){
         $room = new Room;
-        $room->deleteData($id);
 
-        return response()->json(['success'=>'Room deleted successfully']);
+        if(!Reservation::where('room_id',$id)->first()){
+            
+            $room->deleteData($id);
+            return response()->json(['success'=>'Room deleted successfully']);
+
+        }
+        else{
+
+            return response()->json(['failure'=>'this room can not be deleted becuase it has reservation']);
+
+        }
     }
 }

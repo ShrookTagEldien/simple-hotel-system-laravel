@@ -23,7 +23,7 @@ class managerController extends Controller
     {
         return view('manager.dashboard',[ 'availableRooms'=> Room::where('status','available')->count(),
                                         'rooms'=> Room::where('status','rented')->count(),
-                                        'available'=> intval(Room::avg('price')),
+                                        'available'=> intval(Room::avg('price'))*0.01,
                                         'reservations'=>'4037',
                                         'floors'=>Floor::count(),
                                         'clients'=>'9520'

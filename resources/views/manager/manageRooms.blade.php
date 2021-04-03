@@ -85,25 +85,31 @@
 
 <!-- Delete Article Modal -->
 <div class="modal" id="DeleteArticleModal">
-<div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Delete Room</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-            <h4>Are you sure want to delete this Room?</h4>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Room</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4  class="sure">Are you sure want to delete this Room?</h4>
+                <h4 class=" error">This Room can't be deleted becuase it has a Reservation</h4>
+    
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <div  class="hide">
+                    <button type="button" class="btn btn-danger sure" id="SubmitDeleteArticleForm">Yes</button>
+                    <button type="button" class="btn btn-default sure" data-dismiss="modal">No</button>
+                </div>
+                    <button type="button" class="btn btn-danger error" data-dismiss="modal" id="ok">OK</button>
+    
+            </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 
 <!-- Create Article Modal -->
 <div class="modal" id="CreateArticleModal">
@@ -250,7 +256,7 @@
         });
 
                 // Update article Ajax request.
-                $('#SubmitEditArticleForm').click(function(e) {
+        $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -296,6 +302,7 @@
         var deleteID;
         $('body').on('click', '#getDeleteId', function(){
             deleteID = $(this).data('id');
+            $('.error').hide();
         })
         $('#SubmitDeleteArticleForm').click(function(e) {
             e.preventDefault();
@@ -306,19 +313,30 @@
                 }
             });
             $.ajax({
-                url: "managerRooms/"+id,
+                url: "adminRooms/"+id,
                 method: 'DELETE',
                 success: function(result) {
-                  setTimeout(function(){
-                        $('#user').DataTable().ajax.reload();
-                        $('#DeleteArticleModal').hide();
-                        $('.modal-backdrop.show').hide();
-                    }, 1000);
+                    if(!result.failure){
+                        setTimeout(function(){ 
+                                $('#user').DataTable().ajax.reload();
+                                $('#DeleteArticleModal').hide();
+                                $('.modal-backdrop.show').hide();
+                            }, 1000);
+                    }
+                    else{
+                        $('.error').show();  
+                        $('.sure').hide();
 
+                    }
+          
                 }
             });
         });
+        $('#ok').click(function(e){
+            $('.sure').show();  
+            $('.error').hide();
 
+        });
 
         var stat;
             $('input[type="radio"]').click(function(){

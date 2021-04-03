@@ -15,17 +15,12 @@ use App\Http\Controllers\AdminFloorController;
 
 Auth::routes();
 
-/**** Tables listing data routes*****/
-//Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
-//Route::get('/Receptionists', [managerController::class, 'getManagerReceptionists'])->name('managerReceptionist.list');
-
-/**CRUD operations routes ***/
 
 Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/manager_dashboard', function(){
         return view('manager.dashboard',[ 'availableRooms'=> Room::where('status','available')->count(),
                                             'rooms'=> Room::where('status','rented')->count(),
-                                            'available'=> intval(Room::avg('price')),
+                                            'available'=> intval(Room::avg('price'))*0.01,
                                             'reservations'=>'4037',
                                             'floors'=>Floor::count(),
                                             'clients'=>'9520'
@@ -40,9 +35,6 @@ Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/floors', [managerController::class, 'floors'])->name('floors');
       Route::get('/clients', [managerController::class, 'clients'])->name('clients');
 
-      /********** Tables listing data routes*************/
-      //Route::get('get-rooms', [managerController::class, 'getRooms'])->name('rooms.list');
-      //Route::get('/Receptionists', [managerController::class, 'getManagerReceptionists'])->name('managerReceptionist.list');
 
       /*******CRUD operations routes ******/
 
@@ -59,7 +51,4 @@ Route::group(['middleware' => ['role:manager']], function () {
 
     Route::resource('adminFloors', AdminFloorController::class);
 
-
-    // Route::get('/receptionists', [adminController::class, 'getReceptionists'])->name('receptionist.list');
-    //Route::resource('adminFloors', managerFloorController::class);
-});
+    });
