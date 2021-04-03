@@ -18,11 +18,13 @@ use App\DataTables\ReservationsDataTable;
 class ReservationsController extends Controller
 {
 
-    public function index(){
-        $userStatus=Auth::user()->status;
-        if($userStatus=='approved')
-             return view('reservations.index',['user'=>Auth::user()]);
-        return view('client.pending');
+    public function index(ReservationsDataTable $dataTable){
+        $user=Auth::user();
+        if($user->role=='client')
+            if($user->status!="approved")
+             return view('client.pending');
+        return $dataTable->render('reservations.index');
+        
     }
 
     public function create(Room $room){

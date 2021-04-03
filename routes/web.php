@@ -4,6 +4,8 @@ use App\DataTables\RoomDataTable;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\ReceptionistsController;
 
 use  App\Http\Controllers\Auth\AdminLoginController;
@@ -65,8 +67,8 @@ Route::get('reservations', [ReservationsController::class, 'index']);          /
 Route::get('reservations/{room}', [ReservationsController::class, 'create'])->name('reservation.create');
 Route::post('reservations', [ReservationsController::class, 'store'])->name('reservation.store');
 Route::get('clients/approve', [ReceptionistsController::class, 'getPendingClients'])->name('get-pending');
-Route::post('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
-Route::post('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])->name('client.deny');
+Route::get('/clients/{client}/approve', [ReceptionistsController::class, 'approve'])->name('client.approve');
+Route::get('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])->name('client.deny');
 
 
 
@@ -83,6 +85,8 @@ Route::post('/clients/{client}/deny', [ReceptionistsController::class, 'deny'])-
 Route::get('receptionist/all', [ReceptionistsController::class, 'index'])->name('receptionist.index');
 Route::get('clients/pending', [ReceptionistsController::class, 'getPendingClients'])->name('receptionist.getPendingClients');
 Route::get('receptionist/MyClients',[UserController::class, 'index'])->name('receptionist.approvedClients');
+Route::get('receptionist/MyClientsReservations',[UserController::class, 'getReservations'])->name('receptionist.clientsReservations');
+
 
 /*============================================================================*/
 

@@ -47,17 +47,18 @@ class ReceptionistsController extends Controller
         return DataTables::of($data)
             ->addColumn('Actions', function($data) {
                 return '<button type="button" class="btn btn-success btn-sm" id="approveClient" data-id="'.$data->id.'">Approve</button>
-                    <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#denyClientModal" class="btn btn-danger btn-sm" id="denyClient">Deny</button>';
+                    <button type="button" data-id="'.$data->id.'" data-toggle="modal" data-target="#denyClientModal" class="btn btn-danger btn-sm" id="denyClient">Deny</button>
+                    <button type="button" class="btn btn-success btn-sm" id="approveClient" data-id="'.Auth::user()->id.'" hidden></button>';
             })
             ->rawColumns(['Actions'])
             ->make(true);
     }
     //function that updates database when client is approved
-    public function approves($id){
-        $user=User::find($id);
+    public function approve($id){
+        
+        $user=User::where('id',$id);
         $user->update([
-            'status' => 'approved',
-            'receptionist_id'=> Auth::user()->id,
+            'status' => 'approved'
         ]);
         return response()->json(['success'=>'Client Approved']);
     }

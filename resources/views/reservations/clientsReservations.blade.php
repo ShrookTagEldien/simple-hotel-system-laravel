@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
-
 @section('sideMenu')
-    @include('layouts.receptionistSideMenu')
-  @endsection
- 
-  @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+@include('layouts.clientSideMenu')
+@endsection
+
+@section('content')
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -29,11 +28,19 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        {!! $dataTable->tables() !!}
+        {{ $dataTable->table() }}
       </div>
     </div>
   </div>
 
 </section>
-{!! $dataTable->scripts() !!}
+@endsection
+@section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+{{ $dataTable->scripts() }}
+
+
 @endsection
