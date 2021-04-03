@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.adminSideMenu')
@@ -387,17 +387,13 @@
 
 
         // Ban  Ajax request.
-
         $('body').on('click', '#banManagers', function(){
-
             var id = $(this).data('id');
             $.ajax({
                 url: "adminManager/"+id+"/ban",
                 method: 'GET',
-                success: function(result) {
-                     
+                success: function(result) {     
                   setTimeout(function(){
-                       
                         $('#user').DataTable().ajax.reload(function(){
                             //console.log(result.success);
                             if(result.success=='banned'){
@@ -407,16 +403,9 @@
                             else{
                                 $("button[data-id="+id+"][id='banManagers']").addClass('btn-success');
                                 $("button[data-id="+id+"][id='banManagers']").text('Ban');
-                            
                             }   
-
-
-                        });
-                     
-                    
-                        
+                        });  
                     }, 1000);
-
                 }
             });
         });

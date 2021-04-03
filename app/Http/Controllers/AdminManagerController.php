@@ -42,7 +42,8 @@ class AdminManagerController extends Controller
             'NationalID' => ['required', 'unique:managers'],
             'email' =>  ['required', 'unique:managers'],
             'password' => ['required','min:6'],
-            'avatar' => 'required',
+            //'avatar' => 'required',
+            'avatar' =>  'required|image|mimes:jpg,jpeg',
         ]);
 
 
@@ -207,20 +208,6 @@ class AdminManagerController extends Controller
 
     }
 
-/*
-    public function checkIfBanned($id){
-        $manager = new Manager;
-        $record= $manager->findData($id);
-        if(User::where('email',$record->email)->first()){
-            return response()->json(['success'=>'banned']);
 
-        }
-        else{
-            return response()->json(['success'=>'unbanned']);
-        }
-
-
-    }
- */   
     
 }

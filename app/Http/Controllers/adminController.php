@@ -6,13 +6,14 @@ use Validator;
 use App\Models\Room;
 use App\Models\Manager;
 use App\Models\Floor;
+use Illuminate\Support\Facades\Auth;
 
 
 use App\Models\Receptionist;
 use Illuminate\Http\Request;
 
 use Yajra\DataTables\DataTables;
-use Auth;
+
 
 class adminController extends Controller
 {
@@ -30,7 +31,7 @@ class adminController extends Controller
     {
         return view('admin.dashboard',[ 'managers'=> Manager::count(),
                                         'rooms'=> Room::where('status','rented')->count(),
-                                        'available'=> intval(Room::avg('price')),
+                                        'available'=> intval(Room::avg('price'))*0.01,
                                         'reservations'=>'4037',
                                         'floors'=>Floor::count(),
                                         'clients'=>'9520'
@@ -50,7 +51,7 @@ class adminController extends Controller
 
     public function rooms()
     {
-        return view('admin.manageRooms');
+        return view('admin.manageRooms',['floors'=>Floor::all()]);
     }
 
 
@@ -132,10 +133,14 @@ class adminController extends Controller
 
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
+                    $btnStyle= "";
+                    if($row->banning=='Ban'){
+                        $btnStyle='btn-success';
+                    }
                     $actionBtn = '<button type="button" class="btn btn-secondary btn-sm" id="editReceptionists" data-id="'.$row->id.'">Edit</button>
                     <button type="button" class="btn btn-info btn-sm" id="showManagers" data-id="'.$row->id.'">Show</button>
                    <button type="button" data-id="'.$row->id.'" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>
-                   <button type="button" class="btn btn-success btn-sm" id="banReceptionist" data-id="'.$row->id.'">Ban</button>
+                   <button type="button" class="btn '.$btnStyle.' btn-sm border border-rounded" id="banManagers" data-id="'.$row->id.'">'.$row->banning.'</button>
                    ';
 
                     return $actionBtn;

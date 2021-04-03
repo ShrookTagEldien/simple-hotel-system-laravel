@@ -36,25 +36,37 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', function (RoomDataTable $dataTable, ) {
- 
 
-  $role = Auth::user()->roles->first()->name;
-  if ($role == 'manager') {
-    return redirect()->route('manag_dashboard');
-  } else if ($role == 'admin') {
-    return redirect()->route('super_admin_dashboard');
-  } else if ($role == 'client') {
-    if (Auth::user()->status == 'approved'){
-      $user= User::find(Auth::user()->id);
-      return view('rooms.index');
+Route::get('/home', function (RoomDataTable $dataTable) {
+  ///dd(Auth::user()->roles->first()->name);
+if(Auth::user()!=null){
+    $role = Auth::user()->roles->first()->name;
+ 
+    if ($role == 'manager') {
+
+      
+      return redirect()->route('manag_dashboard');
+
+    } else if ($role == 'admin') {
+
+      return redirect()->route('super_admin_dashboard');
+
+    } else if ($role == 'client') {
+
+          if (Auth::user()->status == 'approved')
+            return view('reservations.index');
+          else {
+            return view('client.pending');
+          }
+    } else if ($role == 'recep'){
+      return view('receptionist.pendingClients');
+
+
     }
-    else {
-      return view('client.pending');
-    }
-  } else if ($role == 'recep'){
-    return view('receptionist.pendingClients');
-  }
+}
+else{
+  return redirect()->route('login');
+}
 })->name('home');
 
 

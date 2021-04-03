@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.managerSideMenu')
@@ -85,25 +85,31 @@
 
 <!-- Delete Article Modal -->
 <div class="modal" id="DeleteArticleModal">
-<div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">Delete Room</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-            <h4>Are you sure want to delete this Room?</h4>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Room</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4  class="sure">Are you sure want to delete this Room?</h4>
+                <h4 class=" error">This Room can't be deleted becuase it has a Reservation</h4>
+    
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <div  class="hide">
+                    <button type="button" class="btn btn-danger sure" id="SubmitDeleteArticleForm">Yes</button>
+                    <button type="button" class="btn btn-default sure" data-dismiss="modal">No</button>
+                </div>
+                    <button type="button" class="btn btn-danger error" data-dismiss="modal" id="ok">OK</button>
+    
+            </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 
 <!-- Create Article Modal -->
 <div class="modal" id="CreateArticleModal">
@@ -145,12 +151,15 @@
             <div class="col-6 m-0">
                 <div class="form-group">
                     <label for="floor"class="text-dark">Floor Number:</label>
-                    <input type="text" class="form-control" name="floor" id="createFloor">
-                </div>
-                <div class="form-group">
-                  <label for="manager"class="text-dark">Manager Name:</label>
-                  <input type="text" class="form-control" name="manager" id="createManager">
-                </div>
+
+                              
+                    <select id="floor" name="floor" class="form-control">
+                        @foreach($floors as $floor)
+                            <option value="{{$floor['floorId']}}" id="createFloor">{{$floor['floorId']}}</option>
+                        @endforeach
+                    </select>   </div>
+             
+
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>
                       <input type="radio" name="status" id="createStatus" value="available" > Available &nbsp;
@@ -250,7 +259,7 @@
         });
 
                 // Update article Ajax request.
-                $('#SubmitEditArticleForm').click(function(e) {
+        $('#SubmitEditArticleForm').click(function(e) {
             e.preventDefault();
             $.ajaxSetup({
                 headers: {
@@ -265,7 +274,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                     //   manager_name: $('#createManager').val(),
                         status: edstat,
                 },
                 success: function(result) {
@@ -296,6 +305,7 @@
         var deleteID;
         $('body').on('click', '#getDeleteId', function(){
             deleteID = $(this).data('id');
+            $('.error').hide();
         })
         $('#SubmitDeleteArticleForm').click(function(e) {
             e.preventDefault();
@@ -306,19 +316,30 @@
                 }
             });
             $.ajax({
-                url: "managerRooms/"+id,
+                url: "adminRooms/"+id,
                 method: 'DELETE',
                 success: function(result) {
-                  setTimeout(function(){
-                        $('#user').DataTable().ajax.reload();
-                        $('#DeleteArticleModal').hide();
-                        $('.modal-backdrop.show').hide();
-                    }, 1000);
+                    if(!result.failure){
+                        setTimeout(function(){ 
+                                $('#user').DataTable().ajax.reload();
+                                $('#DeleteArticleModal').hide();
+                                $('.modal-backdrop.show').hide();
+                            }, 1000);
+                    }
+                    else{
+                        $('.error').show();  
+                        $('.sure').hide();
 
+                    }
+          
                 }
             });
         });
+        $('#ok').click(function(e){
+            $('.sure').show();  
+            $('.error').hide();
 
+        });
 
         var stat;
             $('input[type="radio"]').click(function(){
@@ -342,7 +363,7 @@
                         capacity: $('#createCapacity').val(),
                         price: $('#createPrice').val(),
                         floor_number: $('#createFloor').val(),
-                        manager_name: $('#createManager').val(),
+                      //  manager_name: $('#createManager').val(),
                         status: stat,
 
                       },

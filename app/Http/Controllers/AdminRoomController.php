@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 //use Validator;
 
 use App\Models\Room;
+use App\Models\Floor;
+
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-
 use Yajra\DataTables\DataTables;
-use App\DataTables\AdminDatatable;
-use Yajra\DataTables\Services\DataTable;
 
+use App\DataTables\AdminDatatable;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -47,16 +50,24 @@ class AdminRoomController extends Controller
         $validator = Validator::make($request->all(), [
             'room_number' => ['required','unique:rooms'],
             'floor_number' => 'required',
-            'manager_name' =>  ['required'],
+           // 'manager_name' =>  ['required'],
             'capacity' => 'required',
             'price' => 'required',
         ]);    
-
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+       // $room->storeData($request->all());
+        Room::create([
+            'room_number'=>$request['room_number'],
+            'floor_number'=>$request['floor_number'],
+            'capacity'=>$request['capacity'],
+            'status'=>$request['status'],
+            'price'=>$request['price'],
+            'manager_name'=>Auth::user()->name,
+            
 
-        $room->storeData($request->all());
+        ]);
 
         return response()->json(['success'=>'Room added successfully']);
     }
@@ -80,6 +91,11 @@ class AdminRoomController extends Controller
      */
     public function edit(Room $room,$id)
     {
+        $floors=Floor::all();
+        $string= "";
+         foreach($floors as $floor){
+            $string.= '<option value="'.$floor['floorId'].'" id="createFloor">'.$floor['floorId'].'</option>';
+            }
         $room = new Room;
         $data = $room->findData($id);
         if($data->status=='available'){
@@ -109,12 +125,11 @@ class AdminRoomController extends Controller
         <div class="col-6 m-0">
             <div class="form-group">
                 <label for="floor"class="text-dark">Floor Number:</label>
-                <input type="text" class="form-control" name="floor" id="createFloor" value="'.$data->floor_number.'">
+                <select id="floor" name="floor" class="form-control">'
+                .$string.'
+                </select>   
             </div>
-            <div class="form-group">
-              <label for="manager"class="text-dark">Manager Name:</label>
-              <input type="text" class="form-control" name="manager" id="createManager" value="'.$data->manager_name.'">
-            </div>
+        
             <div class="form-group">
               <label for="status"class="text-dark">Status:</label>   <br/>
                   <input type="radio" name="status"  value="available"'.$available.'checked="checked"'.'> Available &nbsp;
@@ -136,20 +151,17 @@ class AdminRoomController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {/*
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'NationalID' => 'required',
-            'email' => 'required',
-
-        ]);
-        
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
-        }
-*/
+    {
         $room = new Room;
-        $room->updateData($id, $request->all());
+       /* Room::where('id', $id)->update(['room_number'=>$request['room_number'],
+        'floor_number'=>$request['floor_number'],
+        'capacity'=>$request['capacity'],
+        'status'=>$request['status'],
+        'price'=>$request['price'],
+        //'manager_name'=>Auth::user()->name]
+         ] );*/
+         //$room->Auth::user()->name;
+         $room->updateData($id, $request->all());
 
         return response()->json(['success'=>'Room updated successfully']);
    
@@ -163,8 +175,17 @@ class AdminRoomController extends Controller
      */
     public function destroy($id){
         $room = new Room;
-        $room->deleteData($id);
 
-        return response()->json(['success'=>'Room deleted successfully']);
+        if(!Reservation::where('room_id',$id)->first()){
+            
+            $room->deleteData($id);
+            return response()->json(['success'=>'Room deleted successfully']);
+
+        }
+        else{
+
+            return response()->json(['failure'=>'this room can not be deleted becuase it has reservation']);
+
+        }
     }
 }

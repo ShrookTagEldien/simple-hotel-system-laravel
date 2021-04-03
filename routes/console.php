@@ -29,7 +29,7 @@ Artisan::command('create:admin {--name=} {--password=}', function ($name, $passw
         //store password hashed inside database
         $admin->password=Hash::make($password);
         $admin->save();
-        User::insert([
+        User::create([
         'name' => $name,
         'email' =>$name,
         'password' => Hash::make($password),

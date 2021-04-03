@@ -213,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!------------------------------------------------------------------------------------------>
   <!-- Main Sidebar Container -->
 
-  <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:165%; width:20%">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4 py-0" style="height:auto">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ url('/') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -248,7 +248,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @yield('sideMenu')
 
 
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -256,7 +255,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <h5>Title</h5>
       <p>Sidebar content</p>
     </div>
-  </aside>
   </aside>
   <!-- Main Footer -->
   <footer class="main-footer">

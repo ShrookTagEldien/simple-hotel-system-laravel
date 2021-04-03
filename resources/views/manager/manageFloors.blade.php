@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.SysApp')
 
 @section('sideMenu')
     @include('layouts.managerSideMenu')
@@ -182,7 +182,9 @@
         processing: true,
         serverSide: true,
         ajax: {
+
          url: "{{ route('managersFloors.list') }}",
+
         },
         columns: [
             {data: 'floorId', name: 'floorId'},
