@@ -1,7 +1,7 @@
 @extends('layouts.SysApp')
 
 @section('sideMenu')
-    @include('layouts.adminSideMenu')
+    @include('layouts.managerSideMenu')
   @endsection
 
 

@@ -118,18 +118,24 @@ class AdminFloorController extends Controller
     */
     public function destroy($id)
     {
-        
-      /*  $reqfloor=Floor::find($id)->first();
-        $floorNo=$reqfloor['floorId'];
-        if( !(Room::where('floor_number',$floorNo)->first()) ){
-          //  dd('done delete');
-            $floor = new Floor();
+       /*
+        $flag=0;
+         $reqfloor=Floor::find($id)->first();
+         $resultArray= Room::where('floor_number', $reqfloor['floorId'])->pluck('room_number')->all();
+         foreach( $resultArray as $val) {
+             if(Reservation::where('room_id',$val)->first())
+            {     
+                $flag=1; 
+                  break;
+            }
+          } 
+          if ($flag ==1)
+          {
+              $floor = new Floor();
             $floor->deleteData($id);
-        return response()->json(['success'=>'Floor deleted successfully']);
-        }else{
-            return response()->json(['success'=>"Floor can't be deleted "]);
-            dd('in else delete');
-        }*/
+          }
+       
+       */
          $floor = new Floor();
          $floor->deleteData($id);
         return response()->json(['success'=>"Floor can't be deleted "]);
