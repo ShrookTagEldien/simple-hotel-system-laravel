@@ -158,10 +158,7 @@
                             <option value="{{$floor['floorId']}}" id="createFloor">{{$floor['floorId']}}</option>
                         @endforeach
                     </select>   </div>
-                <div class="form-group">
-                  <label for="manager"class="text-dark">Manager Name:</label>
-                  <input type="text" class="form-control" name="manager" id="createManager">
-                </div>
+             
 
                 <div class="form-group">
                   <label for="status"class="text-dark">Status:</label>   <br/>

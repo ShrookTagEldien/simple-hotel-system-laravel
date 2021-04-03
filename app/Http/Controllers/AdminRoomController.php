@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 //use Validator;
 
 use App\Models\Room;
-use App\Models\Reservation;
+use App\Models\Floor;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\DataTables\AdminDatatable;
 
-use Yajra\DataTables\Services\DataTable;
+use App\DataTables\AdminDatatable;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -90,6 +91,11 @@ class AdminRoomController extends Controller
      */
     public function edit(Room $room,$id)
     {
+        $floors=Floor::all();
+        $string= "";
+         foreach($floors as $floor){
+            $string.= '<option value="'.$floor['floorId'].'" id="createFloor">'.$floor['floorId'].'</option>';
+            }
         $room = new Room;
         $data = $room->findData($id);
         if($data->status=='available'){
@@ -119,8 +125,11 @@ class AdminRoomController extends Controller
         <div class="col-6 m-0">
             <div class="form-group">
                 <label for="floor"class="text-dark">Floor Number:</label>
-                <input type="text" class="form-control" name="floor" id="createFloor" value="'.$data->floor_number.'">
+                <select id="floor" name="floor" class="form-control">'
+                .$string.'
+                </select>   
             </div>
+        
             <div class="form-group">
               <label for="status"class="text-dark">Status:</label>   <br/>
                   <input type="radio" name="status"  value="available"'.$available.'checked="checked"'.'> Available &nbsp;
