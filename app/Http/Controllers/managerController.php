@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
+use App\Models\Floor;
 use App\Models\Receptionist;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Models\Floor;
 
 
 class managerController extends Controller
@@ -21,7 +22,14 @@ class managerController extends Controller
     }*/
     public function dash()
     {
-        return view('manager.dashboard');
+        return view('manager.dashboard',[ 'availableRooms'=> Room::where('status','available')->count(),
+                                        'rooms'=> Room::where('status','rented')->count(),
+                                        'available'=> intval(Room::avg('price')),
+                                        'reservations'=>'4037',
+                                        'floors'=>Floor::count(),
+                                        'clients'=>'9520'
+
+                                        ]);
     }
     public function recep()
     {

@@ -27,7 +27,14 @@ class adminController extends Controller
 
     public function dash()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard',[ 'managers'=> Manager::count(),
+                                        'rooms'=> Room::where('status','rented')->count(),
+                                        'available'=> intval(Room::avg('price')),
+                                        'reservations'=>'4037',
+                                        'floors'=>Floor::count(),
+                                        'clients'=>'9520'
+
+                                        ]);
     }
     public function recep()
     {

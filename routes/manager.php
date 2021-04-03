@@ -1,7 +1,9 @@
 <?php
 namespace App;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Room;
 
+use App\Models\Floor;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\adminController;
@@ -16,7 +18,14 @@ Auth::routes();
 
 Route::group(['middleware' => ['role:manager']], function () {
       Route::get('/manager_dashboard', function(){
-        return view('manager.dashboard');
+        return view('manager.dashboard',[ 'availableRooms'=> Room::where('status','available')->count(),
+                                            'rooms'=> Room::where('status','rented')->count(),
+                                            'available'=> intval(Room::avg('price')),
+                                            'reservations'=>'4037',
+                                            'floors'=>Floor::count(),
+                                            'clients'=>'9520'
+
+                                            ]);
       })->name('manag_dashboard');
     
       //we're using admin prefix for all those routes defined in routeServiceProvider.php for admin accout as following >> localhost:8000/admin/following_route_name

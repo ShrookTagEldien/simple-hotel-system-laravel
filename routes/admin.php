@@ -1,12 +1,14 @@
 <?php
+use App\Models\Room;
+use App\Models\Manager;
+use App\Models\Floor;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\AdminManagerController;
 use App\Http\Controllers\AdminRoomController;
-use App\Http\Controllers\AdminReceptionsController;
 use App\Http\Controllers\AdminFloorController;
+use App\Http\Controllers\AdminManagerController;
+use App\Http\Controllers\AdminReceptionsController;
 use  App\Http\Controllers\Auth\AdminLoginController;
 
 
@@ -14,7 +16,15 @@ Auth::routes();
 
 Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/superadmin_dashboard', function(){
-      return view('admin.dashboard');
+      return view('admin.dashboard',[ 'managers'=> Manager::count(),
+                                        'rooms'=> Room::where('status','rented')->count(),
+                                        'available'=> intval(Room::avg('price')),
+                                        'reservations'=>'4037',
+                                        'floors'=>Floor::count(),
+                                        'clients'=>'9520'
+
+                                         ]);
+
     })->name('super_admin_dashboard');
 
         //we're using admin prefix for all those routes defined in routeServiceProvider.php for admin accout as following >> localhost:8000/admin/following_route_name
