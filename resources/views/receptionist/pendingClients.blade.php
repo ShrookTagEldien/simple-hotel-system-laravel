@@ -120,11 +120,8 @@
         }
       });
       $.ajax({
-        url: "{{ route('client.approve') }}",
-        method: 'post',
-        data: {
-          id: id,
-        },
+        url: 'clients/'+id+'/approve',
+        method: 'get',
         success: function(result) {
           if (result.errors) {
             $('.alert-danger').html('');
@@ -145,11 +142,8 @@
     });
 
     $.ajax({
-      url: "{{ route('client.deny') }}",
-      method: 'post',
-      data: {
-        id: id,
-      },
+      url: 'clients/'+id+'/deny',
+      method: 'get',
       success: function(result) {
         if (result.errors) {
           $('.alert-danger').html('');

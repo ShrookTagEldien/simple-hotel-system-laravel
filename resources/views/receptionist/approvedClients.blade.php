@@ -1,19 +1,17 @@
 @extends('layouts.app')
 
-
 @section('sideMenu')
-    @include('layouts.receptionistSideMenu')
-  @endsection
- 
-  @section('content')
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+@include('layouts.receptionistSideMenu')
+@endsection
+
+@section('content')
+<div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Pending Clients</h1>
+            <h1 class="m-0">My Approved Clients</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -24,17 +22,15 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section style="padding-top: 60px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            {!! $dataTable->table() !!}
-          </div>
-        </div>
+<section style="padding:50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {!! $dataTable->tables() !!}
       </div>
-    </section>
+    </div>
+  </div>
 
-    {!! $dataTable->scripts() !!}
+</section>
+{!! $dataTable->scripts() !!}
+@endsection

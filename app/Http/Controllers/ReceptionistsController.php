@@ -52,7 +52,7 @@ class ReceptionistsController extends Controller
             ->make(true);
     }
     //function that updates database when client is approved
-    public function approve($id){
+    public function approves($id){
         $user=User::find($id);
         $user->update([
             'status' => 'approved',
@@ -68,12 +68,6 @@ class ReceptionistsController extends Controller
         ]);
         return response()->json(['success'=>'Client Denied']);
     }
-    public function showMyClients()
-    {
-        $user=User::where('status' ,'approved');
-        return DataTables::of($user);
-        
-
-    }
+    
 }
 

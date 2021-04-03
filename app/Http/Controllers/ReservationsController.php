@@ -10,11 +10,14 @@ use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
+use App\DataTables\ReservationsDataTable;
+
 
 
 
 class ReservationsController extends Controller
 {
+
     public function index(){
         $userStatus=Auth::user()->status;
         if($userStatus=='approved')
