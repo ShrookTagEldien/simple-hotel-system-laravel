@@ -54,13 +54,12 @@ if(Auth::user()!=null){
     } else if ($role == 'client') {
 
           if (Auth::user()->status == 'approved')
-            return view('reservations.index');
+            return $dataTable->render('rooms.index');
           else {
             return view('client.pending');
           }
     } else if ($role == 'recep'){
       return view('receptionist.pendingClients');
-
 
     }
 }
