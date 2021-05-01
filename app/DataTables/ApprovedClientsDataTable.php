@@ -63,7 +63,7 @@ class ApprovedClientsDataTable extends DataTable
     /**
      * Get columns.
      *
-     * @return 
+     * @return array
      */
     protected function getColumns()
     {
